@@ -13,7 +13,7 @@ Volunteers from Microsoft and University of Washington have built a web-based da
   
   > npm start
 
-## API Enpoints Tests:
+## API Enpoints
 
   > GET /size  
   
