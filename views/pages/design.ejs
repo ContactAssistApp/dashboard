@@ -1,0 +1,27 @@
+<!-- views/pages/design.ejs -->
+
+<!DOCTYPE HTML>
+<html lang="en">
+<%- include('../includes/head') %>
+
+<body>
+  <div class="container">
+    <%- include('../includes/nav') %>
+    <div class="jumbotron">
+      <p>
+        Volunteers from Microsoft and University of Washington have built a web-based dashboard where anyone can access narrowcast COVID-19 report messages sent by healthcare authorities.
+      </p>
+      <hr/>
+
+      <div class="dashboard_mapContainer">
+        <h3 class="center">MSR Design</h3>
+        <img src="img/design.JPG" class="mapIframe" id="bingMap" width="100%" height="700px" style="position: relative; display: initial;"/>
+      </div>
+      <hr/>
+      
+    </div>
+    <%- include('../includes/footer') %>
+  </div>
+</body>
+
+</html>
