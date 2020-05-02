@@ -11,6 +11,14 @@ router.get('/',function(req,res){
   res.render('pages/index')
 })
 
+router.get('/design',function(req,res){ //MSR Design
+  res.render('pages/design')
+})
+
+router.get('/dashboards',function(req,res){ //References
+  res.render('pages/dashboards')
+})
+
 router.get('/about',function(req,res){
   res.render('pages/about')
 })
@@ -18,6 +26,8 @@ router.get('/about',function(req,res){
 router.get('/contact',function(req,res){
   res.render('pages/contact')
 })
+
+
 
 //API TEST
 router.get('/api/size',function(req,res){
