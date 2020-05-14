@@ -35,3 +35,10 @@ Volunteers from Microsoft and University of Washington have built a web-based da
 ## Deployment
 
 [aka.ms/covidsafe](https://aka.ms/covidsafe)
+
+## Reference
+
+[API Swager Doc GUI (HTML)](https://csapi.azurefd.net/swagger/index.html)
+
+[API Swager Doc (JSON)](https://csapi.azurefd.net/swagger/2020-05-05/swagger.json)
+
