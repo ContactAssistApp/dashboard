@@ -54,9 +54,9 @@ var API = {
   postMessage: function (obj, cb) {
     let input = obj || JSON.stringify({
       "RequestedQueries": [{
-        "messageId": "49d964d8-a895-4197-81e9-69fcf8b4f6ea",
-        "messageTimestamp": 1588371179402
-      }]
+        "messageId": "0af080d1-f5a5-4263-97e2-8429b1c67c51",
+        "messageTimestamp": 1589492344628
+        }]
     })
     const options = {
       hostname: api.host,
@@ -107,8 +107,8 @@ var API = {
           "longitude": -73.9828
         },
         "radiusMeters": 100,
-        "beginTime": 1586083599,
-        "endTime": 1586085189
+        "beginTime": 1589489812000,
+        "endTime": 1589490012000
       }]
     })
     const options = {
