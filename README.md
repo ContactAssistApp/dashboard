@@ -17,19 +17,19 @@ Volunteers from Microsoft and University of Washington have built a web-based da
 
   > GET /size  
   
-    i.e. http://localhost:3000/api/size?lat=42.7569&lon=-73.9828&precision=4&lastTimestamp=0&api-version=2020-04-15
+    i.e. http://localhost:3000/api/size?lat=42.7569&lon=-73.9828&precision=4&lastTimestamp=1589489812000&api-version=2020-05-05
   
   > GET /list  
   
-    i.e. http://localhost:3000/api/list?lat=42.7569&lon=-73.9828&precision=4&lastTimestamp=0&api-version=2020-04-15
+    i.e. http://localhost:3000/api/list?lat=42.7569&lon=-73.9828&precision=4&lastTimestamp=1589489812000&api-version=2020-05-05
   
   > GET /message 
   
-    i.e. http://localhost:3000/api/message?api-version=2020-04-15 
+    i.e. http://localhost:3000/api/message?api-version=2020-05-05 
 
   > GET /report 
   
-    i.e. http://localhost:3000/api/report?api-version=2020-04-15
+    i.e. http://localhost:3000/api/report?api-version=2020-05-05
 
 
 ## Deployment
