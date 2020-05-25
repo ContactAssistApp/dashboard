@@ -36,3 +36,95 @@
     transform: rotate(360deg);
   }
 }
+
+.card-outline {
+  position: absolute;
+  width: 395px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.card-header {
+  width: 395px;
+  height: 60px;
+  mix-blend-mode: normal;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.card-header-logo {
+  left: 8.33%;
+  right: 8.33%;
+  top: 12.5%;
+  bottom: 12.5%;
+}
+
+.card-header-text {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28px;
+  text-align: center;
+  color: #000000
+}
+
+.card-header-chevron {
+  position: absolute;
+  mix-blend-mode: normal;
+  opacity: 0.54;
+  transform: rotate(-90deg);
+  right: 0;
+  cursor: pointer;
+}
+
+.card-location {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 37px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.card-address {
+  font-weight: normal;
+  line-height: 25px;
+  color: #232323;
+}
+
+.card-dates {
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 25px;
+  color: #346BAC;
+}
+
+.card-separator {
+  border: .2px solid rgba(0, 0, 0, 0.3);
+}
+
+.card-description {
+  font-size: 15px;
+  color: #6E6E6E;
+  margin: 0px 16px;
+  width: 331px;
+}
+
+.action-link {
+  font-size: 15px;
+  line-height: 50px;
+  color: #3278CE;
+  cursor: pointer;
+}
+
+.share-button {
+  background: #3278CE;
+  border-radius: 3.7px;
+  width: 135px;
+  height: 46px;
+  font-size: 22px;
+  color: white;
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+}
