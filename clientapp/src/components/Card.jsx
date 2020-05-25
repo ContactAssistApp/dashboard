@@ -8,15 +8,29 @@ export class Card extends React.Component{
         super(props);
         this.getHeaderStyles = this.getHeaderStyles.bind(this);
         this.getCardType = this.getCardType.bind(this);
+        this.collapseCard = this.collapseCard.bind(this);
+        this.expandCard = this.expandCard.bind(this);
+        this.state = {open: false};
     }
 
     render() {
+        let card;
+        if (this.state.open) {
+            card = this.getOpenCard();
+        } else {
+            card = this.getClosedCard();
+        }
+
+        return card;
+    }
+
+    getOpenCard() {
         return (
             <div className="card-outline">
                 <div className="card-header" style={this.getHeaderStyles()}>
                     <img src={warning} className="card-header-logo" alt="header-logo"/>
                     <span className="card-header-text">{this.getCardType()}</span>
-                    <img src={chevron} className="card-header-chevron" alt="chevron"></img>
+                    <img src={chevron} className="card-header-chevron-open" alt="chevron" onClick={this.collapseCard}></img>
                 </div>
                 <div className="card-body">
                     <div className="card-location">
@@ -45,6 +59,33 @@ export class Card extends React.Component{
         )
     }
 
+    getClosedCard() {
+        return (
+            <div className="card-outline">
+                <div className="card-header" style={this.getHeaderStyles()}>
+                    <img src={warning} className="card-header-logo" alt="header-logo"/>
+                    <span className="card-header-text">{this.getCardType()}</span>
+                    <img src={chevron} className="card-header-chevron-closed" alt="chevron" onClick={this.expandCard}></img>
+                </div>
+                <div className="card-body">
+                    <div className="card-location">
+                        {this.getCardLocation()}
+                    </div>
+                    <div className="card-dates">
+                        {this.getCardDates()}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    collapseCard() {
+        this.setState({open: false});
+    }
+
+    expandCard() {
+        this.setState({open: true});
+    }
+
     // TO-DO: change color based on type of card
     getHeaderStyles() {
         return {
@@ -62,14 +103,17 @@ export class Card extends React.Component{
         return "The Morgan Library and Museum";
     }
 
+    // TO-DO; read from actual PSA
     getStreetAddress() {
         return "40th Ave";
     }
 
+    // TO-DO; read from actual PSA
     getCityStateZip() {
         return "New York, NY 10011";
     }
 
+    // TO-DO; read from actual PSA
     getCardDates() {
         const startDate = "April 30, 2020";
         const endDate = "May 3, 2020";
@@ -77,6 +121,7 @@ export class Card extends React.Component{
         return dates;
     }
 
+    // TO-DO; read from actual PSA
     getCardDescription() {
         return "Pleases refrain from entering playground Z until May 3rd because it needs to undergo decontamination";
     }

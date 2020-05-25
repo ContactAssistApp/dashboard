@@ -69,11 +69,20 @@
   color: #000000
 }
 
-.card-header-chevron {
+.card-header-chevron-open {
   position: absolute;
   mix-blend-mode: normal;
   opacity: 0.54;
   transform: rotate(-90deg);
+  right: 0;
+  cursor: pointer;
+}
+
+.card-header-chevron-closed {
+  position: absolute;
+  mix-blend-mode: normal;
+  opacity: 0.54;
+  transform: rotate(90deg);
   right: 0;
   cursor: pointer;
 }
