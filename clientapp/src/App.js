@@ -2,11 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { apiBaseUrl } from "./config";
+import { Card } from "./components/Card";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { apiResponse: ""};
   }
 
   callAPI() {
@@ -14,10 +14,6 @@ class App extends React.Component {
     fetch(url)
       .then(res => res.text())
       .then(res => this.setState({ apiResponse: res }));
-  }
-  
-  componentWillMount() {
-    this.callAPI();
   }
 
   render() {
@@ -37,7 +33,7 @@ class App extends React.Component {
             Learn React
           </a>
         </header>
-        <p className="App-intro">{this.state.apiResponse}</p>
+        <Card />
       </div>
     );
   }
