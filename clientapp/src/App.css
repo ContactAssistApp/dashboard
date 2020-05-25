@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: #595968;
 }
 
 .App-logo {
@@ -136,4 +137,61 @@
   position: absolute;
   right: 16px;
   cursor: pointer;
+}
+
+.mobile-preview {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.54));
+  backdrop-filter: blur(60px);
+  border-radius: 14px;
+  width: 393px;
+  height: 95px;
+  text-align: left;
+}
+
+.mobile-preview-header {
+  padding: 10px;
+}
+
+
+.mobile-preview-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.mobile-preview-appname {
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: black;
+  width: 256px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+
+.mobile-preview-time {
+  font-size: 14px;
+  line-height: 20px;
+  position: absolute;
+  right: 15px;
+}
+
+.mobile-preview-body {
+  margin-left: 10px;
+}
+
+.mobile-preview-body p {
+  margin: 0 auto;
+}
+
+.mobile-preview-title {
+  font-size: 16px;
+  line-height: 22px;
+  color: black;
+  font-weight: bold;
+}
+
+.mobile-preview-description {
+  font-size: 16px;
+  line-height: 22px;
+  color: #363941;
 }

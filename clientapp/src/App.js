@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { apiBaseUrl } from "./config";
-import { Card } from "./components/Card";
+import { MobilePreview } from './components/MobilePreview';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class App extends React.Component {
             Learn React
           </a>
         </header>
-        <Card />
+        <MobilePreview />
       </div>
     );
   }

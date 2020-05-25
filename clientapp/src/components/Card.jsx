@@ -3,6 +3,12 @@ import warning from '../images/warning.svg';
 import chevron from '../images/chevron.svg';
 import calendar from '../images/calendar.svg';
 
+/*
+Card props:
+open: boolean - whether card should be expanded or collapsed
+cardInfo: CardInfo - info for the card
+*/
+
 export class Card extends React.Component{
     constructor(props) {
         super(props);
@@ -10,7 +16,7 @@ export class Card extends React.Component{
         this.getCardType = this.getCardType.bind(this);
         this.collapseCard = this.collapseCard.bind(this);
         this.expandCard = this.expandCard.bind(this);
-        this.state = {open: false};
+        this.state = {open: false, cardInfo: this.props.cardInfo};
     }
 
     render() {
@@ -51,7 +57,7 @@ export class Card extends React.Component{
                 </div>
                 <hr className="card-separator" />
                 <div className="card-footer">
-                    <img src={calendar} className="card-calendar-icon"></img>
+                    <img src={calendar} className="card-calendar-icon" alt="calendar"></img>
                     <span className="action-link">Add to calendar</span>
                     <button className="share-button">Share</button>
                 </div>
@@ -86,34 +92,34 @@ export class Card extends React.Component{
         this.setState({open: true});
     }
 
-    // TO-DO: change color based on type of card
+    // TO-DO: change color based on type of card (look in this.props.cardInfo)
     getHeaderStyles() {
         return {
             backgroundColor: "#FCEF50"
         };
     }
 
-    // TO-DO: change type based on type of card
+    // TO-DO: change type based on type of card (look in this.props.cardInfo)
     getCardType() {
         return "Decontamination";
     }
 
-    // TO-DO: read location from actual PSA
+    // TO-DO: read location from actual PSA (look in this.props.cardInfo)
     getCardLocation() {
         return "The Morgan Library and Museum";
     }
 
-    // TO-DO; read from actual PSA
+    // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getStreetAddress() {
         return "40th Ave";
     }
 
-    // TO-DO; read from actual PSA
+    // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getCityStateZip() {
         return "New York, NY 10011";
     }
 
-    // TO-DO; read from actual PSA
+    // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getCardDates() {
         const startDate = "April 30, 2020";
         const endDate = "May 3, 2020";
@@ -121,7 +127,7 @@ export class Card extends React.Component{
         return dates;
     }
 
-    // TO-DO; read from actual PSA
+    // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getCardDescription() {
         return "Pleases refrain from entering playground Z until May 3rd because it needs to undergo decontamination";
     }
