@@ -1,3 +1,7 @@
+html, body, body>div {
+  height: 100%;
+}
+
 .App {
   text-align: center;
   background: #595968;
@@ -45,12 +49,12 @@
 }
 
 .card-outline {
-  position: absolute;
-  width: 395px;
+  position: relative;
   background: #FFFFFF;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   text-align: left;
+  width: 395px;
 }
 
 .card-header {
@@ -344,7 +348,7 @@
   margin-bottom: 40px;
 }
 
-.row {
+.flex-container {
   display: flex;
 }
 
@@ -354,4 +358,61 @@
 
 .create-psa-container {
   width: 1200px;
+}
+
+.landing-page-leftpane {
+  flex: 20%;
+}
+
+.landing-page-right-pane {
+  flex: 80%;
+}
+
+.landing-page-container {
+  background: #F8F8F8;
+  height: 100%;
+}
+
+.landing-page-top {
+  height: 70px;
+}
+
+.landing-page-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  color: #212324;
+}
+
+.landing-page-updated {
+  font-size: 15px;
+  line-height: 37px;
+  color: #5E6A79;
+  font-style: italic;
+}
+
+.landing-page-find-location {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.landing-page-filter-sort {
+  font-size: 14px;
+  line-height: 20px;
+  color: #008FFF;
+}
+
+.create-psa-button {
+  background: #3278CE;
+  border-radius: 4px;
+  font-size: 22px;
+  line-height: 28px;
+  text-align: center;
+  color: white;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.form-container {
+  margin-left: 20%;
 }

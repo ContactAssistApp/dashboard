@@ -29,7 +29,7 @@ export class CreatePSA extends React.Component {
                 <div className="create-psa-header">
                     Create New PSA
                 </div>
-                <div className="row">
+                <div className="flex-container">
                     <div className="create-psa-left-pane">
                         <div className="create-psa-preview">
                             Preview Public Service Announcement
