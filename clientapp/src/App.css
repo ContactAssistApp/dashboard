@@ -54,10 +54,10 @@
 }
 
 .card-header {
-  width: 395px;
   height: 60px;
   mix-blend-mode: normal;
   border-radius: 8px 8px 0px 0px;
+  padding-left: 15px;
 }
 
 .card-header-logo {
@@ -92,6 +92,10 @@
   transform: rotate(90deg);
   right: 0;
   cursor: pointer;
+}
+
+.card-body {
+  padding-left: 15px;
 }
 
 .card-title {
