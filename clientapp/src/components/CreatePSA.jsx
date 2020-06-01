@@ -12,8 +12,20 @@ export class CreatePSA extends React.Component {
     }
 
     render() {
+        const cardInfo = {
+            type: this.state.type,
+            title: this.state.title,
+            street: this.state.street,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            description: this.state.description
+        };
+
         return (
-            <div>
+            <div className="create-psa-container">
                 <div className="create-psa-header">
                     Create New PSA
                 </div>
@@ -32,7 +44,7 @@ export class CreatePSA extends React.Component {
                             <div className="create-psa-preview-label">
                                 Dashboard Preview
                             </div>
-                            <Card title={this.state.title} description={this.state.description} />
+                            <Card open={true} cardInfo={cardInfo} />
                         </div>
                     </div>
                     <div className="create-psa-middle-pane">

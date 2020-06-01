@@ -16,7 +16,7 @@ export class Card extends React.Component{
         this.getCardType = this.getCardType.bind(this);
         this.collapseCard = this.collapseCard.bind(this);
         this.expandCard = this.expandCard.bind(this);
-        this.state = {open: false, cardInfo: this.props.cardInfo};
+        this.state = {open: this.props.open, cardInfo: this.props.cardInfo};
     }
 
     render() {
@@ -39,8 +39,8 @@ export class Card extends React.Component{
                     <img src={chevron} className="card-header-chevron-open" alt="chevron" onClick={this.collapseCard}></img>
                 </div>
                 <div className="card-body">
-                    <div className="card-location">
-                        {this.getCardLocation()}
+                    <div className="card-title">
+                        {this.getCardTitle()}
                     </div>
                     <div className="card-address">
                         {this.getStreetAddress()}
@@ -74,8 +74,8 @@ export class Card extends React.Component{
                     <img src={chevron} className="card-header-chevron-closed" alt="chevron" onClick={this.expandCard}></img>
                 </div>
                 <div className="card-body">
-                    <div className="card-location">
-                        {this.getCardLocation()}
+                    <div className="card-title">
+                        {this.getCardTitle()}
                     </div>
                     <div className="card-dates">
                         {this.getCardDates()}
@@ -101,34 +101,69 @@ export class Card extends React.Component{
 
     // TO-DO: change type based on type of card (look in this.props.cardInfo)
     getCardType() {
-        return "Decontamination";
+        if (this.props.cardInfo.type) {
+            return this.props.cardInfo.type
+        } else {
+            return "PSA Type";
+        }
     }
 
-    // TO-DO: read location from actual PSA (look in this.props.cardInfo)
-    getCardLocation() {
-        return "The Morgan Library and Museum";
+    // TO-DO: read title from actual PSA (look in this.props.cardInfo)
+    getCardTitle() {
+        if (this.props.cardInfo.title) {
+            return this.props.cardInfo.title;
+        } else {
+            return "Title";
+        }
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getStreetAddress() {
-        return "40th Ave";
+        if (this.props.cardInfo.street) {
+            return this.props.cardInfo.street;
+        } else {
+            return "Street"
+        }
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getCityStateZip() {
-        return "New York, NY 10011";
+        let city = "city";
+        let state = "state";
+        let zip = "zip";
+        if (this.props.cardInfo.city) {
+            city = this.props.cardInfo.city;
+        } 
+        if (this.props.cardInfo.state) {
+            state = this.props.cardInfo.state;
+        }
+        if (this.props.cardInfo.zip) {
+            zip = this.props.cardInfo.zip;
+        }
+
+        return `${city}, ${state} ${zip}`;
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getCardDates() {
-        const startDate = "April 30, 2020";
-        const endDate = "May 3, 2020";
+        let startDate = "start date";
+        let endDate = "end date";
+        if (this.props.cardInfo.startDate) {
+            startDate = this.props.cardInfo.startDate;
+        }
+        if (this.props.cardInfo.endDate) {
+            endDate = this.props.cardInfo.endDate;
+        }
         const dates = `${startDate} to ${endDate}`;
         return dates;
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
     getCardDescription() {
-        return "Pleases refrain from entering playground Z until May 3rd because it needs to undergo decontamination";
+        if (this.props.cardInfo.description) {
+            return this.props.cardInfo.description;
+        } else {
+            return "Description";
+        }
     }
 }

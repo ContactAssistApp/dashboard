@@ -94,7 +94,7 @@
   cursor: pointer;
 }
 
-.card-location {
+.card-title {
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
@@ -346,4 +346,8 @@
 
 .create-psa-middle-pane {
   flex: 50%;
+}
+
+.create-psa-container {
+  width: 1200px;
 }
