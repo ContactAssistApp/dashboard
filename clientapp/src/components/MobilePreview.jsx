@@ -3,7 +3,7 @@ import appIcon from '../images/appIcon.svg';
 
 /*
 MobilePreview props:
-type: PSAType,
+title: string,
 description: string
 */
 
@@ -29,11 +29,20 @@ export class MobilePreview extends React.Component{
     }
 
     getTitle() {
-        return "Decontamination (Today)";
+        if (this.props.title) {
+            return this.props.title;
+        } else {
+            return "Title";
+        }
     }
 
     getDescription() {
-        // cut off the description after certain number of characters
-        return "Please refrain from enterin The Morgan Library...";
+        if (this.props.description) {
+            let cutOffDescription = this.props.description.slice(0, 30);
+            return cutOffDescription + "...";
+        } else {
+            // cut off the description after certain number of characters
+            return "Description...";
+        }
     }
 }

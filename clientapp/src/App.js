@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { apiBaseUrl } from "./config";
-import { TracerForm } from './components/TracerForm';
+import { CreatePSA } from './components/CreatePSA';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class App extends React.Component {
           </p>
         </header>
         <div className="sample-component">
-          <TracerForm />
+          <CreatePSA />
         </div>
       </div>
     );

@@ -1,5 +1,11 @@
 import React from 'react';
 import pin from '../images/pin.svg';
+import { PsaFields } from '../models/PsaFields';
+
+/*
+Props:
+tracerFormCallback(fieldType, fieldValue)
+*/
 
 export class TracerForm extends React.Component {
     constructor(props) {
@@ -12,6 +18,8 @@ export class TracerForm extends React.Component {
         this.onStateChange = this.onStateChange.bind(this);
         this.onZipChange = this.onZipChange.bind(this);
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
+        this.onStartDateChange = this.onStartDateChange.bind(this);
+        this.onEndDateChange = this.onEndDateChange.bind(this);
     }
 
     render() {
@@ -34,9 +42,9 @@ export class TracerForm extends React.Component {
                     <input type="text" value={this.state.zip} onChange={this.onZipChange} placeholder="Zip" className="zip" required/>
                 </div>
                 <div className="tracer-form-dates">
-                    <input type="date" id="start-date"/>
+                    <input type="date" id="start-date" onChange={this.onStartDateChange}/>
                     <span id="tracer-form-dates-separator">to</span>
-                    <input type="date" id="end-date"/>
+                    <input type="date" id="end-date" onChange={this.onEndDateChange}/>
                 </div>
                 <div className="tracer-form-description">
                     <div>
@@ -52,30 +60,54 @@ export class TracerForm extends React.Component {
     }
 
     onTypeChange(ev) {
-        this.setState({ type: ev.target.value});
+        const newType = ev.target.value;
+        this.setState({ type: newType});
+        this.props.changeCallback(PsaFields.TYPE, newType);
     }
 
     onTitleChange(ev) {
-        this.setState({ title: ev.target.value });
+        const newTitle = ev.target.value;
+        this.setState({ title: newTitle });
+        this.props.changeCallback(PsaFields.TITLE, newTitle);
     }
 
     onStreetChange(ev) {
-        this.setState({ street: ev.target.value });
+        const newStreet = ev.target.value;
+        this.setState({ street: newStreet });
+        this.props.changeCallback(PsaFields.STREET, newStreet);
     }
 
     onCityChange(ev) {
-        this.setState({ city: ev.target.value });
+        const newCity = ev.target.value;
+        this.setState({ city: newCity });
+        this.props.changeCallback(PsaFields.CITY, newCity);
     }
 
     onStateChange(ev) {
-        this.setState({ state: ev.target.value });
+        const newState = ev.target.value;
+        this.setState({ state: newState });
+        this.props.changeCallback(PsaFields.STATE, newState);
     }
 
     onZipChange(ev) {
-        this.setState({ zip: ev.target.value });
+        const newZip = ev.target.value;
+        this.setState({ zip: newZip });
+        this.props.changeCallback(PsaFields.ZIP, newZip);
     }
 
     onDescriptionChange(ev) {
-        this.setState({ description: ev.target.value });
+        const newDescription = ev.target.value;
+        this.setState({ description: newDescription });
+        this.props.changeCallback(PsaFields.DESCRIPTION, newDescription);
+    }
+
+    onStartDateChange(ev) {
+        const newStartDate = ev.target.value;
+        this.props.changeCallback(PsaFields.START_DATE, newStartDate);
+    }
+
+    onEndDateChange(ev) {
+        const newEndDate = ev.target.value;
+        this.props.changeCallback(PsaFields.END_DATE, newEndDate);
     }
 }

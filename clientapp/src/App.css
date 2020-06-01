@@ -302,3 +302,48 @@
   padding: 10px 10px;
   color: white;
 }
+
+.create-psa-header {
+  background: #3278CE;
+  border-radius: 8px 8px 0px 0px;
+  font-size: 22px;
+  line-height: 28px;
+  color: white;
+  padding: 10px 50px;
+}
+
+.create-psa-left-pane {
+  background: #595968;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px 0px 0px 4px;
+  padding-left: 70px;
+  flex: 50%;
+}
+
+.create-psa-preview {
+  font-size: 20px;
+  line-height: 25px;
+  color: #9BA6B3;
+  margin-top: 20px;
+}
+
+.create-psa-preview-label {
+  font-size: 20px;
+  line-height: 20px;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.create-psa-card-preview {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.row {
+  display: flex;
+}
+
+.create-psa-middle-pane {
+  flex: 50%;
+}
