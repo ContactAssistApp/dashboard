@@ -38,6 +38,12 @@
   }
 }
 
+.sample-component {
+  margin: 100px 100px;
+  background-color: white;
+  text-align: left;
+}
+
 .card-outline {
   position: absolute;
   width: 395px;
@@ -194,4 +200,105 @@
   font-size: 16px;
   line-height: 22px;
   color: #363941;
+}
+
+.tracer-form {
+  width: 513px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px 0px 0px 4px;
+}
+
+.tracer-form-type-select {
+  background: #E4E5E9;
+  border-radius: 4px;
+  width: 181px;
+  height: 46px;
+  margin-left: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.tracer-form-title {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+}
+
+.tracer-form-address{
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.tracer-form-address input {
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.city {
+  margin-left: 20px;
+}
+
+.state {
+  width: 50px;
+}
+
+.zip {
+  width: 100px;
+}
+
+.tracer-form-address-street {
+  margin-bottom: 10px;
+}
+
+.tracer-form-dates {
+  font-size: 20px;
+  line-height: 25px;
+  color: #346BAC;
+  margin-left: 40px;
+}
+
+#tracer-form-dates-separator {
+  margin: 10px 10px;
+}
+
+.tracer-form-description {
+  background: #F4F9FD;
+}
+
+.tracer-form-textbox {
+  background: white;
+  border: .5px solid #DCDEE3;
+  border-radius: 4px;
+  width: 475px;
+  height: 250px;
+  margin-left: 20px;
+  margin-top: 25px;
+}
+
+.tracer-form-textbox {
+  font-size: 14px;
+  line-height: 20px;
+  color: #A9AEBF;
+}
+
+.tracer-form-buttons {
+  text-align: right;
+  background: #F4F9FD;
+
+}
+.cancel-button {
+  background: #748DAC;
+  border-radius: 4px;
+  margin-right: 6px;
+  padding: 10px 10px;
+  color: white;
+}
+
+.publish-button {
+  background: #3278CE;
+  border-radius: 4px;
+  padding: 10px 10px;
+  color: white;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { apiBaseUrl } from "./config";
-import { MobilePreview } from './components/MobilePreview';
+import { TracerForm } from './components/TracerForm';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,20 +20,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Scroll down to see sample component
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
         </header>
-        <MobilePreview />
+        <div className="sample-component">
+          <TracerForm />
+        </div>
       </div>
     );
   }
