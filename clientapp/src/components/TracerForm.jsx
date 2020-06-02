@@ -5,6 +5,7 @@ import { PsaFields } from '../models/PsaFields';
 /*
 Props:
 tracerFormCallback(fieldType, fieldValue)
+onCancel()
 */
 
 export class TracerForm extends React.Component {
@@ -20,6 +21,7 @@ export class TracerForm extends React.Component {
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
         this.onStartDateChange = this.onStartDateChange.bind(this);
         this.onEndDateChange = this.onEndDateChange.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     render() {
@@ -52,7 +54,7 @@ export class TracerForm extends React.Component {
                     </div>
                 </div>
                 <div className="tracer-form-buttons">
-                    <button className="cancel-button">Cancel</button>
+                    <button className="cancel-button" onClick={this.onCancel}>Cancel</button>
                     <button className="publish-button">Publish</button>
                 </div>
             </div>
@@ -109,5 +111,9 @@ export class TracerForm extends React.Component {
     onEndDateChange(ev) {
         const newEndDate = ev.target.value;
         this.props.changeCallback(PsaFields.END_DATE, newEndDate);
+    }
+
+    onCancel() {
+        this.props.onCancel();
     }
 }

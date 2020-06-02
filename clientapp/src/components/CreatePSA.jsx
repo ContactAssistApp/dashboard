@@ -4,11 +4,17 @@ import { Card } from './Card';
 import { TracerForm } from './TracerForm';
 import { PsaFields } from '../models/PsaFields';
 
+/*
+Props:
+onCancel()
+*/
+
 export class CreatePSA extends React.Component {
     constructor(props) {
         super(props);
         this.state = {type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: ""};
         this.tracerFormCallback = this.tracerFormCallback.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     render() {
@@ -48,7 +54,7 @@ export class CreatePSA extends React.Component {
                         </div>
                     </div>
                     <div className="create-psa-middle-pane">
-                        <TracerForm changeCallback={this.tracerFormCallback} />
+                        <TracerForm changeCallback={this.tracerFormCallback} onCancel={this.onCancel}/>
                     </div>
                 </div>
             </div>
@@ -85,5 +91,9 @@ export class CreatePSA extends React.Component {
                 this.setState({ endDate: fieldValue });
                 break;
         }
+    }
+
+    onCancel() {
+        this.props.onCancel();
     }
 }

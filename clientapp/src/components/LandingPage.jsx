@@ -7,6 +7,7 @@ export class LandingPage extends React.Component {
         super(props);
         this.state = {showingForm: false};
         this.showForm = this.showForm.bind(this);
+        this.onFormCancel = this.onFormCancel.bind(this);
     }
 
     render() {
@@ -39,7 +40,7 @@ export class LandingPage extends React.Component {
                      <div className="landing-page-updated">
                          Last Updated...
                      </div>
-                     <div>
+                     <div className="landing-page-location-container">
                          <input type="text" placeholder="Find location" className="landing-page-find-location" />
                     </div>
                     <div className="landing-page-filter-sort">
@@ -67,12 +68,16 @@ export class LandingPage extends React.Component {
     getForm() {
         return (
             <div className="form-container">
-                <CreatePSA />
+                <CreatePSA onCancel={this.onFormCancel}/>
             </div>
         )
     }
 
     showForm() {
         this.setState({showingForm: true});
+    }
+
+    onFormCancel() {
+        this.setState({showingForm: false});
     }
 }

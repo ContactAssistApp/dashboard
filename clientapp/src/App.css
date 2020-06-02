@@ -382,6 +382,7 @@ html, body, body>div {
   font-size: 20px;
   line-height: 25px;
   color: #212324;
+  text-align: center;
 }
 
 .landing-page-updated {
@@ -389,17 +390,20 @@ html, body, body>div {
   line-height: 37px;
   color: #5E6A79;
   font-style: italic;
+  text-align: center;
 }
 
 .landing-page-find-location {
   font-size: 14px;
   line-height: 20px;
+  text-align: center;
 }
 
 .landing-page-filter-sort {
   font-size: 14px;
   line-height: 20px;
   color: #008FFF;
+  text-align: center;
 }
 
 .create-psa-button {
@@ -415,4 +419,19 @@ html, body, body>div {
 
 .form-container {
   margin-left: 20%;
+}
+
+.user-profile {
+  padding: 15px 20px;
+  font-size: 15px;
+  line-height: 36px;
+}
+
+.landing-page-location-container {
+  text-align: center;
+}
+
+.landing-page-cards>div {
+  margin-bottom: 10px;
+  margin-left: 20px;
 }
