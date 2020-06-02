@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from './Card';
 import { CreatePSA } from './CreatePSA';
+import appIcon from '../images/appIcon.svg';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -58,6 +59,10 @@ export class LandingPage extends React.Component {
                     </div>
                     <div className="landing-page-map">
                         <button className="create-psa-button" onClick={this.showForm}>Create New PSA</button>
+                        <button className="download-button">
+                            <img src={appIcon} />
+                            Download CovidSafe
+                        </button>
                         {form}
                     </div>
                 </div>
