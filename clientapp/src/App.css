@@ -1,5 +1,6 @@
 html, body, body>div {
   height: 100%;
+  font-family: 'Roboto', sans-serif
 }
 
 .App {
@@ -65,10 +66,8 @@ html, body, body>div {
 }
 
 .card-header-logo {
-  left: 8.33%;
-  right: 8.33%;
-  top: 12.5%;
-  bottom: 12.5%;
+  margin: 20px 5px;
+  vertical-align: middle;
 }
 
 .card-header-text {
@@ -77,7 +76,8 @@ html, body, body>div {
   font-size: 22px;
   line-height: 28px;
   text-align: center;
-  color: #000000
+  color: #000000;
+  vertical-align: middle;
 }
 
 .card-header-chevron-open {
