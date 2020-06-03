@@ -134,6 +134,10 @@ html, body, body>div {
   width: 331px;
 }
 
+.card-calendar-icon {
+  padding: 0px 10px;
+}
+
 .action-link {
   font-size: 15px;
   line-height: 50px;
@@ -357,7 +361,7 @@ html, body, body>div {
 }
 
 .create-psa-container {
-  width: 1200px;
+  width: 1100px;
 }
 
 .landing-page-leftpane {
