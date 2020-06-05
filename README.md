@@ -1,4 +1,4 @@
-# web-dashboard
+# PublicHealth-Dashboard
 A minimal web dasboard powered by min.io and node.js web framework
 
 ## Description
