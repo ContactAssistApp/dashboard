@@ -3,21 +3,37 @@ import { MobilePreview } from './MobilePreview';
 import { Card } from './Card';
 import { TracerForm } from './TracerForm';
 import { PsaFields } from '../models/PsaFields';
+import { ConfirmationModal } from './ConfirmationModal';
+import { SuccesModal } from './SuccessModal';
 
 /*
 Props:
 onCancel()
 */
 
+/*
+State:
+formStage: 1 (form), 2 (confirmation), 3 (success)
+*/
+
 export class CreatePSA extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: ""};
+        this.state = {formStage: 1, type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: ""};
         this.tracerFormCallback = this.tracerFormCallback.bind(this);
         this.onCancel = this.onCancel.bind(this);
+        this.getFormStyles = this.getFormStyles.bind(this);
+        this.onPublish = this.onPublish.bind(this);
+        this.onNoConfirm = this.onNoConfirm.bind(this);
+        this.onYesConfirm = this.onYesConfirm.bind(this);
     }
 
     render() {
+
+        if (this.state.formStage === 3) {
+            return <SuccesModal show={this.state.formStage === 3} dismissModal={this.onCancel} />;
+        }
+        
         const cardInfo = {
             type: this.state.type,
             title: this.state.title,
@@ -31,32 +47,35 @@ export class CreatePSA extends React.Component {
         };
 
         return (
-            <div className="create-psa-container">
-                <div className="create-psa-header">
-                    Create New PSA
-                </div>
-                <div className="flex-container">
-                    <div className="create-psa-left-pane">
-                        <div className="create-psa-preview">
-                            Preview Public Service Announcement
+            <div>
+                <div className={this.getFormStyles()}>
+                    <div className="create-psa-header">
+                        Create New PSA
+                    </div>
+                    <div className="flex-container">
+                        <div className="create-psa-left-pane">
+                            <div className="create-psa-preview">
+                                Preview Public Service Announcement
                         </div>
-                        <div className="create-psa-mobile-preview">
-                            <div className="create-psa-preview-label">
-                                Mobile Notification Preview
+                            <div className="create-psa-mobile-preview">
+                                <div className="create-psa-preview-label">
+                                    Mobile Notification Preview
                             </div>
-                            <MobilePreview title={this.state.title} description={this.state.description} />
+                                <MobilePreview title={this.state.title} description={this.state.description} />
+                            </div>
+                            <div className="create-psa-card-preview">
+                                <div className="create-psa-preview-label">
+                                    Dashboard Preview
+                            </div>
+                                <Card open={true} cardInfo={cardInfo} />
+                            </div>
                         </div>
-                        <div className="create-psa-card-preview">
-                            <div className="create-psa-preview-label">
-                                Dashboard Preview
-                            </div>
-                            <Card open={true} cardInfo={cardInfo} />
+                        <div className="create-psa-middle-pane">
+                            <TracerForm changeCallback={this.tracerFormCallback} onCancel={this.onCancel} onPublish={this.onPublish}/>
                         </div>
                     </div>
-                    <div className="create-psa-middle-pane">
-                        <TracerForm changeCallback={this.tracerFormCallback} onCancel={this.onCancel}/>
-                    </div>
                 </div>
+                <ConfirmationModal show={this.state.formStage === 2} onNoConfirm={this.onNoConfirm} onYesConfirm={this.onYesConfirm} />
             </div>
         );
     }
@@ -95,5 +114,25 @@ export class CreatePSA extends React.Component {
 
     onCancel() {
         this.props.onCancel();
+    }
+
+    onPublish() {
+        this.setState({formStage: 2});
+    }
+
+    onNoConfirm() {
+        this.setState({formStage: 1});
+    }
+
+    onYesConfirm() {
+        this.setState({formStage: 3});
+    }
+
+    getFormStyles() {
+        let classes = "create-psa-container"
+        if (this.state.formStage != 1) {
+            classes += " hidden";
+        }
+        return classes;
     }
 }

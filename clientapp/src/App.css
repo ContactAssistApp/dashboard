@@ -568,3 +568,61 @@ input:checked + .slider:before {
   margin-left: 20px;
   vertical-align: middle;
 }
+
+.confirmation-modal-container {
+  background: #F8F9F9;
+  border: 1px solid #EAD7D7;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 300px;
+  padding: 30px;
+  text-align: center;
+}
+
+.confirmation-modal-text {
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+  color: black;
+  margin-bottom: 30px;
+}
+
+.confirmation-modal-yes {
+  color: #3278CE;
+  cursor: pointer;
+}
+
+.confirmation-modal-no {
+  color: #707A85;
+  cursor: pointer;
+}
+
+.confirmation-modal-separator {
+  transform: rotate(90deg);
+  border: 1px solid #D1B9B9;
+  display: inline;
+  margin: 0px 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.confirmation-modal-buttons {
+  text-align: center;
+}
+
+.published-text {
+  font-size: 25px;
+  line-height: 28px;
+  color: #387926;
+}
+
+.published-text {
+  margin: 20px 0px;
+}
+
+.published-checkmark {
+  margin-bottom: 20px;
+}
