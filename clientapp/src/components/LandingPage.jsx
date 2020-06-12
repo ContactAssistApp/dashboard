@@ -10,6 +10,11 @@ export class LandingPage extends React.Component {
         this.showForm = this.showForm.bind(this);
         this.onFormCancel = this.onFormCancel.bind(this);
     }
+    componentDidMount(){
+        console.log('First this called');
+        let map = null;
+        map = new window.Microsoft.Maps.Map(document.getElementById('CovidBingMap'), { });
+    }
 
     render() {
         const defaultCardInfo = {
@@ -30,6 +35,7 @@ export class LandingPage extends React.Component {
         }
 
         return (
+
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
@@ -64,6 +70,8 @@ export class LandingPage extends React.Component {
                             Download CovidSafe
                         </button>
                         {form}
+                        <div id="printoutPanel">Print coords here</div>
+                        <div id="CovidBingMap" style={{width: '100%', height: '700px'}}></div>
                     </div>
                 </div>
             </div>
@@ -77,6 +85,12 @@ export class LandingPage extends React.Component {
             </div>
         )
     }
+
+    // loadMapScenario() {
+    //     console.log('First this called');
+    //     let map = null;
+    //     map = new Microsoft.Maps.Map(document.getElementById('CovidBingMap'), { });
+    // }
 
     showForm() {
         this.setState({showingForm: true});

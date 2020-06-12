@@ -25,11 +25,22 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <style type='text/css'>body{margin:0;padding:0;font-family:'Segoe UI',Helvetica,Arial,Sans-Serif}</style>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AkisLQBneNEbcJ5sGvulxCrTU9LLcBrOLCoHPOZipxL5GRSo3uxDFPYMz6GIvEud'></script>  
+    <title>PSA Dashboard</title>
   </head>
-  <body>
+  <body> 
+    <!-- onload="loadMapScenario();" -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- <script>
+      var map;
+      function loadMapScenario() {
+        map = new Microsoft.Maps.Map(document.getElementById('CovidBingMap'), {});
+      }
+    </script>
+    <div id="CovidBingMap" style="width: 100%; height: 700px;"></div> -->
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
