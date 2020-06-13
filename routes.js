@@ -1,11 +1,32 @@
 var express = require('express'),
   router = express.Router(),
-  API = require('./src/controller')
+  API = require('./src/controller'),
+  conf = require('./config'),
+  basicAuth = require('basic-auth')
 
 router.use(function (req, res, next) {
   console.log(req.method + ' ' + req.path)
   next()
 })
+
+var auth = function (req, res, next) {
+  function unauthorized(res) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    return res.send(401);
+  }
+
+  var user = basicAuth(req);
+  if (!user || !user.name || !user.pass) {
+    return unauthorized(res);
+  }
+
+  if (user.name === conf.admin.username  && user.pass === conf.admin.password) {
+    return next();
+  } else {
+    return unauthorized(res);
+  }
+}
+
 
 router.get('/', function (req, res) {
   res.render('pages/index')
@@ -29,25 +50,25 @@ router.get('/contact', function (req, res) {
 
 
 //API TEST
-router.get('/api/size', function (req, res) { //todo head <> backend
+router.get('/api/size', auth, function (req, res) { //todo head <> backend
   API.getSize(req.query.lat, req.query.lon, req.query.precision, req.query.lastTimestamp, (e) => {
     res.send(e)
   })
 })
 
-router.get('/api/list', function (req, res) {
+router.get('/api/list', auth, function (req, res) {
   API.getList(req.query.lat, req.query.lon, req.query.precision, req.query.lastTimestamp, (e) => {
     res.send(e)
   })
 })
 
-router.get('/api/message', function (req, res) { //todo post <> backend
+router.get('/api/message', auth, function (req, res) { //todo post <> backend
   API.postMessage('', (e) => {
     res.send(e)
   })
 })
 
-router.get('/api/report', function (req, res) { //todo put <> backend
+router.get('/api/report', auth, function (req, res) { //todo put <> backend
   API.putAreaReport('', (e) => {
     res.send(e)
   })
