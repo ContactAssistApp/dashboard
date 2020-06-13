@@ -70,7 +70,7 @@ export class Card extends React.Component{
             <div className="card-outline">
                 <div className="card-header" style={this.getHeaderStyles()}>
                     <img src={warning} className="card-header-logo" alt="header-logo"/>
-                    <span className="card-header-text">{this.props.cardInfo.type}</span>
+                    <span className="card-header-text">{this.getCardType()}</span>
                     <img src={chevron} className="card-header-chevron-closed" alt="chevron" onClick={this.expandCard}></img>
                 </div>
                 <div className="card-body">
