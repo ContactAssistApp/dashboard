@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from './Card';
+import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
 import appIcon from '../images/appIcon.svg';
 
@@ -9,11 +10,6 @@ export class LandingPage extends React.Component {
         this.state = {showingForm: false};
         this.showForm = this.showForm.bind(this);
         this.onFormCancel = this.onFormCancel.bind(this);
-    }
-    componentDidMount(){
-        console.log('First this called');
-        let map = null;
-        map = new window.Microsoft.Maps.Map(document.getElementById('CovidBingMap'), { });
     }
 
     render() {
@@ -27,6 +23,11 @@ export class LandingPage extends React.Component {
             startDate: "",
             endDate: "",
             description: ""
+        };
+
+        const defaultMapInfo = {
+            lat: 35.027222,
+            lon: -111.0225
         };
 
         let form = null;
@@ -70,8 +71,7 @@ export class LandingPage extends React.Component {
                             Download CovidSafe
                         </button>
                         {form}
-                        <div id="printoutPanel">Print coords here</div>
-                        <div id="CovidBingMap" style={{width: '100%', height: '700px'}}></div>
+                        <Map mapInfo={defaultMapInfo} />
                     </div>
                 </div>
             </div>
@@ -85,12 +85,6 @@ export class LandingPage extends React.Component {
             </div>
         )
     }
-
-    // loadMapScenario() {
-    //     console.log('First this called');
-    //     let map = null;
-    //     map = new Microsoft.Maps.Map(document.getElementById('CovidBingMap'), { });
-    // }
 
     showForm() {
         this.setState({showingForm: true});
