@@ -26,8 +26,10 @@ export class LandingPage extends React.Component {
         };
 
         const defaultMapInfo = {
-            lat: 35.027222,
-            lon: -111.0225
+            zip: 10004,
+            lat: 40.75597667,
+            lon: -73.98700333,
+            address: '1 Times Sq, New York, NY 10036'
         };
 
         let form = null;
