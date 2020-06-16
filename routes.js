@@ -41,8 +41,23 @@ router.get('/api/list', function (req, res) {
   })
 })
 
-router.get('/api/message', function (req, res) { //todo post <> backend
-  API.postMessage('', (e) => {
+router.post('/api/message', function (req, res) { //todo post <> backend
+  let messageInput = '';
+
+  let messages = req.body.messages;
+  if (messages) {
+    let query = {
+      "RequestedQueries": messages
+    };
+    try {
+      messageInput = JSON.stringify(query);
+    }
+    catch(e) {
+      console.log("JSON.stringify error");
+    }
+  }
+
+  API.postMessage(messageInput, (e) => {
     res.send(e)
   })
 })
