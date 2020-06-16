@@ -35,6 +35,40 @@ router.get('/api/size', function (req, res) { //todo head <> backend
   })
 })
 
+router.get('/api/areaMatches', function (req, res) {
+  // get the list of message ids
+  API.getList(req.query.lat, req.query.lon, req.query.precision, req.query.lastTimestamp, (response) => {
+    let messages = response.content.messageInfoes;
+    let messageInput = '';
+    if (messages) {
+      let query = {
+        "RequestedQueries": messages
+      };
+      try {
+        messageInput = JSON.stringify(query);
+      }
+      catch(e) {
+        console.log("JSON.stringify error");
+      }
+      API.postMessage(messageInput, (response) => {
+        let matches = [];
+        let matchMessages = response.content.matchMessages;
+        if (matchMessages) {
+          matches = matchMessages.map((m) => {
+            return m.areaMatches;
+          });
+        }
+        // flat requires Node > 11
+        let flattenedMatches = matches.flat();
+        let result = {
+          matches: flattenedMatches
+        };
+        res.send(result);
+      })
+    }
+  })
+})
+
 router.get('/api/list', function (req, res) {
   API.getList(req.query.lat, req.query.lon, req.query.precision, req.query.lastTimestamp, (e) => {
     res.send(e)
