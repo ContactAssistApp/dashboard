@@ -62,8 +62,16 @@ router.post('/api/message', function (req, res) { //todo post <> backend
   })
 })
 
-router.get('/api/report', function (req, res) { //todo put <> backend
-  API.putAreaReport('', (e) => {
+router.post('/api/report', function (req, res) { //todo put <> backend
+  let input = '';
+  let body = req.body;
+  try {
+    input = JSON.stringify(body);
+  }
+  catch(e) {
+    console.log("JSON.stringify error");
+  }
+  API.putAreaReport(input, (e) => {
     res.send(e)
   })
 })
