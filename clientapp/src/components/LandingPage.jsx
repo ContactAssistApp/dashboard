@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from './Card';
+import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
 import { Slider } from './Slider';
 import appIcon from '../images/appIcon.svg';
@@ -29,12 +30,20 @@ export class LandingPage extends React.Component {
             description: ""
         };
 
+        const defaultMapInfo = {
+            zip: 10004,
+            lat: 40.75597667,
+            lon: -73.98700333,
+            address: '1 Times Sq, New York, NY 10036'
+        };
+
         let form = null;
         if (this.state.showingForm) {
             form = this.getForm();
         }
 
         return (
+
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
@@ -84,6 +93,7 @@ export class LandingPage extends React.Component {
                             Download CovidSafe
                         </button>
                         {form}
+                        <Map mapInfo={defaultMapInfo} />
                     </div>
                 </div>
             </div>

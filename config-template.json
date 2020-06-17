@@ -1,0 +1,10 @@
+{
+  "api": {
+    "host": "",
+    "version": ""
+  },
+  "admin":{
+    "username":"",
+    "passworld":""
+  }
+}
