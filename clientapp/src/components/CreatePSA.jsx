@@ -25,8 +25,6 @@ export class CreatePSA extends React.Component {
             city: this.state.city,
             state: this.state.state,
             zip: this.state.zip,
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
             description: this.state.description
         };
 
@@ -50,7 +48,7 @@ export class CreatePSA extends React.Component {
                             <div className="create-psa-preview-label">
                                 Dashboard Preview
                             </div>
-                            <Card open={true} cardInfo={cardInfo} />
+                            <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate}/>
                         </div>
                     </div>
                     <div className="create-psa-middle-pane">
