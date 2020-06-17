@@ -5,6 +5,7 @@ var express = require("express"),
   router = require("./routes"),
   path = require('path'),
   cors = require('cors'),
+  bodyParser = require('body-parser'),
   port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
   host = process.env.OPENSHIFT_NODEJS_IP
 
@@ -12,6 +13,9 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.use(cors())
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // serve static content
 app.use(express.static(path.join(__dirname, 'public')))
