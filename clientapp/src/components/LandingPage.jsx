@@ -1,8 +1,14 @@
 import React from 'react';
 import { Card } from './Card';
+import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
+import { Slider } from './Slider';
 import appIcon from '../images/appIcon.svg';
 import { getAreaMatches } from '../Api/GetAreaMatches';
+import pin from '../images/pin.svg';
+import clock from '../images/clock.svg';
+import calendar from '../images/calendar.svg';
+import savedSettingsIcon from "../images/savedSettingsIcon.svg";
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -38,12 +44,20 @@ export class LandingPage extends React.Component {
             description: ""
         };
 
+        const defaultMapInfo = {
+            zip: 10004,
+            lat: 40.75597667,
+            lon: -73.98700333,
+            address: '1 Times Sq, New York, NY 10036'
+        };
+
         let form = null;
         if (this.state.showingForm) {
             form = this.getForm();
         }
 
         return (
+
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
@@ -69,7 +83,22 @@ export class LandingPage extends React.Component {
                 </div>
                 <div className="landing-page-right-pane">
                     <div className="landing-page-filters landing-page-top">
-                        Filters
+                        <img src={pin} className="tracer-form-pin" alt="pin icon"/>
+                        <input type="text" placeholder="New York, NY 10011" />
+                        <img src={clock} className="clock-icon" alt="clock icon" />
+                        <input type="time" value="07:00" />
+                        <span id="map-filter-times-separator">to</span>
+                        <input type="time" value="07:00" />
+                        <div className="all-day-switch">
+                            <span>All Day</span>
+                        </div>
+                        <img src={calendar} className="map-filter-calendar-icon" alt="calendar icon" />
+                        <input type="date" id="start-date" onChange={this.onStartDateChange}/>
+                        <span id="map-filter-dates-separator">to</span>
+                        <input type="date" id="end-date" onChange={this.onEndDateChange}/>
+                        <Slider startingValue={2} label={"Maximum Radius"} unit={"miles"}/>
+                        <span className="filter-save-text">Save Settings</span>
+                        <img src={savedSettingsIcon} className="saved-settings-icon" alt="saved settings icon" />
                     </div>
                     <div className="landing-page-map">
                         <button className="create-psa-button" onClick={this.showForm}>Create New PSA</button>
@@ -78,6 +107,7 @@ export class LandingPage extends React.Component {
                             Download CovidSafe
                         </button>
                         {form}
+                        <Map mapInfo={defaultMapInfo} />
                     </div>
                 </div>
             </div>
