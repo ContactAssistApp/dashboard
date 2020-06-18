@@ -5,6 +5,8 @@ import { TracerForm } from './TracerForm';
 import { PsaFields } from '../models/PsaFields';
 import { ConfirmationModal } from './ConfirmationModal';
 import { SuccesModal } from './SuccessModal';
+import { PublishPsaRequest } from '../Api/PublishPsaRequest';
+import { publishPSA } from '../Api/publishPSA';
 
 /*
 Props:
@@ -41,8 +43,6 @@ export class CreatePSA extends React.Component {
             city: this.state.city,
             state: this.state.state,
             zip: this.state.zip,
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
             description: this.state.description
         };
 
@@ -66,8 +66,8 @@ export class CreatePSA extends React.Component {
                             <div className="create-psa-card-preview">
                                 <div className="create-psa-preview-label">
                                     Dashboard Preview
-                            </div>
-                                <Card open={true} cardInfo={cardInfo} />
+                                </div>
+                                <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate}/>
                             </div>
                         </div>
                         <div className="create-psa-middle-pane">
@@ -125,7 +125,13 @@ export class CreatePSA extends React.Component {
     }
 
     onYesConfirm() {
-        this.setState({formStage: 3});
+        // publish PSA to backend
+        let publishRequest = new PublishPsaRequest(this.state);
+        publishRequest.getBody((body) => {
+            // to-do show error if publish did not succeed
+            publishPSA(body);
+            this.setState({formStage: 3});
+        });
     }
 
     getFormStyles() {

@@ -6,7 +6,9 @@ import calendar from '../images/calendar.svg';
 /*
 Card props:
 open: boolean - whether card should be expanded or collapsed
-cardInfo: CardInfo - info for the card
+cardInfo: CardInfo - info for the card - equivalent to the userMessage
+startDate: string,
+endDate: string
 */
 
 export class Card extends React.Component{
@@ -17,7 +19,7 @@ export class Card extends React.Component{
         this.collapseCard = this.collapseCard.bind(this);
         this.expandCard = this.expandCard.bind(this);
         this.state = {open: this.props.open, cardInfo: this.props.cardInfo};
-    }
+    }   
 
     render() {
         let card;
@@ -148,11 +150,11 @@ export class Card extends React.Component{
     getCardDates() {
         let startDate = "start date";
         let endDate = "end date";
-        if (this.props.cardInfo.startDate) {
-            startDate = this.props.cardInfo.startDate;
+        if (this.props.startDate) {
+            startDate = this.props.startDate;
         }
-        if (this.props.cardInfo.endDate) {
-            endDate = this.props.cardInfo.endDate;
+        if (this.props.endDate) {
+            endDate = this.props.endDate;
         }
         const dates = `${startDate} to ${endDate}`;
         return dates;

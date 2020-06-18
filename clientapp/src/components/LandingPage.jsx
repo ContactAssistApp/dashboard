@@ -4,6 +4,7 @@ import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
 import { Slider } from './Slider';
 import appIcon from '../images/appIcon.svg';
+import { getAreaMatches } from '../Api/GetAreaMatches';
 import pin from '../images/pin.svg';
 import clock from '../images/clock.svg';
 import calendar from '../images/calendar.svg';
@@ -12,9 +13,22 @@ import savedSettingsIcon from "../images/savedSettingsIcon.svg";
 export class LandingPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showingForm: false};
+        this.state = {showingForm: false, cards: []};
         this.showForm = this.showForm.bind(this);
         this.onFormCancel = this.onFormCancel.bind(this);
+    }
+
+    componentDidMount() {
+        //hard-coding location for now
+        let params = {
+            lat: 42,
+            lon: -73,
+            precision: 4,
+            lastTimestamp: 1592204400000
+          };
+          getAreaMatches(params).then(res => {
+            this.setState({ cards: res.matches });
+          });
     }
 
     render() {
@@ -62,9 +76,9 @@ export class LandingPage extends React.Component {
                         Filter and sort
                     </div>
                     <div className="landing-page-cards">
-                        <Card open={false} cardInfo={defaultCardInfo}/>
-                        <Card open={false} cardInfo={defaultCardInfo}/>
-                        <Card open={false} cardInfo={defaultCardInfo}/>
+                        {this.state.cards.map((card) => {
+                            return this.getCard(card);
+                        })}
                     </div>
                 </div>
                 <div className="landing-page-right-pane">
@@ -114,5 +128,19 @@ export class LandingPage extends React.Component {
 
     onFormCancel() {
         this.setState({showingForm: false});
+    }
+
+    getCard(cardInfo) {
+        try {
+            let parsedInfo = JSON.parse(cardInfo.userMessage);
+            // convert the timestamps to readable dates
+            let startDate = new Date(cardInfo.area.beginTime).toLocaleDateString();
+            let endDate = new Date(cardInfo.area.endTime).toLocaleDateString();
+
+            return <Card open={false} cardInfo={parsedInfo} startDate={startDate} endDate={endDate} />;
+        } catch(e) {
+            console.log("JSON.parse error");
+            return null;
+        }
     }
 }
