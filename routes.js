@@ -73,17 +73,9 @@ router.get('/api/areaMatches', function (req, res) {
         console.log("JSON.stringify error");
       }
       API.postMessage(messageInput, (response) => {
-        let matches = [];
-        let matchMessages = response.content.matchMessages;
-        if (matchMessages) {
-          matches = matchMessages.map((m) => {
-            return m.areaMatches;
-          });
-        }
-        // flat requires Node > 11
-        let flattenedMatches = matches.flat();
+        let matchMessages = response.content.narrowcastMessages;
         let result = {
-          matches: flattenedMatches
+          matches: matchMessages
         };
         res.send(result);
       })

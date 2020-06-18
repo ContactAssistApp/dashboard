@@ -114,7 +114,7 @@ var API = {
     const options = {
       hostname: api.host,
       port: 443,
-      path: format('/api/Messages/AreaReport?api-version={0}', api.version),
+      path: format('/api/Messages/Announce?api-version={0}', api.version),
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

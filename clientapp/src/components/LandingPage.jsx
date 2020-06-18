@@ -21,8 +21,8 @@ export class LandingPage extends React.Component {
     componentDidMount() {
         //hard-coding location for now
         let params = {
-            lat: 42.7569,
-            lon: -73.9828,
+            lat: 42,
+            lon: -73,
             precision: 4,
             lastTimestamp: 1592204400000
           };
@@ -134,8 +134,8 @@ export class LandingPage extends React.Component {
         try {
             let parsedInfo = JSON.parse(cardInfo.userMessage);
             // convert the timestamps to readable dates
-            let startDate = new Date(cardInfo.areas[0].beginTime).toLocaleDateString();
-            let endDate = new Date(cardInfo.areas[0].endTime).toLocaleDateString();
+            let startDate = new Date(cardInfo.area.beginTime).toLocaleDateString();
+            let endDate = new Date(cardInfo.area.endTime).toLocaleDateString();
 
             return <Card open={false} cardInfo={parsedInfo} startDate={startDate} endDate={endDate} />;
         } catch(e) {
