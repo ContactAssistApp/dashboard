@@ -358,6 +358,7 @@ html, body, body>div {
 
 .create-psa-middle-pane {
   flex: 50%;
+  background: white;
 }
 
 .create-psa-container {
@@ -420,10 +421,14 @@ html, body, body>div {
   padding: 8px 20px;
   cursor: pointer;
   margin-top: 10px;
+  position: relative;
+  z-index: 100;
 }
 
 .form-container {
   margin-left: 20%;
+  position: relative;
+  z-index: 100;
 }
 
 .user-profile {
@@ -625,4 +630,11 @@ input:checked + .slider:before {
 
 .published-checkmark {
   margin-bottom: 20px;
+}
+
+#CovidBingMap {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 10px;
 }
