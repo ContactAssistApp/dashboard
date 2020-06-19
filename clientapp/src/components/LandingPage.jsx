@@ -102,7 +102,6 @@ export class LandingPage extends React.Component {
                     </div>
                     <div className="landing-page-map">
                         <button className="create-psa-button" onClick={this.showForm}>Create New PSA</button>
-                        {console.log('this.state.cards:', JSON.stringify(this.state.cards))}
                         <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards}/>
                         <button className="download-button">
                             <img src={appIcon} />
