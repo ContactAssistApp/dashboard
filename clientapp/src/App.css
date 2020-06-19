@@ -306,6 +306,7 @@ html, body, body>div {
   margin-right: 6px;
   padding: 10px 10px;
   color: white;
+  cursor: pointer;
 }
 
 .publish-button {
@@ -313,6 +314,7 @@ html, body, body>div {
   border-radius: 4px;
   padding: 10px 10px;
   color: white;
+  cursor: pointer;
 }
 
 .create-psa-header {
@@ -458,6 +460,9 @@ html, body, body>div {
   bottom: 10%;
   padding: 10px;
   cursor: pointer;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
 }
 
 .download-button>img {

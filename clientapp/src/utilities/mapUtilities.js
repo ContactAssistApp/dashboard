@@ -1,12 +1,22 @@
+let map = null; //global 
+
 export const BingMap = {
-    createMap: function(){
-        let map = null;
+    init: function(){
         map = new window.Microsoft.Maps.Map(document.getElementById('CovidBingMap'), { 
             //options
         });
+    },
+    getMap: function(){        
         return map;
     },
-    reverseGeocoordsFromZip:function(map, zipcode, cb) {
+    setView: function(lat,lon,zoom){
+        map.setView({
+            mapTypeId: window.Microsoft.Maps.MapTypeId.aerial,
+            center: new window.Microsoft.Maps.Location(lat,lon),
+            zoom: zoom
+        });
+    },
+    reverseGeocoordsFromZip:function(zipcode, cb) {
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var requestOptions = {
@@ -19,7 +29,7 @@ export const BingMap = {
             searchManager.geocode(requestOptions)
         })
     },
-    reverseGeocoordsFromAddress:function(map,address,cb) { // Get lat, lon
+    reverseGeocoordsFromAddress:function(address,cb) { // Get lat, lon
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var requestOptions = {
@@ -32,7 +42,7 @@ export const BingMap = {
             searchManager.geocode(requestOptions)
         })
     },
-    reverseAddress:function(map, lat, lon, cb) { // Get address
+    reverseAddress:function(lat, lon, cb) { // Get address
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var reverseGeocodeRequestOptions = {
@@ -44,7 +54,7 @@ export const BingMap = {
             searchManager.reverseGeocode(reverseGeocodeRequestOptions);
         })
     },
-    drawThePinByAddress:function(map, address) { // Draw the pin
+    drawThePinByAddress:function(address) { // Draw the pin
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var requestOptions = {
@@ -58,7 +68,7 @@ export const BingMap = {
             searchManager.geocode(requestOptions)
         })
     },
-    drawThePinByGeocoords:function(map, lat, lon) { // Draw the pin
+    drawThePinByGeocoords:function(lat, lon) { // Draw the pin
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var reverseGeocodeRequestOptions = {
