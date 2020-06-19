@@ -119,14 +119,17 @@ export class Map extends React.Component {
         //Loop:
         // BingMap.drawThePinByAddress('20 west st new york ny 10004');
         // BingMap.drawThePinByAddress('641 ave of america New York NY 10011');
+        let lat = null;
+        let lon = null;
+        let address = null;
         cards.map((card) => {
-            //focus point
-            BingMap.setView(card.area.location.latitude,card.area.location.longitude,5);
-            let address = this.getAddress(card);
+            lat = card.area.location.latitude;
+            lon = card.area.location.longitude;
+            address = this.getAddress(card);
             if(address){
               BingMap.drawThePinByAddress(address);
             } else {
-              BingMap.drawThePinByGeocoords(card.area.location.latitude, card.area.location.longitude);
+              BingMap.drawThePinByGeocoords(lat,lon);
             }            
             //BingMap.drawThePinByAddress(JSON.parse(card.userMessage).zip) //test zipcode 
             //BingMap.drawThePinByGeocoords(card.area.location.latitude, card.area.location.longitude)
@@ -143,7 +146,9 @@ export class Map extends React.Component {
             // BingMap.reverseAddress(card.area.location.latitude, card.area.location.longitude.lon, function(e){
             //     console.log('Find address from Geocoords:',e);
             // })
-        });   
+        });  
+        //focus point
+        BingMap.setView(lat, lon,5); 
     }
 
     getAddress(card){
