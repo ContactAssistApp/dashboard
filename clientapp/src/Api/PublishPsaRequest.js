@@ -53,8 +53,7 @@ export class PublishPsaRequest {
             longitude: 0
         };
         let address = `${params.street} ${params.city}, ${params.state} ${params.zip}`;
-        let map = BingMap.createMap();
-        BingMap.reverseGeocoordsFromAddress(map, address, (result) => {
+        BingMap.reverseGeocoordsFromAddress(address, (result) => {
             location.latitude = result.latitude;
             location.longitude = result.longitude;
             cb(location);

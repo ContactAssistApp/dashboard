@@ -1,74 +1,91 @@
 import React from 'react';
 import { BingMap } from '../utilities/mapUtilities';
-/*
+/*setState
 Map props:
 mapInfo:
+cards:
 */
 export class Map extends React.Component {
     constructor(props) {
         super(props);
         this.loadMapScenario = this.loadMapScenario.bind(this);
-        this.state = {mapInfo: this.props.mapInfo};        
+        this.state = {mapInfo: this.props.mapInfo, cardInfo: this.props.cardInfo };       
     }
 
     componentDidMount(){
         window.onload = this.loadMapScenario;
     }
 
+    componentDidUpdate(){
+      this.loadMapScenario();
+    }
+
     render() {
         return (
-            <div id="CovidBingMap" style={{width: '100%', height: '700px'}}></div>
+            <div id="CovidBingMap" style={{width: '100%', height: '900px'}}></div>
         )
     }
 
     
-    loadMapScenario(mapInfo) {
-        console.log('First this called',this.props.mapInfo);
-        //Get List of Cards
+    loadMapScenario() {
+        console.log('mapInfo:',this.props.mapInfo);
+        console.log('cards:',this.props.cardInfo); //? []
+        if(BingMap.getMap()==null){
+          BingMap.init(); //One time here only
+        }        
+        //Get List of counties
         //https://public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/table/
-        const cards = [
-            {
-                type: "",
-                title: "",
-                street: "",
-                city: "",
-                state: "",
-                zip: this.props.mapInfo.zip,
-                startDate: "",
-                endDate: "",
-                description: "",
-                lat: this.props.mapInfo.lat,
-                lon: this.props.mapInfo.lon,
-                address: this.props.mapInfo.address
-            }
-        ]
-        let map = BingMap.createMap();
+        const cards = this.props.cardInfo;
         //Loop:
-        var mapInfo = cards[0];
-       
-        //focus point
-        map.setView({
-            mapTypeId: window.Microsoft.Maps.MapTypeId.aerial,
-            center: new window.Microsoft.Maps.Location(mapInfo.lat, mapInfo.lon),
-            zoom: 15
-        });
-        
-        //Draw the pin on map by Zipcode/Address/Geocoords
-        //BingMap.drawThePinByAddress(map,mapInfo.zip) //test zipcode
-        //TODO: Loop the list of cards
-        BingMap.drawThePinByAddress(map,mapInfo.address)
+        // BingMap.drawThePinByAddress('20 west st new york ny 10004');
+        // BingMap.drawThePinByAddress('641 ave of america New York NY 10011');
+        if(cards){
+          let lat = null;
+          let lon = null;
+          let address = null;
+          cards.map((card) => {
+              lat = card.area.location.latitude;
+              lon = card.area.location.longitude;
+              address = this.getAddress(card);
+              if(address){
+                BingMap.drawThePinByAddress(address);
+              } else {
+                BingMap.drawThePinByGeocoords(lat,lon);
+              }            
+              //BingMap.drawThePinByAddress(JSON.parse(card.userMessage).zip) //test zipcode 
+              //BingMap.drawThePinByGeocoords(card.area.location.latitude, card.area.location.longitude)
+              //TODO: Cleanup test utilities
+              // BingMap.reverseGeocoordsFromZip(JSON.parse(card.userMessage).zip, function(e){
+              //     console.log('Find Geocoords from Zipcode:',e);
+              // })
+              // BingMap.reverseGeocoordsFromAddress(this.getAddress(JSON.parse(card.userMessage).street,
+              // JSON.parse(card.userMessage).city,
+              // JSON.parse(card.userMessage).state,
+              // JSON.parse(card.userMessage).zip), function(e){
+              //     console.log('Find Geocoords from Address:',e);
+              // })
+              // BingMap.reverseAddress(card.area.location.latitude, card.area.location.longitude.lon, function(e){
+              //     console.log('Find address from Geocoords:',e);
+              // })
+          });  
+          //focus point
+          BingMap.setView(lat, lon,5); 
+        }
+    }
 
-        //// TEST - TODO: Cleanup
-        BingMap.reverseGeocoordsFromZip(map, mapInfo.zip, function(e){
-            console.log('Find Geocoords from Zipcode:',e);
-        })
-        BingMap.reverseGeocoordsFromAddress(map, mapInfo.address, function(e){
-            console.log('Find Geocoords from Address:',e);
-        })
-        BingMap.reverseAddress(map, mapInfo.lat, mapInfo.lon, function(e){
-            console.log('Find address from Geocoords:',e);
-        })
-       // BingMap.drawThePinByGeocoords(map,mapInfo.lat,mapInfo.lon)
-        
+    getAddress(card){
+      try{
+          let parsedInfo = JSON.parse(card.userMessage);
+          if(parsedInfo.street && parsedInfo.city && parsedInfo.state && parsedInfo.zip){
+            //address
+            console.log("Address:", [parsedInfo.street,parsedInfo.city,parsedInfo.state,parsedInfo.zip].join(' '));
+            return [parsedInfo.street,parsedInfo.city,parsedInfo.state,parsedInfo.zip].join(' ');
+          }else{ //zip
+            return null;
+          }   
+        } catch(e) {
+            console.log("JSON.parse error:", card.userMessage);
+            return null;
+        }
     }
 }
