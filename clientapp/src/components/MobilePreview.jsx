@@ -17,7 +17,7 @@ export class MobilePreview extends React.Component{
             <div className="mobile-preview">
                 <div className="mobile-preview-header">
                     <img src={appIcon} className="mobile-preview-icon" alt="app icon" />
-                    <span className="mobile-preview-appname">COVIDSAFE</span>
+                    <span className="mobile-preview-appname">COMMONCIRCLE</span>
                     <span className="mobile-preview-time">Just now</span>
                 </div>
                 <div className="mobile-preview-body">

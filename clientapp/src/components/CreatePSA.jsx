@@ -50,7 +50,7 @@ export class CreatePSA extends React.Component {
             <div>
                 <div className={this.getFormStyles()}>
                     <div className="create-psa-header">
-                        Create New PSA
+                        Create New Announcement
                     </div>
                     <div className="flex-container">
                         <div className="create-psa-left-pane">
