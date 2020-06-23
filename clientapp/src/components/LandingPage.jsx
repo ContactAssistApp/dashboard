@@ -9,6 +9,7 @@ import pin from '../images/pin.svg';
 import clock from '../images/clock.svg';
 import calendar from '../images/calendar.svg';
 import savedSettingsIcon from "../images/savedSettingsIcon.svg";
+import { BingMap } from '../utilities/mapUtilities';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -16,19 +17,8 @@ export class LandingPage extends React.Component {
         this.state = {showingForm: false, cards: []};
         this.showForm = this.showForm.bind(this);
         this.onFormCancel = this.onFormCancel.bind(this);
-    }
-
-    componentDidMount() {
-        //hard-coding location for now
-        let params = {
-            lat: 42,
-            lon: -73,
-            precision: 4,
-            lastTimestamp: 1592204400000
-          };
-          getAreaMatches(params).then(res => {
-            this.setState({ cards: res.matches });
-          });
+        this.onZipChange = this.onZipChange.bind(this);
+        this.searchingZip = false;
     }
 
     render() {
@@ -70,13 +60,13 @@ export class LandingPage extends React.Component {
                          Last Updated...
                      </div>
                      <div className="landing-page-location-container">
-                         <input type="text" placeholder="Find location" className="landing-page-find-location" />
+                         <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
                     </div>
                     <div className="landing-page-filter-sort">
                         Filter and sort
                     </div>
                     <div className="landing-page-cards">
-                        {this.state.cards.map((card) => {
+                        {this.state.cards && this.state.cards.map((card) => {
                             return this.getCard(card);
                         })}
                     </div>
@@ -141,6 +131,28 @@ export class LandingPage extends React.Component {
         } catch(e) {
             console.log("JSON.parse error");
             return null;
+        }
+    }
+
+    onZipChange(ev) {
+        let newZip = ev.target.value;
+        // rudimentary zip validation so were not constantly spamming the service
+        if (newZip.length >= 5 && !this.searchingZip) {
+            this.searchingZip = true;
+            let self = this;
+            BingMap.reverseGeocoordsFromZip(newZip, (result) => {
+                let params = {
+                    lat: Math.floor(result.latitude),
+                    lon: Math.floor(result.longitude),
+                    precision: 4,
+                    lastTimestamp: 1592204400000
+                  };
+                getAreaMatches(params).then(res => {
+                    this.setState({ cards: res.matches });
+                }).finally(() => {
+                    self.searchingZip = false;
+                });
+            });
         }
     }
 }
