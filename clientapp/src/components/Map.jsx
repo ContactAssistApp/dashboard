@@ -16,8 +16,10 @@ export class Map extends React.Component {
         window.onload = this.loadMapScenario;
     }
 
-    componentDidUpdate(){
-      this.loadMapScenario();
+    componentDidUpdate(prevProps, prevState){
+      if (prevProps.cardInfo !== this.props.cardInfo) {
+        this.loadMapScenario();
+      }
     }
 
     render() {
@@ -39,7 +41,7 @@ export class Map extends React.Component {
         //Loop:
         // BingMap.drawThePinByAddress('20 west st new york ny 10004');
         // BingMap.drawThePinByAddress('641 ave of america New York NY 10011');
-        if(cards){
+        if(cards && cards.length > 0){
           let lat = null;
           let lon = null;
           let address = null;

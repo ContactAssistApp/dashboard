@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `Tracer vs Viewer`
+The app supports a tracer view and a viewer view. The tracer view includes logging in and the ability to create PSAs.
+To see the tracer view, use "npm run start:admin".
+To see the viewer view, use "npm run start".
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />
