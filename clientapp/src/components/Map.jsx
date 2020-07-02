@@ -24,7 +24,7 @@ export class Map extends React.Component {
 
     render() {
         return (
-            <div id="CovidBingMap" style={{width: '100%', height: '900px'}}></div>
+            <div id="CovidBingMap" style={{width: '100%', height: '100%'}}></div>
         )
     }
 
