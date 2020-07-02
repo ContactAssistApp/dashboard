@@ -34,7 +34,7 @@ Volunteers from Microsoft and University of Washington have built a web-based da
 
 ## Deployment
 
-[aka.ms/covidsafe](https://aka.ms/covidsafe)
+[aka.ms/covidsafe](https://www.bing.com/covid)
 
 ## Reference
 
