@@ -1,0 +1,11 @@
+[0623/153400.882:ERROR:process_reader_win.cc(127)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0623/153401.011:ERROR:exception_snapshot_win.cc(99)] thread ID 21720 not found in process
+[0623/153400.882:ERROR:process_reader_win.cc(127)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0623/153400.882:ERROR:process_reader_win.cc(127)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0623/153400.882:ERROR:process_reader_win.cc(127)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0623/153401.011:ERROR:exception_snapshot_win.cc(99)] thread ID 18600 not found in process
+[0623/153401.013:ERROR:exception_snapshot_win.cc(99)] thread ID 23200 not found in process
+[0623/153401.011:ERROR:exception_snapshot_win.cc(99)] thread ID 24820 not found in process
+[0623/153401.014:ERROR:process_memory_win.cc(73)] ReadMemory at 0xb0a07fe7c0 of 16 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
+[0623/153401.014:ERROR:exception_snapshot_win.cc(210)] EXCEPTION_POINTERS read failed
+[0623/153401.015:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
