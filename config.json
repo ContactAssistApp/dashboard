@@ -5,6 +5,6 @@
   },
   "admin":{
     "username":"admin",
-    "passworld":"123"
+    "password":"123"
   }
 }

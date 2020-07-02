@@ -127,4 +127,17 @@ router.post('/api/report', function (req, res) { //todo put <> backend
 })
 
 
+router.post('/auth', function (req, res) { //todo basic authentication <> backend
+  let user = '';
+  let user = req.body.user;
+  if (!user || !user.name || !user.pass) {
+    res.send(401)
+  }
+  if (user.name === conf.admin.username  && user.pass === conf.admin.password) {
+    res.send(200)
+  } else {
+    res.send(401)
+  }
+})
+
 module.exports = router
