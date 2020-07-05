@@ -2,22 +2,17 @@ import React from 'react';
 import { Card } from './Card';
 import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
-import { Slider } from './Slider';
-import appIcon from '../images/appIcon.svg';
 import { getAreaMatches } from '../Api/GetAreaMatches';
-import pin from '../images/pin.svg';
-import clock from '../images/clock.svg';
-import calendar from '../images/calendar.svg';
-import savedSettingsIcon from "../images/savedSettingsIcon.svg";
 import { BingMap } from '../utilities/mapUtilities';
 
 export class LandingPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showingForm: false, cards: []};
+        this.state = {showingForm: false, cards: [], showingSignIn: false};
         this.showForm = this.showForm.bind(this);
         this.onFormCancel = this.onFormCancel.bind(this);
         this.onZipChange = this.onZipChange.bind(this);
+        this.onSignInClick = this.onSignInClick.bind(this);
         this.searchingZip = false;
     }
 
@@ -45,6 +40,12 @@ export class LandingPage extends React.Component {
         if (this.state.showingForm) {
             form = this.getForm();
         }
+
+        let signInForm = null;
+        if (this.state.showingSignIn) {
+            signInForm = this.getSignInForm();
+        }
+
         let createPsaButton = this.getCreatePsaButton();
 
         return (
@@ -52,6 +53,7 @@ export class LandingPage extends React.Component {
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
+                        <button className="signin-button" onClick={this.onSignInClick}>Pro Tracer Sign in</button>
                      </div>   
                      <div className="landing-page-title">
                         Resource Hub
@@ -75,6 +77,7 @@ export class LandingPage extends React.Component {
                         {createPsaButton}
                         <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards}/>
                         {form}
+                        {signInForm}
                     </div>
                 </div>
             </div>
@@ -141,11 +144,32 @@ export class LandingPage extends React.Component {
                     lastTimestamp: 1592204400000
                   };
                 getAreaMatches(params).then(res => {
-                    this.setState({ cards: res.matches });
+                    this.setState({ cards: res.matches });  
                 }).finally(() => {
                     self.searchingZip = false;
                 });
             });
         }
+    }
+
+    onSignInClick() {
+        this.setState({ showingSignIn: true });
+    }
+
+    getSignInForm() {
+        return (
+            <div className="signIn-Form">
+                <div className="signIn-title">
+                    Pro Tracer Sign in
+                </div>
+                <input type="text" className="signIn-Field" id="username-field" placeholder="example@email.com" />
+                <input type="password" className="signIn-Field" placeholder="password" />
+                <span className="signIn-Link">I forgot my password</span>
+                <div className="signIn-buttons">
+                    <span className="signIn-cancel-button">Cancel</span>
+                    <span className="signIn-continue-button">Continue</span>
+                </div>
+            </div>
+        );
     }
 }
