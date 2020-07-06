@@ -14,6 +14,15 @@ export class SignInForm extends React.Component {
         this.checkCredentials = this.checkCredentials.bind(this);
         this.onUserNameChange = this.onUserNameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.enterKeyListener = this.enterKeyListener.bind(this);
+    }
+
+    componentDidMount() {
+        document.addEventListener("keydown", this.enterKeyListener);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.enterKeyListener);
     }
 
     render() {
@@ -27,8 +36,8 @@ export class SignInForm extends React.Component {
                 <input type="password" value={this.state.password} onChange={this.onPasswordChange} className={inputClasses} id="password-field" placeholder="password" />
                 <span className="signIn-Link">I forgot my password</span>
                 <div className="signIn-buttons">
-                    <span className="signIn-cancel-button" onClick={this.onCancel}>Cancel</span>
-                    <span className="signIn-continue-button" onClick={this.checkCredentials}>Continue</span>
+                    <span className="signIn-cancel-button" onClick={this.onCancel} tabIndex={0}>Cancel</span>
+                    <span className="signIn-continue-button" onClick={this.checkCredentials} tabIndex={0}>Continue</span>
                 </div>
             </div>
         );
@@ -58,5 +67,11 @@ export class SignInForm extends React.Component {
     onPasswordChange(ev) {
         const newPassword = ev.target.value;
         this.setState({password: newPassword});
+    }
+
+    enterKeyListener(ev) {
+        if (ev.key == "Enter") {
+            this.checkCredentials();
+        }
     }
 }
