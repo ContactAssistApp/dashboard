@@ -2,38 +2,24 @@ import React from 'react';
 import { Card } from './Card';
 import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
-import { Slider } from './Slider';
-import appIcon from '../images/appIcon.svg';
 import { getAreaMatches } from '../Api/GetAreaMatches';
-import pin from '../images/pin.svg';
-import clock from '../images/clock.svg';
-import calendar from '../images/calendar.svg';
-import savedSettingsIcon from "../images/savedSettingsIcon.svg";
 import { BingMap } from '../utilities/mapUtilities';
+import { SignInForm } from './SignInForm';
 
 export class LandingPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showingForm: false, cards: []};
+        this.state = {showingForm: false, cards: [], showingSignIn: false, signedIn: false};
         this.showForm = this.showForm.bind(this);
         this.onFormCancel = this.onFormCancel.bind(this);
         this.onZipChange = this.onZipChange.bind(this);
+        this.onSignInClick = this.onSignInClick.bind(this);
+        this.onCancelSignIn = this.onCancelSignIn.bind(this);
+        this.onSuccessSignIn = this.onSuccessSignIn.bind(this);
         this.searchingZip = false;
     }
 
     render() {
-        const defaultCardInfo = {
-            type: "",
-            title: "",
-            street: "",
-            city: "",
-            state: "",
-            zip: "",
-            startDate: "",
-            endDate: "",
-            description: ""
-        };
-
         const defaultMapInfo = {
             zip: 10004,
             lat: 40.75597667,
@@ -45,6 +31,17 @@ export class LandingPage extends React.Component {
         if (this.state.showingForm) {
             form = this.getForm();
         }
+
+        let signInButton = null;
+        if (!this.state.signedIn) {
+            signInButton =  <button className="signin-button" onClick={this.onSignInClick}>Pro Tracer Sign in</button>;
+        }
+
+        let signInForm = null;
+        if (this.state.showingSignIn) {
+            signInForm = <SignInForm onCancel={this.onCancelSignIn} onSuccess={this.onSuccessSignIn} />;
+        }
+
         let createPsaButton = this.getCreatePsaButton();
 
         return (
@@ -52,6 +49,7 @@ export class LandingPage extends React.Component {
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
+                        {signInButton}
                      </div>   
                      <div className="landing-page-title">
                         Resource Hub
@@ -75,6 +73,7 @@ export class LandingPage extends React.Component {
                         {createPsaButton}
                         <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards}/>
                         {form}
+                        {signInForm}
                     </div>
                 </div>
             </div>
@@ -82,7 +81,7 @@ export class LandingPage extends React.Component {
     }
 
     getForm() {
-        if (process.env.REACT_APP_MODE === 'admin') {
+        if (process.env.REACT_APP_MODE === 'admin' && this.state.signedIn) {
             return (
                 <div className="form-container">
                     <CreatePSA onCancel={this.onFormCancel}/>
@@ -95,7 +94,7 @@ export class LandingPage extends React.Component {
     }
 
     getCreatePsaButton() {
-        if (process.env.REACT_APP_MODE === 'admin') {
+        if (process.env.REACT_APP_MODE === 'admin' && this.state.signedIn) {
             return (
                 <button className="create-psa-button" onClick={this.showForm}>Create New Announcement</button>
             )
@@ -141,11 +140,23 @@ export class LandingPage extends React.Component {
                     lastTimestamp: 1592204400000
                   };
                 getAreaMatches(params).then(res => {
-                    this.setState({ cards: res.matches });
+                    this.setState({ cards: res.matches });  
                 }).finally(() => {
                     self.searchingZip = false;
                 });
             });
         }
+    }
+
+    onSignInClick() {
+        this.setState({ showingSignIn: true });
+    }
+
+    onCancelSignIn() {
+        this.setState({ showingSignIn: false });
+    }
+
+    onSuccessSignIn() {
+        this.setState({ showingSignIn: false, signedIn: true});
     }
 }
