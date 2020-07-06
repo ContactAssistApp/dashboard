@@ -4,31 +4,22 @@ import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
 import { getAreaMatches } from '../Api/GetAreaMatches';
 import { BingMap } from '../utilities/mapUtilities';
+import { SignInForm } from './SignInForm';
 
 export class LandingPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showingForm: false, cards: [], showingSignIn: false};
+        this.state = {showingForm: false, cards: [], showingSignIn: false, signedIn: false};
         this.showForm = this.showForm.bind(this);
         this.onFormCancel = this.onFormCancel.bind(this);
         this.onZipChange = this.onZipChange.bind(this);
         this.onSignInClick = this.onSignInClick.bind(this);
+        this.onCancelSignIn = this.onCancelSignIn.bind(this);
+        this.onSuccessSignIn = this.onSuccessSignIn.bind(this);
         this.searchingZip = false;
     }
 
     render() {
-        const defaultCardInfo = {
-            type: "",
-            title: "",
-            street: "",
-            city: "",
-            state: "",
-            zip: "",
-            startDate: "",
-            endDate: "",
-            description: ""
-        };
-
         const defaultMapInfo = {
             zip: 10004,
             lat: 40.75597667,
@@ -41,9 +32,14 @@ export class LandingPage extends React.Component {
             form = this.getForm();
         }
 
+        let signInButton = null;
+        if (!this.state.signedIn) {
+            signInButton =  <button className="signin-button" onClick={this.onSignInClick}>Pro Tracer Sign in</button>;
+        }
+
         let signInForm = null;
         if (this.state.showingSignIn) {
-            signInForm = this.getSignInForm();
+            signInForm = <SignInForm onCancel={this.onCancelSignIn} onSuccess={this.onSuccessSignIn} />;
         }
 
         let createPsaButton = this.getCreatePsaButton();
@@ -53,7 +49,7 @@ export class LandingPage extends React.Component {
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
-                        <button className="signin-button" onClick={this.onSignInClick}>Pro Tracer Sign in</button>
+                        {signInButton}
                      </div>   
                      <div className="landing-page-title">
                         Resource Hub
@@ -85,7 +81,7 @@ export class LandingPage extends React.Component {
     }
 
     getForm() {
-        if (process.env.REACT_APP_MODE === 'admin') {
+        if (process.env.REACT_APP_MODE === 'admin' && this.state.signedIn) {
             return (
                 <div className="form-container">
                     <CreatePSA onCancel={this.onFormCancel}/>
@@ -98,7 +94,7 @@ export class LandingPage extends React.Component {
     }
 
     getCreatePsaButton() {
-        if (process.env.REACT_APP_MODE === 'admin') {
+        if (process.env.REACT_APP_MODE === 'admin' && this.state.signedIn) {
             return (
                 <button className="create-psa-button" onClick={this.showForm}>Create New Announcement</button>
             )
@@ -156,20 +152,11 @@ export class LandingPage extends React.Component {
         this.setState({ showingSignIn: true });
     }
 
-    getSignInForm() {
-        return (
-            <div className="signIn-Form">
-                <div className="signIn-title">
-                    Pro Tracer Sign in
-                </div>
-                <input type="text" className="signIn-Field" id="username-field" placeholder="example@email.com" />
-                <input type="password" className="signIn-Field" placeholder="password" />
-                <span className="signIn-Link">I forgot my password</span>
-                <div className="signIn-buttons">
-                    <span className="signIn-cancel-button">Cancel</span>
-                    <span className="signIn-continue-button">Continue</span>
-                </div>
-            </div>
-        );
+    onCancelSignIn() {
+        this.setState({ showingSignIn: false });
+    }
+
+    onSuccessSignIn() {
+        this.setState({ showingSignIn: false, signedIn: true});
     }
 }

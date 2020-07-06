@@ -690,6 +690,10 @@ input:checked + .slider:before {
   border-color: #8D55E9;
 }
 
+.signIn-Field.error-Field{
+  border-color: red;
+}
+
 .signIn-Link {
   font-size: 10px;
   color: rgba(0, 0, 0, 0.5);
