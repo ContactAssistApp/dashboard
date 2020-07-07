@@ -4,9 +4,9 @@ A minimal web dasboard powered by min.io and node.js web framework
 ## Description
 Volunteers from Microsoft and University of Washington have built a web-based dashboard where anyone can access narrowcast COVID-19 report messages sent by healthcare authorities.
 
-## Screen Shot 
+## Screenshot 
    <p align="center">
-   <img src="img/screenshot.png">
+   <img src="/public/img/screenshot.png">
    </p>
 
 ## Getting started
