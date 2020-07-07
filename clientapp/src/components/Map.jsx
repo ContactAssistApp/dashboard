@@ -50,9 +50,9 @@ export class Map extends React.Component {
               lon = card.area.location.longitude;
               address = this.getAddress(card);
               if(address){
-                BingMap.drawThePinByAddress(address);
+                BingMap.drawThePinByAddress(address, card.userMessage);
               } else {
-                BingMap.drawThePinByGeocoords(lat,lon);
+                BingMap.drawThePinByGeocoords(lat,lon, card.userMessage);
               }            
               //BingMap.drawThePinByAddress(JSON.parse(card.userMessage).zip) //test zipcode 
               //BingMap.drawThePinByGeocoords(card.area.location.latitude, card.area.location.longitude)
@@ -70,8 +70,11 @@ export class Map extends React.Component {
               //     console.log('Find address from Geocoords:',e);
               // })
           });  
+          //clustering ?
+          BingMap.showCluster();
+          BingMap.showDrawingManager();
           //focus point
-          BingMap.setView(lat, lon,5); 
+          BingMap.setView(window.Microsoft.Maps.MapTypeId.canvasLight, lat, lon, 15); 
         }
     }
 
