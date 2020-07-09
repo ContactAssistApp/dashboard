@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 
 // serve static content
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'clientapp/build')));
 
 app.use("/", router)
 app.use('*', function (req, res) {
