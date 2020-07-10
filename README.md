@@ -39,7 +39,11 @@ Volunteers from Microsoft and University of Washington have built a web-based da
 
 ## Deployment
 
-[aka.ms/covidsafe](https://aka.ms/covidsafe)
+> under /clientapp: npm run-script build
+
+> Then you can deploy either static or integrated node.js structure.
+
+[aka.ms/commoncircle](https://aka.ms/commoncircle)
 
 ## Reference
 

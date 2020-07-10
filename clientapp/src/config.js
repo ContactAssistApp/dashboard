@@ -1,1 +1,1 @@
-export const apiBaseUrl = process.env.NODE_ENV === "production" ?  "https://covidsafe.azurewebsites.net" : "http://localhost:3000";
+export const apiBaseUrl = process.env.NODE_ENV === "production" ?  "https://commoncircle.azurewebsites.net" : "http://localhost:3000";
