@@ -5,6 +5,7 @@ import { CreatePSA } from './CreatePSA';
 import { getAreaMatches } from '../Api/GetAreaMatches';
 import { BingMap } from '../utilities/mapUtilities';
 import { SignInForm } from './SignInForm';
+import { isTracerView } from '../utilities/userRole';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export class LandingPage extends React.Component {
         }
 
         let signInButton = null;
-        if (!this.state.signedIn) {
+        if (isTracerView() && !this.state.signedIn) {
             signInButton =  <button className="signin-button" onClick={this.onSignInClick}>Pro Tracer Sign in</button>;
         }
 
@@ -81,7 +82,7 @@ export class LandingPage extends React.Component {
     }
 
     getForm() {
-        if (process.env.REACT_APP_MODE === 'admin' && this.state.signedIn) {
+        if (isTracerView() && this.state.signedIn) {
             return (
                 <div className="form-container">
                     <CreatePSA onCancel={this.onFormCancel}/>
@@ -94,7 +95,7 @@ export class LandingPage extends React.Component {
     }
 
     getCreatePsaButton() {
-        if (process.env.REACT_APP_MODE === 'admin' && this.state.signedIn) {
+        if (isTracerView() && this.state.signedIn) {
             return (
                 <button className="create-psa-button" onClick={this.showForm}>Create New Announcement</button>
             )

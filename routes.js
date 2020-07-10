@@ -29,7 +29,15 @@ var auth = function (req, res, next) {
 
 
 router.get('/', function (req, res) {
-  res.render('pages/index')
+  res.sendFile('index.html', { root: "./clientapp/build"});
+})
+
+router.get('/admin', function (req, res) {
+  res.sendFile('index.html', { root: "./clientapp/build"});
+})
+
+router.get('/welcome', function (req,res) {
+  res.render('pages/index');
 })
 
 router.get('/design', function (req, res) { //MSR Design

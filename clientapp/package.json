@@ -11,8 +11,7 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "set PORT=8080 && set \"REACT_APP_MODE=viewer\" && react-scripts start",
-    "start:admin": "set PORT=8080 && set \"REACT_APP_MODE=admin\" && react-scripts start",
+    "start": "set PORT=8080 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
