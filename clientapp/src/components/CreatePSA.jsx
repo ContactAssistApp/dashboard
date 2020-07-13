@@ -131,6 +131,11 @@ export class CreatePSA extends React.Component {
             // to-do show error if publish did not succeed
             publishPSA(body);
             this.setState({formStage: 3});
+        },
+        // error callbck
+        () => {
+            // if we reach here, the geocoding from address failed
+            this.setState({formStage: 1});
         });
     }
 
