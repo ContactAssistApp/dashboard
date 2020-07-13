@@ -129,8 +129,14 @@ export class CreatePSA extends React.Component {
         let publishRequest = new PublishPsaRequest(this.state);
         publishRequest.getBody((body) => {
             // to-do show error if publish did not succeed
-            publishPSA(body);
-            this.setState({formStage: 3});
+            publishPSA(body).then(res => {
+                if (res.content.validationFailures) {
+                    this.setState({formStage: 1});
+                }
+                else {
+                   this.setState({formStage: 3}); 
+                }
+            });
         },
         // error callbck
         () => {
