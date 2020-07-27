@@ -37,7 +37,7 @@ export class SignInForm extends React.Component {
                 <div className="signIn-Message">
                     Please sign in with your credentials
                 </div>
-                <input type="text" value={this.state.username} onChange={this.onUserNameChange} className={inputClasses} id="username-field" placeholder="example@email.com" />
+                <input type="text" value={this.state.username} onChange={this.onUserNameChange} className={inputClasses} id="username-field" placeholder="example@email.com" autoFocus/>
                 <input type="password" value={this.state.password} onChange={this.onPasswordChange} className={inputClasses} id="password-field" placeholder="password" />
                 <div className="signIn-options">
                     <input type="checkbox" id="keep-signed-in" name="keep-signed-in"/>

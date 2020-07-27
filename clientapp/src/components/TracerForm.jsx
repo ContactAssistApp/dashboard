@@ -40,7 +40,7 @@ export class TracerForm extends React.Component {
         return (
             <form id="tracer-form">
                 <div>
-                    <input type="text" value={this.state.type} onChange={this.onTypeChange} placeholder="PSA Type" className="tracer-form-type-select" required/>
+                    <input type="text" value={this.state.type} onChange={this.onTypeChange} placeholder="PSA Type" className="tracer-form-type-select" required autoFocus/>
                 </div>
                 <div>
                     <input type="text" value={this.state.title} onChange={this.onTitleChange} placeholder="Title" className="tracer-form-title" required/>
