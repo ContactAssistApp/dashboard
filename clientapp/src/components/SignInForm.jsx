@@ -1,5 +1,6 @@
 import React from 'react';
 import { checkAuth } from '../Api/CheckAuth';
+import newAppIcon from '../images/newAppIcon.svg';
 
 /*
 props:
@@ -29,15 +30,24 @@ export class SignInForm extends React.Component {
         let inputClasses = this.state.hasError ? "signIn-Field error-Field" : "signIn-Field";
         return (
             <div className="signIn-Form">
-                <div className="signIn-title">
-                    Pro Tracer Sign in
+                <div>
+                    <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
+                    <span id="app-header-title">CommonCircle News</span>
+                </div>
+                <div className="signIn-Message">
+                    Please sign in with your credentials
                 </div>
                 <input type="text" value={this.state.username} onChange={this.onUserNameChange} className={inputClasses} id="username-field" placeholder="example@email.com" />
                 <input type="password" value={this.state.password} onChange={this.onPasswordChange} className={inputClasses} id="password-field" placeholder="password" />
-                <span className="signIn-Link">I forgot my password</span>
+                <div className="signIn-options">
+                    <input type="checkbox" id="keep-signed-in" name="keep-signed-in"/>
+                    <label for="keep-signed-in">Keep me signed in</label>
+                    <span id="forgot-password">I forgot my password</span>
+                </div>
+                
                 <div className="signIn-buttons">
-                    <span className="signIn-cancel-button" onClick={this.onCancel} tabIndex={0}>Cancel</span>
-                    <span className="signIn-continue-button" onClick={this.checkCredentials} tabIndex={0}>Continue</span>
+                    <button className="signIn-continue-button" onClick={this.checkCredentials} tabIndex={0}>Sign in</button>
+                    <button className="signIn-cancel-button" onClick={this.onCancel} tabIndex={0}>Cancel</button>
                 </div>
             </div>
         );
