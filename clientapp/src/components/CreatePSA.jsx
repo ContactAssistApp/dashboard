@@ -79,7 +79,9 @@ export class CreatePSA extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ConfirmationModal show={this.state.formStage === 2} onNoConfirm={this.onNoConfirm} onYesConfirm={this.onYesConfirm} />
+                <ConfirmationModal show={this.state.formStage === 2} onNoConfirm={this.onNoConfirm} onYesConfirm={this.onYesConfirm}>
+                    <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate}/>
+                </ConfirmationModal>
             </div>
         );
     }
