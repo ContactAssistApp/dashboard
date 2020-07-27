@@ -6,6 +6,7 @@ import { getAreaMatches } from '../Api/GetAreaMatches';
 import { BingMap } from '../utilities/mapUtilities';
 import { SignInForm } from './SignInForm';
 import { isTracerView } from '../utilities/userRole';
+import newAppIcon from '../images/newAppIcon.svg';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -50,14 +51,12 @@ export class LandingPage extends React.Component {
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
+                        <div className="app-header">
+                            <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
+                            <span id="app-header-title">CommonCircle News</span>
+                        </div>
                         {signInButton}
                      </div>   
-                     <div className="landing-page-title">
-                        Resource Hub
-                     </div>
-                     <div className="landing-page-updated">
-                         Last Updated...
-                     </div>
                      <div className="landing-page-location-container">
                          <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
                     </div>

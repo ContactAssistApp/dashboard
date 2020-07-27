@@ -19,17 +19,6 @@ html, body, body>div {
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -724,4 +713,17 @@ input:checked + .slider:before {
 
 #username-field {
   margin-bottom: 25px;
+}
+
+.app-header {
+  margin-top: 35px;
+}
+
+#app-header-image {
+  vertical-align: bottom;
+  margin-right: 10px;
+}
+
+#app-header-title {
+  font-size: 28px;
 }
