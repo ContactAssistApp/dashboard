@@ -36,7 +36,7 @@ export class LandingPage extends React.Component {
 
         let signInButton = null;
         if (isTracerView() && !this.state.signedIn) {
-            signInButton =  <button className="signin-button" onClick={this.onSignInClick}>Pro Tracer Sign in</button>;
+            signInButton =  <button className="signin-button" onClick={this.onSignInClick}>Sign in</button>;
         }
 
         let signInForm = null;
@@ -55,7 +55,6 @@ export class LandingPage extends React.Component {
                             <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
                             <span id="app-header-title">CommonCircle News</span>
                         </div>
-                        {signInButton}
                      </div>   
                      <div className="landing-page-location-container">
                          <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
@@ -68,6 +67,7 @@ export class LandingPage extends React.Component {
                 </div>
                 <div className="landing-page-right-pane">
                     <div className="landing-page-filters landing-page-top">
+                    {signInButton}
                     </div>
                     <div className="landing-page-map">
                         {createPsaButton}
