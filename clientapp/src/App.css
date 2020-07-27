@@ -285,34 +285,34 @@ html, body, body>div {
 }
 
 .tracer-form-buttons {
-  text-align: right;
-  background: #F4F9FD;
-
+  float: right;
 }
+
 .cancel-button {
-  background: #748DAC;
-  border-radius: 4px;
+  background: #8D55E9;
+  border-radius: 8px;
   margin-right: 6px;
   padding: 10px 10px;
   color: white;
   cursor: pointer;
+  border: 1px solid white;
 }
 
 .publish-button {
-  background: #3278CE;
-  border-radius: 4px;
+  background: white;
+  border-radius: 8px;
   padding: 10px 10px;
-  color: white;
+  color: #8D55E9;
   cursor: pointer;
 }
 
 .create-psa-header {
-  background: #3278CE;
+  background: #8D55E9;
   border-radius: 8px 8px 0px 0px;
   font-size: 22px;
   line-height: 28px;
   color: white;
-  padding: 10px 50px;
+  padding: 15px 30px;
 }
 
 .create-psa-left-pane {

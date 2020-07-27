@@ -51,6 +51,10 @@ export class CreatePSA extends React.Component {
                 <div className={this.getFormStyles()}>
                     <div className="create-psa-header">
                         Create New Announcement
+                        <div className="tracer-form-buttons">
+                            <button className="cancel-button" onClick={this.onCancel}>Cancel</button>
+                            <button className="publish-button" onClick={this.onPublish}>Publish</button>
+                        </div>
                     </div>
                     <div className="flex-container">
                         <div className="create-psa-left-pane">

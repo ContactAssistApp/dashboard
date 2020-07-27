@@ -57,10 +57,6 @@ export class TracerForm extends React.Component {
                         <textarea value={this.state.description} onChange={this.onDescriptionChange} placeholder={sampleDescription} className="tracer-form-textbox" />
                     </div>
                 </div>
-                <div className="tracer-form-buttons">
-                    <button className="cancel-button" onClick={this.onCancel}>Cancel</button>
-                    <button className="publish-button" onClick={this.onPublish}>Publish</button>
-                </div>
             </div>
         )
     }
