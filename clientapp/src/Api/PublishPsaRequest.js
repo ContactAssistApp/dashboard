@@ -9,7 +9,7 @@ export class PublishPsaRequest {
        this.params = params;
     }
 
-    getBody(cb) {
+    getBody(cb, errorCb) {
         let userMessage = this.getUserMessage(this.params);
         let radius = 100;
         let beginTime = this.convertDateStringToTimestamp(this.params.startDate);
@@ -25,6 +25,10 @@ export class PublishPsaRequest {
                 }
             };
             cb(this.body);
+        },
+        // error callback
+        () => {
+            errorCb();
         });
     }
 
@@ -47,7 +51,7 @@ export class PublishPsaRequest {
         return date.getTime();
     }
 
-    convertToLocation(params, cb) {
+    convertToLocation(params, cb, errorCb) {
         let location = {
             latitude: 0,
             longitude: 0
@@ -57,6 +61,9 @@ export class PublishPsaRequest {
             location.latitude = result.latitude;
             location.longitude = result.longitude;
             cb(location);
-        });
+            },
+            (options) => {
+                errorCb();
+            });
     }
 }

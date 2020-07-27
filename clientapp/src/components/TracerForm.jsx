@@ -27,10 +27,18 @@ export class TracerForm extends React.Component {
         this.onPublish = this.onPublish.bind(this);
     }
 
+    componentDidMount() {
+        let tracerForm = document.getElementById("tracer-form");
+        tracerForm.onsubmit = (ev) =>
+        {
+            ev.preventDefault();
+        }
+    }
+
     render() {
-        let sampleDescription = "Please refrain from entering playground Z until April 6th because it needs ot undergo decontamination.";
+        let sampleDescription = "Please refrain from entering playground Z until April 6th because it needs to undergo decontamination.";
         return (
-            <div className="tracer-form">
+            <form id="tracer-form">
                 <div>
                     <input type="text" value={this.state.type} onChange={this.onTypeChange} placeholder="PSA Type" className="tracer-form-type-select" required/>
                 </div>
@@ -48,16 +56,16 @@ export class TracerForm extends React.Component {
                     <Slider startingValue={10} label={"Radius"} unit={"miles"} min={0} max={100} />
                 </div>
                 <div className="tracer-form-dates">
-                    <input type="date" id="start-date" onChange={this.onStartDateChange}/>
+                    <input type="date" id="start-date" onChange={this.onStartDateChange} required/>
                     <span id="tracer-form-dates-separator">to</span>
-                    <input type="date" id="end-date" onChange={this.onEndDateChange}/>
+                    <input type="date" id="end-date" onChange={this.onEndDateChange} required/>
                 </div>
                 <div className="tracer-form-description">
                     <div>
-                        <textarea value={this.state.description} onChange={this.onDescriptionChange} placeholder={sampleDescription} className="tracer-form-textbox" />
+                        <textarea value={this.state.description} onChange={this.onDescriptionChange} placeholder={sampleDescription} className="tracer-form-textbox" required />
                     </div>
                 </div>
-            </div>
+            </form>
         )
     }
 
@@ -118,6 +126,10 @@ export class TracerForm extends React.Component {
     }
 
     onPublish() {
-        this.props.onPublish();
+        // check for validation errors
+        let form = document.getElementById("tracer-form");
+        if (form.reportValidity()) {
+            this.props.onPublish();
+        }
     }
 }

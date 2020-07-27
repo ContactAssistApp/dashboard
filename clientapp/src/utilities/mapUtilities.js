@@ -64,7 +64,7 @@ export const BingMap = {
             searchManager.geocode(requestOptions)
         })
     },
-    reverseGeocoordsFromAddress:function(address,cb) { // Get lat, lon
+    reverseGeocoordsFromAddress:function(address,cb, errorCb) { // Get lat, lon
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var requestOptions = {
@@ -72,6 +72,9 @@ export const BingMap = {
                 where: address,
                 callback: function (answer, userData) {
                     cb(answer.results[0].location)
+                },
+                errorCallback: function(options) {
+                    errorCb()
                 }
             }
             searchManager.geocode(requestOptions)
