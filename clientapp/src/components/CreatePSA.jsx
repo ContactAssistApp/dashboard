@@ -109,6 +109,8 @@ export class CreatePSA extends React.Component {
             case PsaFields.END_DATE:
                 this.setState({ endDate: fieldValue });
                 break;
+            default:
+                break;
         }
     }
 
@@ -136,7 +138,7 @@ export class CreatePSA extends React.Component {
 
     getFormStyles() {
         let classes = "create-psa-container"
-        if (this.state.formStage != 1) {
+        if (this.state.formStage !== 1) {
             classes += " hidden";
         }
         return classes;

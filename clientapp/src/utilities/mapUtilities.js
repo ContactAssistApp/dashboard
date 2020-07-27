@@ -89,7 +89,7 @@ export const BingMap = {
             searchManager.reverseGeocode(reverseGeocodeRequestOptions);
         })
     },
-    drawThePinByAddress:function(address) { // Draw the pin
+    drawPinByAddress:function(address) { // Draw the pin
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var requestOptions = {

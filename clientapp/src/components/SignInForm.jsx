@@ -70,7 +70,7 @@ export class SignInForm extends React.Component {
     }
 
     enterKeyListener(ev) {
-        if (ev.key == "Enter") {
+        if (ev.key === "Enter") {
             this.checkCredentials();
         }
     }
