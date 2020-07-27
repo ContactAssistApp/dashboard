@@ -68,9 +68,9 @@ export class LandingPage extends React.Component {
                 <div className="landing-page-right-pane">
                     <div className="landing-page-filters landing-page-top">
                     {signInButton}
+                    {createPsaButton}
                     </div>
                     <div className="landing-page-map">
-                        {createPsaButton}
                         <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards}/>
                         {form}
                         {signInForm}
@@ -96,7 +96,7 @@ export class LandingPage extends React.Component {
     getCreatePsaButton() {
         if (isTracerView() && this.state.signedIn) {
             return (
-                <button className="create-psa-button" onClick={this.showForm}>Create New Announcement</button>
+                <button className="create-psa-button" onClick={this.showForm}>Create Announcement</button>
             )
         }
         else {
