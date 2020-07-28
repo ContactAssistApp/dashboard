@@ -134,8 +134,28 @@ html, body, body>div {
   width: 331px;
 }
 
+.card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .card-calendar-icon {
-  padding: 0px 10px;
+  align-self: flex-start;
+  padding: 15px 10px;
+}
+
+.card-calendar {
+  display: inline-block;
+}
+
+.card-calendar-dropdown a {
+  display: block;
+  color: rgb(228, 45, 45);
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  padding: 6px;
 }
 
 .action-link {
@@ -152,9 +172,8 @@ html, body, body>div {
   height: 46px;
   font-size: 22px;
   color: white;
-  position: absolute;
-  right: 16px;
   cursor: pointer;
+  margin-right: 16px;
 }
 
 .mobile-preview {
