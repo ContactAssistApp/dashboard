@@ -47,25 +47,30 @@ html, body, body>div {
   width: 395px;
 }
 
+.card-top {
+  height: 25px;
+}
+
 .card-header {
-  height: 60px;
   mix-blend-mode: normal;
   border-radius: 8px 8px 0px 0px;
   padding-left: 15px;
+  background-color: #FFF4CE;
+  margin: 0px 15px;
+  color: #8F761E;
 }
 
 .card-header-logo {
-  margin: 20px 5px;
+  margin: 12px 5px;
   vertical-align: middle;
 }
 
 .card-header-text {
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 28px;
   text-align: center;
-  color: #000000;
   vertical-align: middle;
 }
 
@@ -94,9 +99,10 @@ html, body, body>div {
 .card-title {
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
-  line-height: 37px;
+  font-size: 20px;
+  line-height: 26px;
   color: rgba(0, 0, 0, 0.87);
+  margin: 15px 0px;
 }
 
 .card-address {
@@ -119,7 +125,7 @@ html, body, body>div {
 .card-description {
   font-size: 15px;
   color: #6E6E6E;
-  margin: 0px 16px;
+  margin: 20px 0px;
   width: 331px;
 }
 
