@@ -12,7 +12,7 @@ const message = {
   description: "description"
 };
 
-test('renders Card show message', () => {
+test('renders Card showing message', () => {
     const { getByText } = render(<Card open={true} cardInfo={message} startDate={"7/11/2020"} endDate={"7/14/2020"} />);
     const titleElement = getByText(/title/);
     const streetElement = getByText(/street/);
@@ -24,7 +24,7 @@ test('renders Card show message', () => {
     expect(datesElement).toBeInTheDocument();
   });
 
-test('renders Card show add to calendar link', () => {
+test('renders Card showing add to calendar link', () => {
   const { getByText } = render(<Card open={true} cardInfo={message} startDate={"7/11/2020"} endDate={"7/14/2020"} />);
   const calendarButtonElement = getByText(/Add to calendar/);
   expect(calendarButtonElement).toBeInTheDocument();
