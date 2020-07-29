@@ -7,10 +7,6 @@ show: boolean
 dismissModal()
 */
 export class SuccesModal extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         window.addEventListener("mouseup", this.props.dismissModal);
     }
