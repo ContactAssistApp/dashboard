@@ -60,6 +60,11 @@ export class TracerForm extends React.Component {
                     <span id="tracer-form-dates-separator">to</span>
                     <input type="date" id="end-date" onChange={this.onEndDateChange} required/>
                 </div>
+                <div className="tracer-form-dates">
+                    <input type="time" id="start-time" onChange={this.onStartDateChange} required/>
+                    <span id="tracer-form-dates-separator">to</span>
+                    <input type="time" id="end-time" onChange={this.onEndDateChange} required/>
+                </div>
                 <div className="tracer-form-description">
                     <div>
                         <textarea value={this.state.description} onChange={this.onDescriptionChange} placeholder={sampleDescription} className="tracer-form-textbox" required />
@@ -116,12 +121,16 @@ export class TracerForm extends React.Component {
     }
 
     onStartDateChange(ev) {
-        const newStartDate = ev.target.value;
+        var startDate = document.getElementById("start-date").value;
+        var startTime = document.getElementById("start-time").value;
+        const newStartDate = startDate + " " + startTime;
         this.props.changeCallback(PsaFields.START_DATE, newStartDate);
     }
 
     onEndDateChange(ev) {
-        const newEndDate = ev.target.value;
+        var endDate = document.getElementById("end-date").value;
+        var endTime = document.getElementById("end-time").value;
+        const newEndDate = endDate + " " + endTime;
         this.props.changeCallback(PsaFields.END_DATE, newEndDate);
     }
 

@@ -117,8 +117,8 @@ export class LandingPage extends React.Component {
         try {
             let parsedInfo = JSON.parse(cardInfo.userMessage);
             // convert the timestamps to readable dates
-            let startDate = new Date(cardInfo.area.beginTime).toLocaleDateString();
-            let endDate = new Date(cardInfo.area.endTime).toLocaleDateString();
+            let startDate = new Date(cardInfo.area.beginTime).toLocaleString();
+            let endDate = new Date(cardInfo.area.endTime).toLocaleString();
 
             return <Card open={false} cardInfo={parsedInfo} startDate={startDate} endDate={endDate} />;
         } catch(e) {

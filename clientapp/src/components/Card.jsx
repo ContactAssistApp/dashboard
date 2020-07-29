@@ -50,7 +50,10 @@ export class Card extends React.Component{
                         {this.getCityStateZip()}
                     </div>
                     <div className="card-dates">
-                        {this.getCardDates()}
+                        {this.getCardDates()[0]}
+                    </div>
+                    <div className="card-dates">
+                        {this.getCardDates()[1]}
                     </div>
                 </div>
                 <hr className="card-separator" />
@@ -80,7 +83,7 @@ export class Card extends React.Component{
                         {this.getCardTitle()}
                     </div>
                     <div className="card-dates">
-                        {this.getCardDates()}
+                        {this.getCardDates()[0]}
                     </div>
                 </div>
             </div>
@@ -150,14 +153,19 @@ export class Card extends React.Component{
     getCardDates() {
         let startDate = "start date";
         let endDate = "end date";
+        let startTime = "start time";
+        let endTime = "end time";
         if (this.props.startDate) {
-            startDate = this.props.startDate;
+            startDate = new Date(this.props.startDate).toLocaleDateString();
+            startTime = new Date(this.props.startDate).toLocaleTimeString();
         }
         if (this.props.endDate) {
-            endDate = this.props.endDate;
+            endDate = new Date(this.props.endDate).toLocaleDateString();
+            endTime = new Date(this.props.endDate).toLocaleTimeString();
         }
         const dates = `${startDate} to ${endDate}`;
-        return dates;
+        const times = `${startTime} to ${endTime}`;
+        return [dates, times];
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
