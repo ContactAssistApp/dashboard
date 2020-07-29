@@ -120,7 +120,7 @@ export class LandingPage extends React.Component {
             let startDate = new Date(cardInfo.area.beginTime).toLocaleString();
             let endDate = new Date(cardInfo.area.endTime).toLocaleString();
 
-            return <Card open={false} cardInfo={parsedInfo} startDate={startDate} endDate={endDate} />;
+            return <Card open={false} cardInfo={parsedInfo} startDate={new Date(startDate).toLocaleDateString()} endDate={new Date(endDate).toLocaleDateString()} startTime={new Date(startDate).toLocaleTimeString()} endTime={new Date(endDate).toLocaleTimeString()} />;
         } catch(e) {
             console.log("JSON.parse error");
             return null;

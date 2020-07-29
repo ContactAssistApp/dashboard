@@ -21,7 +21,7 @@ formStage: 1 (form), 2 (confirmation), 3 (success)
 export class CreatePSA extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {formStage: 1, type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: ""};
+        this.state = {formStage: 1, type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: "", startTime: "", endTime: ""};
         this.tracerFormCallback = this.tracerFormCallback.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.getFormStyles = this.getFormStyles.bind(this);
@@ -67,7 +67,7 @@ export class CreatePSA extends React.Component {
                                 <div className="create-psa-preview-label">
                                     Dashboard Preview
                                 </div>
-                                <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate}/>
+                                <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} startTime={this.state.startTime} endTime={this.state.endTime} />
                             </div>
                         </div>
                         <div className="create-psa-middle-pane">
@@ -109,6 +109,13 @@ export class CreatePSA extends React.Component {
             case PsaFields.END_DATE:
                 this.setState({ endDate: fieldValue });
                 break;
+            case PsaFields.START_TIME:
+                this.setState({ startTime: fieldValue });
+                break;
+            case PsaFields.END_TIME:
+                this.setState({ endTime: fieldValue });
+                break;
+
         }
     }
 

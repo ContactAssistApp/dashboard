@@ -50,10 +50,10 @@ export class Card extends React.Component{
                         {this.getCityStateZip()}
                     </div>
                     <div className="card-dates">
-                        {this.getCardDates()[0]}
+                        {this.getCardDates()}
                     </div>
                     <div className="card-dates">
-                        {this.getCardDates()[1]}
+                        {this.getCardTimes()}
                     </div>
                 </div>
                 <hr className="card-separator" />
@@ -83,7 +83,7 @@ export class Card extends React.Component{
                         {this.getCardTitle()}
                     </div>
                     <div className="card-dates">
-                        {this.getCardDates()[0]}
+                        {this.getCardDates()}
                     </div>
                 </div>
             </div>
@@ -153,19 +153,27 @@ export class Card extends React.Component{
     getCardDates() {
         let startDate = "start date";
         let endDate = "end date";
-        let startTime = "start time";
-        let endTime = "end time";
         if (this.props.startDate) {
-            startDate = new Date(this.props.startDate).toLocaleDateString();
-            startTime = new Date(this.props.startDate).toLocaleTimeString();
+            startDate = this.props.startDate;
         }
         if (this.props.endDate) {
-            endDate = new Date(this.props.endDate).toLocaleDateString();
-            endTime = new Date(this.props.endDate).toLocaleTimeString();
+            endDate = this.props.endDate;
         }
         const dates = `${startDate} to ${endDate}`;
+        return dates;
+    }
+
+    getCardTimes() {
+        let startTime = "start time";
+        let endTime = "end time";
+        if (this.props.startTime) {
+            startTime = this.props.startTime;
+        }
+        if (this.props.endTime) {
+            endTime = this.props.endTime;
+        }
         const times = `${startTime} to ${endTime}`;
-        return [dates, times];
+        return times;
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
