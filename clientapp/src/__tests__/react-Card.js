@@ -29,9 +29,3 @@ test('renders Card show add to calendar link', () => {
   const calendarButtonElement = getByText(/Add to calendar/);
   expect(calendarButtonElement).toBeInTheDocument();
 });
-
-test('renders Card show share button', () => {
-  const { getByText } = render(<Card open={true} cardInfo={message} startDate={"7/11/2020"} endDate={"7/14/2020"} />);
-  const shareButtonElement = getByText(/Share/);
-  expect(shareButtonElement).toBeInTheDocument();
-});
