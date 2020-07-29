@@ -3,7 +3,7 @@ import warning from '../images/warning.svg';
 import chevron from '../images/chevron.svg';
 import calendar from '../images/calendar.svg';
 import AddToCalendarHOC from 'react-add-to-calendar-hoc';
-import moment from 'moment';
+import { dateTime } from '../utilities/dateTimeUtilites';
 
 /*
 Card props:
@@ -53,9 +53,9 @@ export class Card extends React.Component{
     }
 
     getOpenCard() {
-        const startDateTime = moment(this.props.startDate);
-        const endDateTime = moment(this.props.endDate);
-        const duration = moment.duration(endDateTime.diff(startDateTime)).asHours();
+        const startDateTime = new Date(this.props.startDate);
+        const endDateTime = new Date(this.props.endDate);
+        const duration = dateTime.diffHours(endDateTime, startDateTime);
         return (
             <div className="card-outline">
                 <div className="card-header" style={this.getHeaderStyles()}>
@@ -91,8 +91,8 @@ export class Card extends React.Component{
                                 duration: duration,
                                 title: this.getCardTitle(),
                                 location: `${this.getStreetAddress()}, ${this.getCityStateZip()}`,
-                                endDatetime: endDateTime.format('YYYYMMDDTHHmmss'),
-                                startDatetime: startDateTime.format('YYYYMMDDTHHmmss'),
+                                endDatetime: dateTime.getTimeZoneFormat(new Date(this.props.endDate)),
+                                startDatetime: dateTime.getTimeZoneFormat(new Date(this.props.startDate)),
                                 timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
                             }
                         }
