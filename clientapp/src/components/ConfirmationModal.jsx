@@ -19,12 +19,17 @@ export class ConfirmationModal extends React.Component {
             return (
                 <div className="confirmation-modal-container">
                     <div className="confirmation-modal-text">
-                        Are you sure you want to publish?
+                        Are you sure you want to publish this announcement?
+                    </div>
+                    <div className="confimation-modal-subtext">
+                        This action cannot be undone.
+                    </div>
+                    <div className="confirmation-card">
+                        {this.props.children}
                     </div>
                     <div className="confirmation-modal-buttons">
-                        <span className="confirmation-modal-yes" onClick={this.onYesConfirm}>Yes</span>
-                        <hr className="confirmation-modal-separator" />
-                        <span className="confirmation-modal-no" onClick={this.onNoConfirm}>No</span>
+                        <button className="confirmation-modal-no" onClick={this.onNoConfirm}>Cancel</button>
+                        <button className="confirmation-modal-yes" onClick={this.onYesConfirm}>Publish</button>
                     </div>
                 </div>
             );

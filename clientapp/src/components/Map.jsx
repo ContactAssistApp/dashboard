@@ -45,7 +45,7 @@ export class Map extends React.Component {
           let lat = null;
           let lon = null;
           let address = null;
-          cards.map((card) => {
+          cards.forEach((card) => {
               lat = card.area.location.latitude;
               lon = card.area.location.longitude;
               address = this.getAddress(card);
