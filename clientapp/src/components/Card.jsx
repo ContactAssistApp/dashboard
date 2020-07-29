@@ -13,9 +13,7 @@ startDate: string,
 endDate: string
 */
 
-const AddToCalendarDropdown = AddToCalendarHOC(Button, CalendarModal);
-
-class Button extends React.Component{
+class CalendarButton extends React.Component{
     render() {
         return (
             <span className="action-link" onClick = {this.props.onClick}>Add to calendar</span>
@@ -23,13 +21,15 @@ class Button extends React.Component{
     }
 }
 
-class CalendarModal extends React.Component{
+class CalendarDropdown extends React.Component{
     render() {
         return (
             <div className="card-calendar-dropdown">{this.props.children}</div>
         );
     }
 }
+
+const AddToCalendarDropdown = AddToCalendarHOC(CalendarButton, CalendarDropdown);
 
 export class Card extends React.Component{
     constructor(props) {
