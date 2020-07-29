@@ -93,8 +93,8 @@ export class Card extends React.Component{
                                 duration: duration,
                                 title: this.getCardTitle(),
                                 location: `${this.getStreetAddress()}, ${this.getCityStateZip()}`,
-                                endDatetime: dateTime.getTimeZoneFormat(new Date(this.props.endDate)),
-                                startDatetime: dateTime.getTimeZoneFormat(new Date(this.props.startDate)),
+                                endDatetime: dateTime.getTimeZoneFormat(endDateTime),
+                                startDatetime: dateTime.getTimeZoneFormat(startDateTime),
                                 timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
                             }
                         }
