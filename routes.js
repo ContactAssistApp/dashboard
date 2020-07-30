@@ -27,6 +27,20 @@ var auth = function (req, res, next) {
   }
 }
 
+var combineMessageInfoAndMessage = function (messages, matchMessages)
+{
+  let matches = [];
+  for (i = 0; i < matchMessages.length; i++)
+  {
+    matches.push({
+      messageId: messages[i].messageId,
+      messageTimestamp: messages[i].messageTimestamp,
+      userMessage: matchMessages[i].userMessage,
+      area: matchMessages[i].area
+    });
+  }
+  return matches;
+}
 
 router.get('/', function (req, res) {
   res.sendFile('index.html', { root: "./clientapp/build"});
@@ -82,8 +96,9 @@ router.get('/api/areaMatches', function (req, res) {
       }
       API.postMessage(messageInput, (response) => {
         let matchMessages = response.content.narrowcastMessages;
+        let matches = combineMessageInfoAndMessage(messages, matchMessages);
         let result = {
-          matches: matchMessages
+          matches: matches
         };
         res.send(result);
       })

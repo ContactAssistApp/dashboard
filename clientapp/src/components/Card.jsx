@@ -54,9 +54,8 @@ export class Card extends React.Component{
     }
 
     getOpenCard() {
-        const startDateTime = new Date(this.props.startDate);
-        const endDateTime = new Date(this.props.endDate);
-        const duration = dateTime.diffHours(endDateTime, startDateTime);
+        const addToCalendarDropdown = this.getAddToCalendarDropdown();
+
         return (
             <div className="card-outline">
                 <div className="card-top">
@@ -88,20 +87,7 @@ export class Card extends React.Component{
                 <hr className="card-separator" />
                 <div className="card-footer">
                     <img src={calendar} className="card-calendar-icon" alt="calendar"></img>
-                    <AddToCalendarDropdown 
-                        className = "card-calendar"
-                        event = {
-                            {
-                                description: this.getCardDescription(),
-                                duration: duration,
-                                title: this.getCardTitle(),
-                                location: `${this.getStreetAddress()}, ${this.getCityStateZip()}`,
-                                endDatetime: dateTime.getTimeZoneFormat(endDateTime),
-                                startDatetime: dateTime.getTimeZoneFormat(startDateTime),
-                                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                            }
-                        }
-                    />
+                    {addToCalendarDropdown}
                     <img src={shareIcon} alt="share icon"></img>
                 </div>
             </div>
@@ -220,6 +206,34 @@ export class Card extends React.Component{
         } else {
             return "Description";
         }
+    }
+
+    getAddToCalendarDropdown() {
+        if (this.props.preview === true)
+        {
+            return (
+                <span className="action-link">Add to calendar</span>
+            );
+        }
+        
+        const startDateTime = new Date(this.props.startDate);
+        const endDateTime = new Date(this.props.endDate);
+        const duration = dateTime.diffHours(endDateTime, startDateTime);
+        
+        return (<AddToCalendarDropdown 
+            className = "card-calendar"
+            event = {
+                {
+                    description: this.getCardDescription(),
+                    duration: duration,
+                    title: this.getCardTitle(),
+                    location: `${this.getStreetAddress()}, ${this.getCityStateZip()}`,
+                    endDatetime: dateTime.getTimeZoneFormat(endDateTime),
+                    startDatetime: dateTime.getTimeZoneFormat(startDateTime),
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                }
+            }
+        />);
     }
 }
 

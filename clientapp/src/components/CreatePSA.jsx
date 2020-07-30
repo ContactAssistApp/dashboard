@@ -71,7 +71,7 @@ export class CreatePSA extends React.Component {
                                 <div className="create-psa-preview-label">
                                     Dashboard Preview
                                 </div>
-                                <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} startTime={this.state.startTime} endTime={this.state.endTime} />
+                                <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} preview={true} />
                             </div>
                         </div>
                         <div className="create-psa-middle-pane">
@@ -80,7 +80,7 @@ export class CreatePSA extends React.Component {
                     </div>
                 </div>
                 <ConfirmationModal show={this.state.formStage === 2} onNoConfirm={this.onNoConfirm} onYesConfirm={this.onYesConfirm}>
-                    <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate}/>
+                    <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} preview={true} />
                 </ConfirmationModal>
             </div>
         );
