@@ -1,7 +1,8 @@
 export const dateTime = {
     getTimeZoneFormat: function(dateTime){
+        const locale = window.navigator.userLanguage || window.navigator.language;
         const dateTimeFormat = new Intl.DateTimeFormat(
-            'en-US',
+            locale,
             {
                 year: 'numeric',
                 month: '2-digit',
