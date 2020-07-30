@@ -204,10 +204,10 @@ export class Card extends React.Component{
         let startTime = "start time";
         let endTime = "end time";
         if (this.props.startTime) {
-            startTime = this.props.startTime;
+            startTime = translateTime(this.props.startTime);
         }
         if (this.props.endTime) {
-            endTime = this.props.endTime;
+            endTime = translateTime(this.props.endTime);
         }
         const times = `${startTime} to ${endTime}`;
         return times;
@@ -221,4 +221,12 @@ export class Card extends React.Component{
             return "Description";
         }
     }
+}
+
+function translateTime(time) {
+    var [h, m] = time.split(":");
+    if (m.includes('AM') || m.includes('PM')) {
+        return time;
+    }
+    return (h % 12 + 12 * (h % 12 == 0)) + ":" + m + " " + (h >= 12 ? 'PM' : 'AM');
 }
