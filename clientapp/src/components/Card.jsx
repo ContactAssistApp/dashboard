@@ -1,8 +1,10 @@
 import React from 'react';
 import chevron from '../images/chevron.svg';
 import calendar from '../images/calendar.svg';
+import AddToCalendarHOC from 'react-add-to-calendar-hoc';
 import bell from "../images/bell.svg";
 import shareIcon from "../images/shareIcon.svg";
+import { dateTime } from '../utilities/dateTimeUtilites';
 
 /*
 Card props:
@@ -11,6 +13,24 @@ cardInfo: CardInfo - info for the card - equivalent to the userMessage
 startDate: string,
 endDate: string
 */
+
+class CalendarButton extends React.Component{
+    render() {
+        return (
+            <span className="action-link" onClick = {this.props.onClick}>Add to calendar</span>
+        );
+    }
+}
+
+class CalendarDropdown extends React.Component{
+    render() {
+        return (
+            <div className="card-calendar-dropdown">{this.props.children}</div>
+        );
+    }
+}
+
+const AddToCalendarDropdown = AddToCalendarHOC(CalendarButton, CalendarDropdown);
 
 export class Card extends React.Component{
     constructor(props) {
@@ -34,6 +54,9 @@ export class Card extends React.Component{
     }
 
     getOpenCard() {
+        const startDateTime = new Date(this.props.startDate);
+        const endDateTime = new Date(this.props.endDate);
+        const duration = dateTime.diffHours(endDateTime, startDateTime);
         return (
             <div className="card-outline">
                 <div className="card-top">
@@ -62,7 +85,20 @@ export class Card extends React.Component{
                 <hr className="card-separator" />
                 <div className="card-footer">
                     <img src={calendar} className="card-calendar-icon" alt="calendar"></img>
-                    <span className="action-link">Add to calendar</span>
+                    <AddToCalendarDropdown 
+                        className = "card-calendar"
+                        event = {
+                            {
+                                description: this.getCardDescription(),
+                                duration: duration,
+                                title: this.getCardTitle(),
+                                location: `${this.getStreetAddress()}, ${this.getCityStateZip()}`,
+                                endDatetime: dateTime.getTimeZoneFormat(endDateTime),
+                                startDatetime: dateTime.getTimeZoneFormat(startDateTime),
+                                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                            }
+                        }
+                    />
                     <img src={shareIcon} alt="share icon"></img>
                 </div>
             </div>
