@@ -24,5 +24,12 @@ export const dateTime = {
         var diff = (dt2 - dt1) / 1000;
         diff /= (60 * 60);
         return Math.abs(Math.round(diff));
+    },
+    translateTime(time) {
+        var [h, m] = time.split(":");
+        if (m.includes('AM') || m.includes('PM')) {
+            return time;
+        }
+        return (h % 12 + 12 * (h % 12 == 0)) + ":" + m + " " + (h >= 12 ? 'PM' : 'AM');
     }
 };

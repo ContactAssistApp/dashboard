@@ -21,7 +21,7 @@ formStage: 1 (form), 2 (confirmation), 3 (success)
 export class CreatePSA extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {formStage: 1, type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: ""};
+        this.state = {formStage: 1, type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: "", startTime: "", endTime: ""};
         this.tracerFormCallback = this.tracerFormCallback.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.getFormStyles = this.getFormStyles.bind(this);
@@ -71,7 +71,7 @@ export class CreatePSA extends React.Component {
                                 <div className="create-psa-preview-label">
                                     Dashboard Preview
                                 </div>
-                                <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} preview={true} />
+                                <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} startTime={this.state.startTime} endTime={this.state.endTime} preview={true} />
                             </div>
                         </div>
                         <div className="create-psa-middle-pane">
@@ -80,7 +80,7 @@ export class CreatePSA extends React.Component {
                     </div>
                 </div>
                 <ConfirmationModal show={this.state.formStage === 2} onNoConfirm={this.onNoConfirm} onYesConfirm={this.onYesConfirm}>
-                    <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} preview={true} />
+                    <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate} startTime={this.state.startTime} endTime={this.state.endTime} preview={true} />
                 </ConfirmationModal>
             </div>
         );
@@ -114,6 +114,12 @@ export class CreatePSA extends React.Component {
                 break;
             case PsaFields.END_DATE:
                 this.setState({ endDate: fieldValue });
+                break;
+            case PsaFields.START_TIME:
+                this.setState({ startTime: fieldValue });
+                break;
+            case PsaFields.END_TIME:
+                this.setState({ endTime: fieldValue });
                 break;
             default:
                 break;

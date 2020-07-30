@@ -23,6 +23,8 @@ export class TracerForm extends React.Component {
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
         this.onStartDateChange = this.onStartDateChange.bind(this);
         this.onEndDateChange = this.onEndDateChange.bind(this);
+        this.onStartTimeChange = this.onStartTimeChange.bind(this);
+        this.onEndTimeChange = this.onEndTimeChange.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onPublish = this.onPublish.bind(this);
     }
@@ -59,6 +61,11 @@ export class TracerForm extends React.Component {
                     <input type="date" id="start-date" onChange={this.onStartDateChange} required/>
                     <span id="tracer-form-dates-separator">to</span>
                     <input type="date" id="end-date" onChange={this.onEndDateChange} required/>
+                </div>
+                <div className="tracer-form-dates">
+                    <input type="time" id="start-time" onChange={this.onStartTimeChange} required/>
+                    <span id="tracer-form-dates-separator">to</span>
+                    <input type="time" id="end-time" onChange={this.onEndTimeChange} required/>
                 </div>
                 <div className="tracer-form-description">
                     <div>
@@ -119,6 +126,16 @@ export class TracerForm extends React.Component {
     onEndDateChange(ev) {
         const newEndDate = ev.target.value;
         this.props.changeCallback(PsaFields.END_DATE, newEndDate);
+    }
+
+    onStartTimeChange(ev) {
+        const newStartTime = ev.target.value;
+        this.props.changeCallback(PsaFields.START_TIME, newStartTime);
+    }
+
+    onEndTimeChange(ev) {
+        const newEndTime = ev.target.value;
+        this.props.changeCallback(PsaFields.END_TIME, newEndTime);
     }
 
     onCancel() {

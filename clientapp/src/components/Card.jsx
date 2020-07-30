@@ -80,6 +80,9 @@ export class Card extends React.Component{
                     <div className="card-dates">
                         {this.getCardDates()}
                     </div>
+                    <div className="card-dates">
+                        {this.getCardTimes()}
+                    </div>
                 </div>
                 <hr className="card-separator" />
                 <div className="card-footer">
@@ -181,6 +184,19 @@ export class Card extends React.Component{
         }
         const dates = `${startDate} to ${endDate}`;
         return dates;
+    }
+
+    getCardTimes() {
+        let startTime = "start time";
+        let endTime = "end time";
+        if (this.props.startTime) {
+            startTime = dateTime.translateTime(this.props.startTime);
+        }
+        if (this.props.endTime) {
+            endTime = dateTime.translateTime(this.props.endTime);
+        }
+        const times = `${startTime} to ${endTime}`;
+        return times;
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
