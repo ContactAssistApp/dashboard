@@ -42,7 +42,7 @@ export class TracerForm extends React.Component {
         return (
             <form id="tracer-form">
                 <div>
-                    <input type="text" value={this.state.type} onChange={this.onTypeChange} placeholder="PSA Type" className="tracer-form-type-select" required/>
+                    <input type="text" value={this.state.type} onChange={this.onTypeChange} placeholder="PSA Type" className="tracer-form-type-select" required autoFocus/>
                 </div>
                 <div>
                     <input type="text" value={this.state.title} onChange={this.onTitleChange} placeholder="Title" className="tracer-form-title" required/>
@@ -71,10 +71,6 @@ export class TracerForm extends React.Component {
                     <div>
                         <textarea value={this.state.description} onChange={this.onDescriptionChange} placeholder={sampleDescription} className="tracer-form-textbox" required />
                     </div>
-                </div>
-                <div className="tracer-form-buttons">
-                    <button className="cancel-button" onClick={this.onCancel}>Cancel</button>
-                    <button className="publish-button" onClick={this.onPublish}>Publish</button>
                 </div>
             </form>
         )

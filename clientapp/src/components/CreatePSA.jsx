@@ -51,6 +51,10 @@ export class CreatePSA extends React.Component {
                 <div className={this.getFormStyles()}>
                     <div className="create-psa-header">
                         Create New Announcement
+                        <div className="tracer-form-buttons">
+                            <button className="cancel-button" onClick={this.onCancel}>Cancel</button>
+                            <button className="publish-button" onClick={this.onPublish}>Publish</button>
+                        </div>
                     </div>
                     <div className="flex-container">
                         <div className="create-psa-left-pane">
@@ -75,7 +79,9 @@ export class CreatePSA extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ConfirmationModal show={this.state.formStage === 2} onNoConfirm={this.onNoConfirm} onYesConfirm={this.onYesConfirm} />
+                <ConfirmationModal show={this.state.formStage === 2} onNoConfirm={this.onNoConfirm} onYesConfirm={this.onYesConfirm}>
+                    <Card open={true} cardInfo={cardInfo} startDate={this.state.startDate} endDate={this.state.endDate}/>
+                </ConfirmationModal>
             </div>
         );
     }
@@ -115,7 +121,8 @@ export class CreatePSA extends React.Component {
             case PsaFields.END_TIME:
                 this.setState({ endTime: fieldValue });
                 break;
-
+            default:
+                break;
         }
     }
 
@@ -124,7 +131,10 @@ export class CreatePSA extends React.Component {
     }
 
     onPublish() {
-        this.setState({formStage: 2});
+        let form = document.getElementById("tracer-form");
+        if (form.reportValidity()) {
+            this.setState({formStage: 2});
+        }
     }
 
     onNoConfirm() {
@@ -154,7 +164,7 @@ export class CreatePSA extends React.Component {
 
     getFormStyles() {
         let classes = "create-psa-container"
-        if (this.state.formStage != 1) {
+        if (this.state.formStage !== 1) {
             classes += " hidden";
         }
         return classes;

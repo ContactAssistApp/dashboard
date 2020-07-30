@@ -6,6 +6,7 @@ import { getAreaMatches } from '../Api/GetAreaMatches';
 import { BingMap } from '../utilities/mapUtilities';
 import { SignInForm } from './SignInForm';
 import { isTracerView } from '../utilities/userRole';
+import newAppIcon from '../images/newAppIcon.svg';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -35,7 +36,7 @@ export class LandingPage extends React.Component {
 
         let signInButton = null;
         if (isTracerView() && !this.state.signedIn) {
-            signInButton =  <button className="signin-button" onClick={this.onSignInClick}>Pro Tracer Sign in</button>;
+            signInButton =  <button className="signin-button" onClick={this.onSignInClick}>Sign in</button>;
         }
 
         let signInForm = null;
@@ -50,14 +51,11 @@ export class LandingPage extends React.Component {
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
-                        {signInButton}
+                        <div className="app-header">
+                            <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
+                            <span id="app-header-title">CommonCircle News</span>
+                        </div>
                      </div>   
-                     <div className="landing-page-title">
-                        Resource Hub
-                     </div>
-                     <div className="landing-page-updated">
-                         Last Updated...
-                     </div>
                      <div className="landing-page-location-container">
                          <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
                     </div>
@@ -69,9 +67,10 @@ export class LandingPage extends React.Component {
                 </div>
                 <div className="landing-page-right-pane">
                     <div className="landing-page-filters landing-page-top">
+                    {signInButton}
+                    {createPsaButton}
                     </div>
                     <div className="landing-page-map">
-                        {createPsaButton}
                         <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards}/>
                         {form}
                         {signInForm}
@@ -97,7 +96,7 @@ export class LandingPage extends React.Component {
     getCreatePsaButton() {
         if (isTracerView() && this.state.signedIn) {
             return (
-                <button className="create-psa-button" onClick={this.showForm}>Create New Announcement</button>
+                <button className="create-psa-button" onClick={this.showForm}>Create Announcement</button>
             )
         }
         else {

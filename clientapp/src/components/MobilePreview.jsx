@@ -8,10 +8,6 @@ description: string
 */
 
 export class MobilePreview extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="mobile-preview">

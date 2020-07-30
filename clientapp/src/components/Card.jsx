@@ -1,7 +1,10 @@
 import React from 'react';
-import warning from '../images/warning.svg';
 import chevron from '../images/chevron.svg';
 import calendar from '../images/calendar.svg';
+import AddToCalendarHOC from 'react-add-to-calendar-hoc';
+import bell from "../images/bell.svg";
+import shareIcon from "../images/shareIcon.svg";
+import { dateTime } from '../utilities/dateTimeUtilites';
 
 /*
 Card props:
@@ -10,6 +13,24 @@ cardInfo: CardInfo - info for the card - equivalent to the userMessage
 startDate: string,
 endDate: string
 */
+
+class CalendarButton extends React.Component{
+    render() {
+        return (
+            <span className="action-link" onClick = {this.props.onClick}>Add to calendar</span>
+        );
+    }
+}
+
+class CalendarDropdown extends React.Component{
+    render() {
+        return (
+            <div className="card-calendar-dropdown">{this.props.children}</div>
+        );
+    }
+}
+
+const AddToCalendarDropdown = AddToCalendarHOC(CalendarButton, CalendarDropdown);
 
 export class Card extends React.Component{
     constructor(props) {
@@ -33,16 +54,24 @@ export class Card extends React.Component{
     }
 
     getOpenCard() {
+        const startDateTime = new Date(this.props.startDate);
+        const endDateTime = new Date(this.props.endDate);
+        const duration = dateTime.diffHours(endDateTime, startDateTime);
         return (
             <div className="card-outline">
-                <div className="card-header" style={this.getHeaderStyles()}>
-                    <img src={warning} className="card-header-logo" alt="header-logo"/>
-                    <span className="card-header-text">{this.getCardType()}</span>
+                <div className="card-top">
                     <img src={chevron} className="card-header-chevron-open" alt="chevron" onClick={this.collapseCard}></img>
+                </div>
+                <div className="card-header" style={this.getHeaderStyles()}>
+                    <img src={bell} className="card-header-logo" alt="header-logo"/>
+                    <span className="card-header-text">{this.getCardType()}</span>
                 </div>
                 <div className="card-body">
                     <div className="card-title">
                         {this.getCardTitle()}
+                    </div>
+                    <div className="card-description">
+                        {this.getCardDescription()}
                     </div>
                     <div className="card-address">
                         {this.getStreetAddress()}
@@ -57,14 +86,23 @@ export class Card extends React.Component{
                     </div>
                 </div>
                 <hr className="card-separator" />
-                <div className="card-description">
-                    {this.getCardDescription()}
-                </div>
-                <hr className="card-separator" />
                 <div className="card-footer">
                     <img src={calendar} className="card-calendar-icon" alt="calendar"></img>
-                    <span className="action-link">Add to calendar</span>
-                    <button className="share-button">Share</button>
+                    <AddToCalendarDropdown 
+                        className = "card-calendar"
+                        event = {
+                            {
+                                description: this.getCardDescription(),
+                                duration: duration,
+                                title: this.getCardTitle(),
+                                location: `${this.getStreetAddress()}, ${this.getCityStateZip()}`,
+                                endDatetime: dateTime.getTimeZoneFormat(endDateTime),
+                                startDatetime: dateTime.getTimeZoneFormat(startDateTime),
+                                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                            }
+                        }
+                    />
+                    <img src={shareIcon} alt="share icon"></img>
                 </div>
             </div>
         )
@@ -73,17 +111,16 @@ export class Card extends React.Component{
     getClosedCard() {
         return (
             <div className="card-outline">
-                <div className="card-header" style={this.getHeaderStyles()}>
-                    <img src={warning} className="card-header-logo" alt="header-logo"/>
-                    <span className="card-header-text">{this.getCardType()}</span>
+                <div className="card-top">
                     <img src={chevron} className="card-header-chevron-closed" alt="chevron" onClick={this.expandCard}></img>
                 </div>
+                <div className="card-header" style={this.getHeaderStyles()}>
+                    <img src={bell} className="card-header-logo" alt="header-logo"/>
+                    <span className="card-header-text">{this.getCardType()}</span>
+                </div>
                 <div className="card-body">
-                    <div className="card-title">
-                        {this.getCardTitle()}
-                    </div>
-                    <div className="card-dates">
-                        {this.getCardDates()}
+                    <div className="card-description">
+                        {this.getCardDescription()}
                     </div>
                 </div>
             </div>
