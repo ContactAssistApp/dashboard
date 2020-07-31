@@ -34,6 +34,8 @@ export class Map extends React.Component {
         console.log('cards:',this.props.cardInfo); //? []
         if(BingMap.getMap()==null){
           BingMap.init(); //One time here only
+          const mapCenter = BingMap.getCenter();
+          this.props.onMapInit(mapCenter);
         }        
         //Get List of counties
         //https://public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/table/
