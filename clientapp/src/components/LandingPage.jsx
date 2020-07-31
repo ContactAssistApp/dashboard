@@ -5,8 +5,9 @@ import { CreatePSA } from './CreatePSA';
 import { getAreaMatches } from '../Api/GetAreaMatches';
 import { BingMap } from '../utilities/mapUtilities';
 import { SignInForm } from './SignInForm';
-import { isTracerView } from '../utilities/userRole';
+import { isTracerView, isCardShare } from '../utilities/userRole';
 import newAppIcon from '../images/newAppIcon.svg';
+import { getSingleCard } from '../Api/GetSingleCard';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -154,7 +155,21 @@ export class LandingPage extends React.Component {
     }
 
     onMapInit(location) {
-        if (location) {
+        if (isCardShare()) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const requestBody = {
+                "messages": [
+                    {
+                        "messageId": urlParams.get("id"),
+                        "messageTimestamp": urlParams.get("timestamp")
+                    }
+                ]
+            };
+            getSingleCard(requestBody).then(res => {
+                this.setState({ cards: res.content.narrowcastMessages });
+            }); 
+        }
+        else if (location) {
             let params = {
                 lat: location.latitude,
                 lon: location.longitude
