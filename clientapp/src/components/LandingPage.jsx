@@ -121,7 +121,9 @@ export class LandingPage extends React.Component {
             let startDate = new Date(cardInfo.area.beginTime).toLocaleString();
             let endDate = new Date(cardInfo.area.endTime).toLocaleString();
 
-            return <Card open={false} cardInfo={parsedInfo} startDate={new Date(startDate).toLocaleDateString()} endDate={new Date(endDate).toLocaleDateString()} startTime={new Date(startDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} endTime={new Date(endDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} messageId={messageId} messageTimestamp={messageTimestamp}/>;
+            return <Card open={false} cardInfo={parsedInfo} startDate={new Date(startDate).toLocaleDateString()} endDate={new Date(endDate).toLocaleDateString()} 
+            startTime={new Date(startDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} endTime={new Date(endDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} 
+            messageId={messageId} messageTimestamp={messageTimestamp}/>;
         } catch(e) {
             console.log("JSON.parse error");
             return null;

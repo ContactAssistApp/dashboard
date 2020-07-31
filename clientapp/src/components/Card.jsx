@@ -5,6 +5,7 @@ import AddToCalendarHOC from 'react-add-to-calendar-hoc';
 import bell from "../images/bell.svg";
 import shareIcon from "../images/shareIcon.svg";
 import { dateTime } from '../utilities/dateTimeUtilites';
+import { ShareForm } from './ShareForm';
 
 /*
 Card props:
@@ -39,13 +40,18 @@ export class Card extends React.Component{
         this.getCardType = this.getCardType.bind(this);
         this.collapseCard = this.collapseCard.bind(this);
         this.expandCard = this.expandCard.bind(this);
-        this.state = {open: this.props.open, cardInfo: this.props.cardInfo};
+        this.onClickShareButton = this.onClickShareButton.bind(this);
+        this.state = {open: this.props.open, cardInfo: this.props.cardInfo, showingShareForm: false};
     }   
 
     render() {
+        let shareForm = null;
+        if (this.state.showingShareForm) {
+            shareForm = this.getShareForm();
+        }
         let card;
         if (this.state.open) {
-            card = this.getOpenCard();
+            card = this.getOpenCard(shareForm);
         } else {
             card = this.getClosedCard();
         }
@@ -53,7 +59,7 @@ export class Card extends React.Component{
         return card;
     }
 
-    getOpenCard() {
+    getOpenCard(shareForm) {
         const addToCalendarDropdown = this.getAddToCalendarDropdown();
 
         return (
@@ -88,7 +94,8 @@ export class Card extends React.Component{
                 <div className="card-footer">
                     <img src={calendar} className="card-calendar-icon" alt="calendar"></img>
                     {addToCalendarDropdown}
-                    <img src={shareIcon} alt="share icon"></img>
+                    <img src={shareIcon} className="share-button" alt="share icon" onClick={this.onClickShareButton}></img>
+                    {shareForm}
                 </div>
             </div>
         )
@@ -234,5 +241,13 @@ export class Card extends React.Component{
                 }
             }
         />);
+    }
+
+    onClickShareButton() {
+        this.setState({ showingShareForm: true});
+    }
+
+    getShareForm() {
+        return <ShareForm id={this.props.messageId} timeStamp={this.props.messageTimestamp} />
     }
 }
