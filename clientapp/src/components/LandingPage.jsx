@@ -5,8 +5,9 @@ import { CreatePSA } from './CreatePSA';
 import { getAreaMatches } from '../Api/GetAreaMatches';
 import { BingMap } from '../utilities/mapUtilities';
 import { SignInForm } from './SignInForm';
-import { isTracerView } from '../utilities/userRole';
+import { isTracerView, isCardShare } from '../utilities/userRole';
 import newAppIcon from '../images/newAppIcon.svg';
+import { getSingleCard } from '../Api/GetSingleCard';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -122,7 +123,9 @@ export class LandingPage extends React.Component {
             let startDate = new Date(cardInfo.area.beginTime).toLocaleString();
             let endDate = new Date(cardInfo.area.endTime).toLocaleString();
 
-            return <Card open={false} cardInfo={parsedInfo} startDate={new Date(startDate).toLocaleDateString()} endDate={new Date(endDate).toLocaleDateString()} startTime={new Date(startDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} endTime={new Date(endDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} messageId={messageId} messageTimestamp={messageTimestamp}/>;
+            return <Card open={false} cardInfo={parsedInfo} startDate={new Date(startDate).toLocaleDateString()} endDate={new Date(endDate).toLocaleDateString()} 
+            startTime={new Date(startDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} endTime={new Date(endDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} 
+            messageId={messageId} messageTimestamp={messageTimestamp}/>;
         } catch(e) {
             console.log("JSON.parse error");
             return null;
@@ -152,7 +155,21 @@ export class LandingPage extends React.Component {
     }
 
     onMapInit(location) {
-        if (location) {
+        if (isCardShare()) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const requestBody = {
+                "messages": [
+                    {
+                        "messageId": urlParams.get("id"),
+                        "messageTimestamp": urlParams.get("timestamp")
+                    }
+                ]
+            };
+            getSingleCard(requestBody).then(res => {
+                this.setState({ cards: res.content.narrowcastMessages });
+            }); 
+        }
+        else if (location) {
             let params = {
                 lat: location.latitude,
                 lon: location.longitude

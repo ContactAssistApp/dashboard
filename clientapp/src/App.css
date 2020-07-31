@@ -789,3 +789,8 @@ input:checked + .slider:before {
 #app-header-title {
   font-size: 28px;
 }
+
+.share-button {
+  display: inline;
+  line-height: 60px;
+}
