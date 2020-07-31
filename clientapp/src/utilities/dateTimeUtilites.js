@@ -1,5 +1,5 @@
 export const dateTime = {
-    getTimeZoneFormat: function(dateTime){
+    getUTCFormatString: function(dateTime){
         const locale = window.navigator.userLanguage || window.navigator.language;
         const dateTimeFormat = new Intl.DateTimeFormat(
             locale,
@@ -11,6 +11,7 @@ export const dateTime = {
                 minute: '2-digit',
                 second: '2-digit',
                 hourCycle: 'h23',
+                timeZone: 'UTC'
             }
         );
        const dateTimeParts = dateTimeFormat.formatToParts(dateTime).reduce(function(acc, item){
@@ -18,7 +19,7 @@ export const dateTime = {
             return acc;
         }, {});
 
-        return `${dateTimeParts['year']}${dateTimeParts['month']}${dateTimeParts['day']}T${dateTimeParts['hour']}${dateTimeParts['minute']}${dateTimeParts['second']}`;
+        return `${dateTimeParts['year']}${dateTimeParts['month']}${dateTimeParts['day']}T${dateTimeParts['hour']}${dateTimeParts['minute']}${dateTimeParts['second']}Z`;
     },
     diffHours: function(dt2, dt1){
         var diff = (dt2 - dt1) / 1000;
