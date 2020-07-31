@@ -19,6 +19,7 @@ export class LandingPage extends React.Component {
         this.onCancelSignIn = this.onCancelSignIn.bind(this);
         this.onSuccessSignIn = this.onSuccessSignIn.bind(this);
         this.searchingZip = false;
+        this.onMapInit = this.onMapInit.bind(this);
     }
 
     render() {
@@ -71,7 +72,7 @@ export class LandingPage extends React.Component {
                     {createPsaButton}
                     </div>
                     <div className="landing-page-map">
-                        <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards}/>
+                        <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards} onMapInit={this.onMapInit} />
                         {form}
                         {signInForm}
                     </div>
@@ -136,16 +137,28 @@ export class LandingPage extends React.Component {
             let self = this;
             BingMap.reverseGeocoordsFromZip(newZip, (result) => {
                 let params = {
-                    lat: Math.floor(result.latitude),
-                    lon: Math.floor(result.longitude),
-                    precision: 4,
-                    lastTimestamp: 1592204400000
+                    lat: result.latitude,
+                    lon: result.longitude,
                   };
                 getAreaMatches(params).then(res => {
                     this.setState({ cards: res.matches });  
                 }).finally(() => {
                     self.searchingZip = false;
                 });
+            }, () => {
+                self.searchingZip = false;
+            });
+        }
+    }
+
+    onMapInit(location) {
+        if (location) {
+            let params = {
+                lat: location.latitude,
+                lon: location.longitude
+            };
+            getAreaMatches(params).then(res => {
+                this.setState({ cards: res.matches });
             });
         }
     }

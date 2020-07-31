@@ -44,6 +44,9 @@ export const BingMap = {
     getMap: function(){        
         return map;
     },
+    getCenter: function() {
+        return map.getCenter();
+    },
     setView: function(type,lat,lon,zoom){
         map.setView({
             mapTypeId: type,
@@ -51,7 +54,7 @@ export const BingMap = {
             zoom: zoom
         });
     },
-    reverseGeocoordsFromZip:function(zipcode, cb) {
+    reverseGeocoordsFromZip:function(zipcode, cb, errorCb) {
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var requestOptions = {
@@ -59,6 +62,9 @@ export const BingMap = {
                 where: zipcode,
                 callback: function (answer, userData) {
                     cb(answer.results[0].location)
+                },
+                errorCallback: function(options) {
+                    errorCb();
                 }
             }
             searchManager.geocode(requestOptions)
