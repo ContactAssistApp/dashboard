@@ -135,8 +135,8 @@ export class LandingPage extends React.Component {
             let self = this;
             BingMap.reverseGeocoordsFromZip(newZip, (result) => {
                 let params = {
-                    lat: Math.floor(result.latitude),
-                    lon: Math.floor(result.longitude),
+                    lat: result.latitude,
+                    lon: result.longitude,
                   };
                 getAreaMatches(params).then(res => {
                     this.setState({ cards: res.matches });  
