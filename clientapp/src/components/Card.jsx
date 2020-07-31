@@ -216,8 +216,8 @@ export class Card extends React.Component{
             );
         }
         
-        const startDateTime = new Date(this.props.startDate);
-        const endDateTime = new Date(this.props.endDate);
+        const startDateTime = new Date(`${this.props.startDate} ${this.props.startTime}`);
+        const endDateTime = new Date(`${this.props.endDate} ${this.props.endTime}`);
         const duration = dateTime.diffHours(endDateTime, startDateTime);
         
         return (<AddToCalendarDropdown 
@@ -228,9 +228,8 @@ export class Card extends React.Component{
                     duration: duration,
                     title: this.getCardTitle(),
                     location: `${this.getStreetAddress()}, ${this.getCityStateZip()}`,
-                    endDatetime: dateTime.getTimeZoneFormat(endDateTime),
-                    startDatetime: dateTime.getTimeZoneFormat(startDateTime),
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                    endDatetime: dateTime.getUTCFormatString(endDateTime),
+                    startDatetime: dateTime.getUTCFormatString(startDateTime)
                 }
             }
         />);
