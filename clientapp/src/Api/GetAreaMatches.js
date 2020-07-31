@@ -17,8 +17,8 @@ export function getAreaMatches(params) {
         params.lastTimestamp = 1592204400000;
     }
 
-    params.lat = Math.round(params.lat);
-    params.lon = Math.round(params.lon);
+    params.lat = Math.floor(params.lat);
+    params.lon = Math.floor(params.lon);
 
     let url = `${apiBaseUrl}/api/areaMatches?lat=${params.lat}&lon=${params.lon}&precision=${params.precision}&lastTimestamp=${params.lastTimestamp}`;
     return fetch(url)
