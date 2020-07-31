@@ -243,7 +243,9 @@ export class Card extends React.Component{
     }
 
     onClickShareButton() {
-        this.setState({ showingShareForm: true});
+        if (!this.props.preview) {
+            this.setState({ showingShareForm: true});
+        }
     }
 
     getShareForm() {
