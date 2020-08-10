@@ -8,6 +8,7 @@ import { SignInForm } from './SignInForm';
 import { isTracerView, isCardShare } from '../utilities/userRole';
 import newAppIcon from '../images/newAppIcon.svg';
 import { getSingleCard } from '../Api/GetSingleCard';
+import { Footer } from './Footer';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -49,35 +50,37 @@ export class LandingPage extends React.Component {
         let createPsaButton = this.getCreatePsaButton();
 
         return (
-
-            <div className="landing-page-container flex-container">
-                <div className="landing-page-leftpane">
-                    <div className="user-profile landing-page-top">
-                        <div className="app-header">
-                            <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
-                            <span id="app-header-title">CommonCircle News</span>
+            <div>
+                <div className="landing-page-container flex-container">
+                    <div className="landing-page-leftpane">
+                        <div className="user-profile landing-page-top">
+                            <div className="app-header">
+                                <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
+                                <span id="app-header-title">CommonCircle News</span>
+                            </div>
+                        </div>   
+                        <div className="landing-page-location-container">
+                            <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
                         </div>
-                     </div>   
-                     <div className="landing-page-location-container">
-                         <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
+                        <div className="landing-page-cards">
+                            {this.state.cards && this.state.cards.map((card) => {
+                                return this.getCard(card);
+                            })}
+                        </div>
                     </div>
-                    <div className="landing-page-cards">
-                        {this.state.cards && this.state.cards.map((card) => {
-                            return this.getCard(card);
-                        })}
-                    </div>
-                </div>
-                <div className="landing-page-right-pane">
-                    <div className="landing-page-filters landing-page-top">
-                    {signInButton}
-                    {createPsaButton}
-                    </div>
-                    <div className="landing-page-map">
-                        <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards} onMapInit={this.onMapInit} />
-                        {form}
-                        {signInForm}
+                    <div className="landing-page-right-pane">
+                        <div className="landing-page-filters landing-page-top">
+                        {signInButton}
+                        {createPsaButton}
+                        </div>
+                        <div className="landing-page-map">
+                            <Map mapInfo={defaultMapInfo} cardInfo={this.state.cards} onMapInit={this.onMapInit} />
+                            {form}
+                            {signInForm}
+                        </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }
