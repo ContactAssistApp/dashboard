@@ -387,8 +387,6 @@ html, body, body>div {
 .landing-page-container {
   background: #F8F8F8;
   height: 100%;
-  padding: 30px 15px;
-  margin-bottom: 30px;
 }
 
 .landing-page-top {
@@ -801,6 +799,8 @@ input:checked + .slider:before {
   align-items: center;
   align-self: center;
   text-align: center;
+  background: #F8F8F8;
+  padding: 15px 15px;
 }
 
 .footer p {

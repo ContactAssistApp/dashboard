@@ -49,6 +49,7 @@ export class LandingPage extends React.Component {
         let createPsaButton = this.getCreatePsaButton();
 
         return (
+
             <div className="landing-page-container flex-container">
                 <div className="landing-page-leftpane">
                     <div className="user-profile landing-page-top">
@@ -56,9 +57,9 @@ export class LandingPage extends React.Component {
                             <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
                             <span id="app-header-title">CommonCircle News</span>
                         </div>
-                    </div>   
-                    <div className="landing-page-location-container">
-                        <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
+                     </div>   
+                     <div className="landing-page-location-container">
+                         <input type="text" placeholder="Find location" className="landing-page-find-location" onChange={this.onZipChange}/>
                     </div>
                     <div className="landing-page-cards">
                         {this.state.cards && this.state.cards.map((card) => {
