@@ -94,6 +94,7 @@ html, body, body>div {
 
 .card-body {
   padding-left: 15px;
+  display: inline-block;
 }
 
 .card-title {
