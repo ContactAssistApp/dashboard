@@ -30,8 +30,11 @@ var auth = function (req, res, next) {
 var combineMessageInfoAndMessage = function (messages, matchMessages)
 {
   let matches = [];
-  for (i = 0; i < matchMessages.length; i++)
-  {
+  if(typeof matchMessages === 'undefined' || matchMessages === null) {
+    return matches;
+  }
+
+  for (i = 0; i < matchMessages.length; i++) {
     matches.push({
       messageId: messages[i].messageId,
       messageTimestamp: messages[i].messageTimestamp,
