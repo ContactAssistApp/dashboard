@@ -800,7 +800,7 @@ input:checked + .slider:before {
   align-self: center;
   text-align: center;
   background: #F8F8F8;
-  padding: 15px 15px;
+  height: 10%;
 }
 
 .footer p {
