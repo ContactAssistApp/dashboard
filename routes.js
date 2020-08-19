@@ -30,7 +30,7 @@ var auth = function (req, res, next) {
 var combineMessageInfoAndMessage = function (messages, matchMessages)
 {
   let matches = [];
-  if(typeof matchMessages === 'undefined' || matchMessages === null) {
+  if (!matchMessages) {
     return matches;
   }
 
