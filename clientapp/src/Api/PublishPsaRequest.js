@@ -1,7 +1,7 @@
 import { BingMap } from '../utilities/mapUtilities';
 
 /*
-params {type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: ""}
+params {type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: "", radius: number}
 */
 
 export class PublishPsaRequest {
@@ -11,7 +11,7 @@ export class PublishPsaRequest {
 
     getBody(cb, errorCb) {
         let userMessage = this.getUserMessage(this.params);
-        let radius = 100;
+        let radius = this.params.radius;
         let beginTime = this.convertDateStringToTimestamp(this.params.startDate + " " + this.params.startTime);
         let endTime = this.convertDateStringToTimestamp(this.params.endDate + " " + this.params.endTime);
         this.convertToLocation(this.params, (locationResult) => {

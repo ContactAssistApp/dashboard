@@ -3,7 +3,8 @@ import React from 'react';
 /*
 props:
 startingValue: int,
-label: string
+label: string,
+onChange: (newRadius) => void
 */
 export class Slider extends React.Component {
     constructor(props) {
@@ -24,5 +25,6 @@ export class Slider extends React.Component {
     onChange(ev) {
         let newValue = ev.target.value;
         this.setState({currentValue: newValue});
+        this.props.onChange(parseInt(newValue));
     }
 }
