@@ -794,3 +794,11 @@ input:checked + .slider:before {
   display: inline;
   line-height: 60px;
 }
+
+#radius-input {
+  width: 100px;
+}
+
+#radius-slider {
+  width: 100%;
+}

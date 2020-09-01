@@ -16,8 +16,8 @@ export class Slider extends React.Component {
     render() {
         return (
             <div className="slider-container">
-                <p>{this.props.label}: {this.state.currentValue} {this.props.unit}</p>
-                <input type="range" min={this.props.min} max={this.props.max} value={this.state.currentValue} onChange={this.onChange} />
+                <p>{this.props.label}: <input id="radius-input" type="number" min={this.props.min} max={this.props.max} value={this.state.currentValue} onChange={this.onChange}></input> {this.props.unit}</p>
+                <input id="radius-slider" type="range" min={this.props.min} max={this.props.max} value={this.state.currentValue} onChange={this.onChange} />
             </div>
         );
     }

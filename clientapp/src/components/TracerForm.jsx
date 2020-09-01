@@ -56,7 +56,7 @@ export class TracerForm extends React.Component {
                     <input type="text" value={this.state.city} onChange={this.onCityChange} placeholder="City" className="city" required/>
                     <input type="text" value={this.state.state} onChange={this.onStateChange} placeholder="State" className="state" required/>
                     <input type="text" value={this.state.zip} onChange={this.onZipChange} placeholder="Zip" className="zip" required/>
-                    <Slider startingValue={10} label={"Radius"} unit={"meters"} min={0} max={100} onChange={this.onRadiusChange} />
+                    <Slider startingValue={10} label={"Radius"} unit={"meters"} min={0} max={100000} onChange={this.onRadiusChange} />
                 </div>
                 <div className="tracer-form-dates">
                     <input type="date" id="start-date" onChange={this.onStartDateChange} required/>
