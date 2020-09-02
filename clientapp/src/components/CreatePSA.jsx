@@ -21,7 +21,7 @@ formStage: 1 (form), 2 (confirmation), 3 (success)
 export class CreatePSA extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {formStage: 1, type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: "", startTime: "", endTime: ""};
+        this.state = {formStage: 1, type: "", title: "", street: "", city: "", state: "", zip: "", description: "", startDate: "", endDate: "", startTime: "", endTime: "", radius: 0};
         this.tracerFormCallback = this.tracerFormCallback.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.getFormStyles = this.getFormStyles.bind(this);
@@ -120,6 +120,9 @@ export class CreatePSA extends React.Component {
                 break;
             case PsaFields.END_TIME:
                 this.setState({ endTime: fieldValue });
+                break;
+            case PsaFields.RADIUS:
+                this.setState({ radius: fieldValue });
                 break;
             default:
                 break;

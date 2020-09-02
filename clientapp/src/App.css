@@ -796,6 +796,14 @@ input:checked + .slider:before {
   line-height: 60px;
 }
 
+#radius-input {
+  width: 100px;
+}
+
+#radius-slider {
+  width: 100%;
+}
+
 .footer {
   align-items: center;
   align-self: center;
