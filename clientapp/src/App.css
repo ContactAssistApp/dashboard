@@ -785,6 +785,7 @@ input:checked + .slider:before {
 #app-header-image {
   vertical-align: bottom;
   margin-right: 10px;
+  width: 32px;
 }
 
 #app-header-title {

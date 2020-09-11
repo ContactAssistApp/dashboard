@@ -6,7 +6,7 @@ import { getAreaMatches } from '../Api/GetAreaMatches';
 import { BingMap } from '../utilities/mapUtilities';
 import { SignInForm } from './SignInForm';
 import { isTracerView, isCardShare } from '../utilities/userRole';
-import newAppIcon from '../images/newAppIcon.svg';
+import newAppIcon from '../images/contact-assist-icon.svg';
 import { getSingleCard } from '../Api/GetSingleCard';
 
 export class LandingPage extends React.Component {
@@ -55,7 +55,7 @@ export class LandingPage extends React.Component {
                     <div className="user-profile landing-page-top">
                         <div className="app-header">
                             <img src={newAppIcon} alt={"app icon"} id="app-header-image"/>
-                            <span id="app-header-title">CommonCircle News</span>
+                            <span id="app-header-title">ContactAssist</span>
                         </div>
                      </div>   
                      <div className="landing-page-location-container">
