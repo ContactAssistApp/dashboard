@@ -44,12 +44,13 @@ export class Map extends React.Component {
         // BingMap.drawThePinByAddress('20 west st new york ny 10004');
         // BingMap.drawThePinByAddress('641 ave of america New York NY 10011');
         if(cards && cards.length > 0){
-          let lat = null;
-          let lon = null;
+          let locations = [];
           let address = null;
           cards.forEach((card) => {
-              lat = card.area.location.latitude;
-              lon = card.area.location.longitude;
+              let lat = card.area.location.latitude;
+              let lon = card.area.location.longitude;
+              locations.push({latitude: card.area.location.latitude, longitude: card.area.location.longitude});
+              console.log("push location: ", locations[locations.length - 1].latitude, locations[locations.length - 1].longitude);
               address = this.getAddress(card);
               if(address){
                 BingMap.drawThePinByAddress(address, card.userMessage);
@@ -76,7 +77,10 @@ export class Map extends React.Component {
           BingMap.showCluster();
           BingMap.showDrawingManager();
           //focus point
-          BingMap.setView(window.Microsoft.Maps.MapTypeId.canvasLight, lat, lon, 15); 
+          let lat = locations[locations.length - 1].latitude;
+          let lon = locations[locations.length - 1].longitude;
+          console.log("locations are: ", lat, lon);
+          BingMap.setView(window.Microsoft.Maps.MapTypeId.canvasLight, lat, lon, 15);
         }
     }
 

@@ -54,6 +54,10 @@ export const BingMap = {
             zoom: zoom
         });
     },
+    setLocationsView: function(locations, padding){
+        let rect = new window.Microsoft.Maps.LocationRect.fromLocations(locations);
+        map.setView({ bounds: rect, padding });
+    },
     reverseGeocoordsFromZip:function(zipcode, cb, errorCb) {
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
