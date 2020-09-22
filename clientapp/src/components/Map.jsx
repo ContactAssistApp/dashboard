@@ -53,9 +53,9 @@ export class Map extends React.Component {
               console.log("push location: ", locations[locations.length - 1].latitude, locations[locations.length - 1].longitude);
               address = this.getAddress(card);
               if(address){
-                BingMap.drawThePinByAddress(address, card.userMessage);
+                BingMap.drawThePinByAddress(address, card.userMessage, false);
               } else {
-                BingMap.drawThePinByGeocoords(lat,lon, card.userMessage);
+                BingMap.drawThePinByGeocoords(lat,lon, card.userMessage, false);
               }            
               //BingMap.drawThePinByAddress(JSON.parse(card.userMessage).zip) //test zipcode 
               //BingMap.drawThePinByGeocoords(card.area.location.latitude, card.area.location.longitude)
@@ -76,11 +76,8 @@ export class Map extends React.Component {
           //clustering ?
           BingMap.showCluster();
           BingMap.showDrawingManager();
-          //focus point
-          let lat = locations[locations.length - 1].latitude;
-          let lon = locations[locations.length - 1].longitude;
-          console.log("locations are: ", lat, lon);
-          BingMap.setView(window.Microsoft.Maps.MapTypeId.canvasLight, lat, lon, 15);
+          //set map view based on all locations
+          BingMap.setLocationsView(locations, 80);
         }
     }
 

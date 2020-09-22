@@ -116,13 +116,15 @@ export const BingMap = {
             searchManager.geocode(requestOptions)
         })
     },
-    drawThePinByGeocoords:function(lat, lon, message) { // Draw the pin
+    drawThePinByGeocoords:function(lat, lon, message, shouldSetView) { // Draw the pin
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var reverseGeocodeRequestOptions = {
                 location: new window.Microsoft.Maps.Location(lat,lon),
-                callback: function (answer, userData) {
-                    map.setView({ bounds: answer.bestView })
+                callback: function (answer, userData, shouldSetView) {
+                    if (shouldSetView){
+                        map.setView({ bounds: answer.bestView });
+                    }
                     var pushpin = new window.Microsoft.Maps.Pushpin(reverseGeocodeRequestOptions.location,{
                         enableHoverStyle: true, 
                         enableClickedStyle: true                
@@ -142,14 +144,16 @@ export const BingMap = {
             searchManager.reverseGeocode(reverseGeocodeRequestOptions);
         })
     },
-    drawThePinByAddress:function(address, message) { // Draw the pin
+    drawThePinByAddress:function(address, message, shouldSetView) { // Draw the pin
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
             var requestOptions = {
                 bounds: map.getBounds(),
                 where: address,
-                callback: function (answer, userData) {
-                    map.setView({ bounds: answer.results[0].bestView });
+                callback: function (answer, userData, shouldSetView) {
+                    if (shouldSetView){
+                        map.setView({ bounds: answer.results[0].bestView });
+                    }
                     var pushpin = new window.Microsoft.Maps.Pushpin(answer.results[0].location,{
                         enableHoverStyle: true, 
                         enableClickedStyle: true,
