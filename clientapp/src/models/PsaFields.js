@@ -10,5 +10,6 @@ export const PsaFields = {
     END_DATE: 'end_date',
     START_TIME: 'start_time',
     END_TIME: 'end_time',
+    TIME_ZONE: 'time_zone',
     RADIUS: 'radius'
 };

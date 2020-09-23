@@ -89,6 +89,9 @@ export class Card extends React.Component{
                     <div className="card-dates">
                         {this.getCardTimes()}
                     </div>
+                    <div className="card-dates">
+                        {this.getCardTimeZone()}
+                    </div>
                 </div>
                 <hr className="card-separator" />
                 <div className="card-footer">
@@ -204,6 +207,14 @@ export class Card extends React.Component{
         }
         const times = `${startTime} to ${endTime}`;
         return times;
+    }
+
+    getCardTimeZone() {
+        let timeZone = "local time";
+        if (this.props.timeZone) {
+            timeZone = this.props.timeZone;
+        }
+        return timeZone;
     }
 
     // TO-DO; read from actual PSA (look in this.props.cardInfo)
