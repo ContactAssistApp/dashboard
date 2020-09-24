@@ -53,9 +53,9 @@ export class Map extends React.Component {
               console.log("push location: ", locations[locations.length - 1].latitude, locations[locations.length - 1].longitude);
               address = this.getAddress(card);
               if(address){
-                BingMap.drawThePinByAddress(address, card.userMessage, false);
+                BingMap.drawThePinByAddress(address, card.userMessage);
               } else {
-                BingMap.drawThePinByGeocoords(lat,lon, card.userMessage, false);
+                BingMap.drawThePinByGeocoords(lat,lon, card.userMessage);
               }            
               //BingMap.drawThePinByAddress(JSON.parse(card.userMessage).zip) //test zipcode 
               //BingMap.drawThePinByGeocoords(card.area.location.latitude, card.area.location.longitude)
