@@ -50,7 +50,6 @@ export class Map extends React.Component {
               let lat = card.area.location.latitude;
               let lon = card.area.location.longitude;
               locations.push({latitude: card.area.location.latitude, longitude: card.area.location.longitude});
-              console.log("push location: ", locations[locations.length - 1].latitude, locations[locations.length - 1].longitude);
               address = this.getAddress(card);
               if(address){
                 BingMap.drawThePinByAddress(address, card.userMessage);
