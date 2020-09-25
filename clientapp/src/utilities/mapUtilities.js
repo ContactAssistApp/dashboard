@@ -54,6 +54,10 @@ export const BingMap = {
             zoom: zoom
         });
     },
+    setLocationsView: function(locations, padding){
+        let rect = new window.Microsoft.Maps.LocationRect.fromLocations(locations);
+        map.setView({ bounds: rect, padding });
+    },
     reverseGeocoordsFromZip:function(zipcode, cb, errorCb) {
         window.Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             var searchManager = new window.Microsoft.Maps.Search.SearchManager(map);
@@ -118,7 +122,6 @@ export const BingMap = {
             var reverseGeocodeRequestOptions = {
                 location: new window.Microsoft.Maps.Location(lat,lon),
                 callback: function (answer, userData) {
-                    map.setView({ bounds: answer.bestView })
                     var pushpin = new window.Microsoft.Maps.Pushpin(reverseGeocodeRequestOptions.location,{
                         enableHoverStyle: true, 
                         enableClickedStyle: true                
@@ -145,7 +148,6 @@ export const BingMap = {
                 bounds: map.getBounds(),
                 where: address,
                 callback: function (answer, userData) {
-                    map.setView({ bounds: answer.results[0].bestView });
                     var pushpin = new window.Microsoft.Maps.Pushpin(answer.results[0].location,{
                         enableHoverStyle: true, 
                         enableClickedStyle: true,
