@@ -8,6 +8,7 @@ import { SignInForm } from './SignInForm';
 import { isTracerView, isCardShare } from '../utilities/userRole';
 import newAppIcon from '../images/contact-assist-icon.svg';
 import { getSingleCard } from '../Api/GetSingleCard';
+import { dateTime } from '../utilities/dateTimeUtilites';
 
 export class LandingPage extends React.Component {
     constructor(props) {
@@ -123,8 +124,11 @@ export class LandingPage extends React.Component {
             let startDate = new Date(cardInfo.area.beginTime).toLocaleString();
             let endDate = new Date(cardInfo.area.endTime).toLocaleString();
 
+            let timeZone = dateTime.getLocalTimeZone();
+
             return <Card open={false} cardInfo={parsedInfo} startDate={new Date(startDate).toLocaleDateString()} endDate={new Date(endDate).toLocaleDateString()} 
             startTime={new Date(startDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} endTime={new Date(endDate).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} 
+            timeZone={timeZone}
             messageId={messageId} messageTimestamp={messageTimestamp}/>;
         } catch(e) {
             console.log("JSON.parse error");

@@ -32,5 +32,11 @@ export const dateTime = {
             return time;
         }
         return (h % 12 + 12 * (h % 12 == 0)) + ":" + m + " " + (h >= 12 ? 'PM' : 'AM');
+    },
+    getLocalTimeZone() {
+        var tzRe = /\(([\w\s]+)\)/; // Look for "(", any words (\w) or spaces (\s), and ")"
+        var d = new Date().toString();
+        var tz = tzRe.exec(d)[1];
+        return tz;
     }
 };
