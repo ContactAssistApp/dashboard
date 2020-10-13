@@ -2,6 +2,7 @@ import React from 'react';
 import pin from '../images/pin.svg';
 import { PsaFields } from '../models/PsaFields';
 import { Slider } from './Slider';
+import { dateTime } from '../utilities/dateTimeUtilites';
 
 /*
 Props:
@@ -70,12 +71,22 @@ export class TracerForm extends React.Component {
                     <input type="time" id="end-time" onChange={this.onEndTimeChange} required/>
                 </div>
                 <div className="tracer-form-dates">
-                    <select id="time-zone" onChange={this.onTimeZoneChange} required>
-                        <option value="PDT">PDT</option>
-                        <option value="MDT">MDT</option>
-                        <option value="CDT">CDT</option>
-                        <option value="EDT">EDT</option>
-                    </select>
+                    {dateTime.isDST() &&
+                        <select id="time-zone" onChange={this.onTimeZoneChange} required>
+                            <option value="PDT">PDT</option>
+                            <option value="MDT">MDT</option>
+                            <option value="CDT">CDT</option>
+                            <option value="EDT">EDT</option>
+                        </select>
+                    }
+                    {!dateTime.isDST() &&
+                        <select id="time-zone" onChange={this.onTimeZoneChange} required>
+                            <option value="PST">PST</option>
+                            <option value="MST">MST</option>
+                            <option value="CST">CST</option>
+                            <option value="EST">EST</option>
+                        </select>
+                    }
                 </div>
                 <div className="tracer-form-description">
                     <div>
