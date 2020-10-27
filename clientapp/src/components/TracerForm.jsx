@@ -2,6 +2,7 @@ import React from 'react';
 import pin from '../images/pin.svg';
 import { PsaFields } from '../models/PsaFields';
 import { Slider } from './Slider';
+import { dateTime } from '../utilities/dateTimeUtilites';
 
 /*
 Props:
@@ -25,6 +26,7 @@ export class TracerForm extends React.Component {
         this.onEndDateChange = this.onEndDateChange.bind(this);
         this.onStartTimeChange = this.onStartTimeChange.bind(this);
         this.onEndTimeChange = this.onEndTimeChange.bind(this);
+        this.onTimeZoneChange = this.onTimeZoneChange.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onPublish = this.onPublish.bind(this);
         this.onRadiusChange = this.onRadiusChange.bind(this);
@@ -67,6 +69,24 @@ export class TracerForm extends React.Component {
                     <input type="time" id="start-time" onChange={this.onStartTimeChange} required/>
                     <span id="tracer-form-dates-separator">to</span>
                     <input type="time" id="end-time" onChange={this.onEndTimeChange} required/>
+                </div>
+                <div className="tracer-form-dates">
+                    {dateTime.isDST() &&
+                        <select id="time-zone" onChange={this.onTimeZoneChange} required>
+                            <option value="PDT">PDT</option>
+                            <option value="MDT">MDT</option>
+                            <option value="CDT">CDT</option>
+                            <option value="EDT">EDT</option>
+                        </select>
+                    }
+                    {!dateTime.isDST() &&
+                        <select id="time-zone" onChange={this.onTimeZoneChange} required>
+                            <option value="PST">PST</option>
+                            <option value="MST">MST</option>
+                            <option value="CST">CST</option>
+                            <option value="EST">EST</option>
+                        </select>
+                    }
                 </div>
                 <div className="tracer-form-description">
                     <div>
@@ -137,6 +157,11 @@ export class TracerForm extends React.Component {
     onEndTimeChange(ev) {
         const newEndTime = ev.target.value;
         this.props.changeCallback(PsaFields.END_TIME, newEndTime);
+    }
+
+    onTimeZoneChange(ev) {
+        const newTimeZone = ev.target.value;
+        this.props.changeCallback(PsaFields.TIME_ZONE, newTimeZone);
     }
 
     onRadiusChange(newRadius) {
