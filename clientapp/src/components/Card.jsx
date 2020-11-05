@@ -278,7 +278,7 @@ export class Card extends React.Component{
     {
         return isTracerView() // && this.props.signedIn
         ? (
-            <div>
+            <div className="menu-container">
                 <button className="menu-button" onClick={this.showEditMenu}></button>
                 {this.getEditMenu()}
             </div>
