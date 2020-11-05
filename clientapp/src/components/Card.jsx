@@ -6,6 +6,7 @@ import bell from "../images/bell.svg";
 import shareIcon from "../images/shareIcon.svg";
 import { dateTime } from '../utilities/dateTimeUtilites';
 import { ShareForm } from './ShareForm';
+import { isTracerView } from '../utilities/userRole';
 
 /*
 Card props:
@@ -41,7 +42,11 @@ export class Card extends React.Component{
         this.collapseCard = this.collapseCard.bind(this);
         this.expandCard = this.expandCard.bind(this);
         this.onClickShareButton = this.onClickShareButton.bind(this);
-        this.state = {open: this.props.open, cardInfo: this.props.cardInfo, showingShareForm: false};
+        this.shouldShowEditMenu = this.shouldShowEditMenu.bind(this);
+        this.showEditMenu = this.showEditMenu.bind(this);
+        this.closeEditMenu = this.closeEditMenu.bind(this);
+        this.getEditMenu = this.getEditMenu.bind(this);
+        this.state = {open: this.props.open, cardInfo: this.props.cardInfo, showingShareForm: false, showMenu: false};
     }   
 
     render() {
@@ -67,13 +72,16 @@ export class Card extends React.Component{
                 <div className="card-top">
                     <img src={chevron} className="card-header-chevron-open" alt="chevron" onClick={this.collapseCard}></img>
                 </div>
-                <div className="card-header" style={this.getHeaderStyles()}>
-                    <img src={bell} className="card-header-logo" alt="header-logo"/>
-                    <span className="card-header-text">{this.getCardType()}</span>
+                <div className="card-header-container">
+                    <div className="card-header" style={this.getHeaderStyles()}>
+                        <img src={bell} className="card-header-logo" alt="header-logo"/>
+                        <span className="card-header-text">{this.getCardType()}</span>
+                    </div>
+                    {this.shouldShowEditMenu()}
                 </div>
                 <div className="card-body">
                     <div className="card-title">
-                        {this.getCardTitle()}
+                            {this.getCardTitle()}
                     </div>
                     <div className="card-description">
                         {this.getCardDescription()}
@@ -110,9 +118,12 @@ export class Card extends React.Component{
                 <div className="card-top">
                     <img src={chevron} className="card-header-chevron-closed" alt="chevron" onClick={this.expandCard}></img>
                 </div>
-                <div className="card-header" style={this.getHeaderStyles()}>
-                    <img src={bell} className="card-header-logo" alt="header-logo"/>
-                    <span className="card-header-text">{this.getCardType()}</span>
+                <div className="card-header-container">
+                    <div className="card-header" style={this.getHeaderStyles()}>
+                        <img src={bell} className="card-header-logo" alt="header-logo"/>
+                        <span className="card-header-text">{this.getCardType()}</span>
+                    </div>
+                    {this.shouldShowEditMenu()}
                 </div>
                 <div className="card-body">
                     <div className="card-description">
@@ -261,5 +272,54 @@ export class Card extends React.Component{
 
     getShareForm() {
         return <ShareForm id={this.props.messageId} timeStamp={this.props.messageTimestamp} />
+    }
+
+    shouldShowEditMenu()
+    {
+        return isTracerView() // && this.props.signedIn
+        ? (
+            <div>
+                <button className="menu-button" onClick={this.showEditMenu}></button>
+                {this.getEditMenu()}
+            </div>
+        )
+        : (
+            null
+        )
+    }
+
+    showEditMenu(event) {
+        event.preventDefault();
+        
+        this.setState({ showMenu: true }, () => {
+          document.addEventListener('click', this.closeEditMenu);
+        });
+    }
+
+    closeEditMenu(event) {
+        if (!this.dropdownMenu.contains(event.target)) {
+          this.setState({ showMenu: false }, () => {
+            document.removeEventListener('click', this.closeEditMenu);
+          });
+        }
+    }
+
+    getEditMenu() {
+        return this.state.showMenu
+        ? (
+            <div
+                className="menu-content"
+                ref={(element) => {
+                    this.dropdownMenu = element;
+                }}
+            >
+                <button>Edit</button>
+                <hr className="menu-separator"/>
+                <button>Delete</button>
+            </div>
+        )
+        : (
+            null
+        )
     }
 }

@@ -56,8 +56,15 @@ html, body, body>div {
   border-radius: 8px 8px 0px 0px;
   padding-left: 15px;
   background-color: #FFF4CE;
-  margin: 0px 15px;
+  margin: 0px 5px 0px 15px;
   color: #8F761E;
+  flex-grow: 5;
+}
+
+.card-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .card-header-logo {
@@ -164,6 +171,65 @@ html, body, body>div {
 .card-footer img {
   padding: 15px 10px;
   align-self: flex-start;
+}
+
+.menu-button {
+  height: 100%;
+  margin-right: 2px;
+  padding: 0;
+  border: none;
+  background: none;
+  display: inline-block;
+  position: relative;
+}
+
+.menu-button:after {
+  content: '\2807';
+  font-size: 25px;
+  color: #6E6E6E;
+}
+
+.menu-content {
+  position: absolute;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  left: 400px;
+  top: 30px;
+  background-color:#272626;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.menu-content::after {
+  content: "";
+  position: absolute;
+  top: 27%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #272626 transparent transparent;
+}
+
+.menu-content button {
+  color: whitesmoke;
+  border: none;
+  padding: 10px 25px;
+  background: none;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.menu-separator {
+  border: 0.01px solid rgba(59, 61, 63, 0.795);
+  margin: 0px;
+}
+
+.menu-content button:focus {
+  outline: 0;
+}
+
+.menu-button:focus{
+  outline: 0;
 }
 
 .mobile-preview {
