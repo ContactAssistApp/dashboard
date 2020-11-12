@@ -210,7 +210,7 @@ export class Card extends React.Component{
     }
 
     getCardTimeZone() {
-        let timeZone = "local time";
+        let timeZone = dateTime.isDST() ? "PDT" : "PST";
         if (this.props.timeZone) {
             timeZone = this.props.timeZone;
         }
