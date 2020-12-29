@@ -58,7 +58,7 @@ html, body, body>div {
   background-color: #FFF4CE;
   margin: 0px 15px;
   color: #8F761E;
-  flex-grow: 5;
+  flex-grow: 1;
 }
 
 .card-header-container {
