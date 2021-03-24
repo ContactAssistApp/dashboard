@@ -3,6 +3,7 @@ import { Card } from './Card';
 import { Map } from './Map';
 import { CreatePSA } from './CreatePSA';
 import { getAreaMatches } from '../Api/GetAreaMatches';
+import { getUserMentionsTweets } from '../Api/GetUserMentionsTweets';
 import { BingMap } from '../utilities/mapUtilities';
 import { SignInForm } from './SignInForm';
 import { isTracerView, isCardShare } from '../utilities/userRole';
@@ -182,6 +183,10 @@ export class LandingPage extends React.Component {
                 this.setState({ cards: res.matches });
             });
         }
+
+        getUserMentionsTweets({twitterId: '1350123171933003776'}).then(res => {
+            console.log(res.content);
+        });
     }
 
     onSignInClick() {
