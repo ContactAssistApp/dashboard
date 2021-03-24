@@ -1,3 +1,5 @@
+const twitterBearToken = require('../config').twitter.bearToken;
+
 const https = require('https'),
   api = require('../config').api,
   format = (str2Format, ...args) => str2Format.replace(/(\{\d+\})/g, a => args[+(a.substr(1, a.length - 2)) || 0]);
@@ -58,7 +60,7 @@ var API = {
       path: format('/2/users/{0}/mentions', twitterId),
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAALX%2FNQEAAAAAPcC2lUlx1LQOcvvxT3Y7wXTa4iM%3DVAcRo6QfB0AHQedWcAOTaXjygX1hyEMGb2NK1xRkpfNlYKPwvh'
+        'Authorization': format('Bearer {0}', twitterBearToken)
       }
     }
     const req = https.request(options, (res) => {
