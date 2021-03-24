@@ -6,8 +6,5 @@
   "admin":{
     "username":"",
     "passworld":""
-  },
-  "twitter": {
-    "bearerToken": ""
   }
 }

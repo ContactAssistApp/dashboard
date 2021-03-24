@@ -8,6 +8,6 @@
     "password":"123"
   },
   "twitter": {
-    "bearerToken": "AAAAAAAAAAAAAAAAAAAAALX%2FNQEAAAAAPcC2lUlx1LQOcvvxT3Y7wXTa4iM%3DVAcRo6QfB0AHQedWcAOTaXjygX1hyEMGb2NK1xRkpfNlYKPwvh"
+    "bearerToken": "token"
   }
 }

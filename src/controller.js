@@ -1,4 +1,4 @@
-const twitterBearToken = require('../config').twitter.bearToken;
+const twitterBearToken = require('../config').twitter.bearerToken;
 
 const https = require('https'),
   api = require('../config').api,
