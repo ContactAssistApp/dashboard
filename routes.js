@@ -116,7 +116,7 @@ router.get('/api/list', function (req, res) {
 })
 
 router.get('/api/usermentionstweets', function (req, res) {
-  API.getUserMentionsTweets('1350123171933003776', (e) => {
+  API.getUserMentionsTweets(req.query.twitterId, (e) => {
     res.send(e)
   })
 })
