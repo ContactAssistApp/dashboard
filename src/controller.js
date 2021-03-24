@@ -138,7 +138,32 @@ var API = {
     req.write(input)
     req.end()
   },
-
+  getUserMentionsTweets: function (twitterId, cb) {
+    const options = {
+      hostname: 'api.twitter.com',
+      port: 443,
+      path: format('/2/users/{0}/mentions', twitterId),
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAALX%2FNQEAAAAAPcC2lUlx1LQOcvvxT3Y7wXTa4iM%3DVAcRo6QfB0AHQedWcAOTaXjygX1hyEMGb2NK1xRkpfNlYKPwvh'
+      }
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end()
+  },
 }
 
 module.exports = API

@@ -115,6 +115,11 @@ router.get('/api/list', function (req, res) {
   })
 })
 
+router.get('/api/usermentionstweets', function (req, res) {
+  API.getUserMentionsTweets('1350123171933003776', (e) => {
+    res.send(e)
+  })
+})
 
 router.post('/api/message', function (req, res) { //todo post <> backend
   let messageInput = '';
