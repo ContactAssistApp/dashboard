@@ -1,3 +1,5 @@
+const twitterBearToken = require('../config').twitter.bearerToken;
+
 const https = require('https'),
   api = require('../config').api,
   format = (str2Format, ...args) => str2Format.replace(/(\{\d+\})/g, a => args[+(a.substr(1, a.length - 2)) || 0]);
@@ -33,6 +35,32 @@ var API = {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
+      }
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end()
+  },
+  getUserMentionsTweets: function (twitterId, cb) {
+    const options = {
+      hostname: 'api.twitter.com',
+      port: 443,
+      path: format('/2/users/{0}/mentions', twitterId),
+      method: 'GET',
+      headers: {
+        'Authorization': format('Bearer {0}', twitterBearToken)
       }
     }
     const req = https.request(options, (res) => {

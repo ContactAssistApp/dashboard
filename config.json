@@ -6,5 +6,8 @@
   "admin":{
     "username":"admin",
     "password":"123"
+  },
+  "twitter": {
+    "bearerToken": "token"
   }
 }

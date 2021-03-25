@@ -115,6 +115,11 @@ router.get('/api/list', function (req, res) {
   })
 })
 
+router.get('/api/usermentionstweets', function (req, res) {
+  API.getUserMentionsTweets(req.query.twitterId, (e) => {
+    res.send(e)
+  })
+})
 
 router.post('/api/message', function (req, res) { //todo post <> backend
   let messageInput = '';
