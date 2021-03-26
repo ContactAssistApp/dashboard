@@ -9,5 +9,6 @@
   },
   "twitter": {
     "bearerToken": ""
-  }
+  },
+  "bingKey": ""
 }

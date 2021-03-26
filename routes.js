@@ -1,3 +1,5 @@
+const TweetParser = require('./src/tweetparser')
+
 var express = require('express'),
   router = express.Router(),
   API = require('./src/controller'),
@@ -120,6 +122,14 @@ router.get('/api/usermentionstweets', function (req, res) {
     res.send(e)
   })
 })
+
+router.get('/api/publishTweets', function(req, res) {
+  const parser = new TweetParser();
+  API.getUserMentionsTweets(req.query.twitterId, (e) => {
+    
+    parser.parseTweets(e);
+  });
+});
 
 router.post('/api/message', function (req, res) { //todo post <> backend
   let messageInput = '';

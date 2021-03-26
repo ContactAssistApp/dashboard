@@ -1,4 +1,5 @@
 const twitterBearToken = require('../config').twitter.bearerToken;
+const bingKey = require('../config').bingKey;
 
 const https = require('https'),
   api = require('../config').api,
@@ -166,7 +167,33 @@ var API = {
     req.write(input)
     req.end()
   },
-
+  getAddressFromBing: function(location, cb) {
+    const options = {
+      hostname: "dev.virtualearth.net",
+      port: 443,
+      path: format('/REST/v1/Locations/{0},{1}?&key={2}', location.latitude, location.longitude, bingKey),
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end()
+  }
 }
 
 module.exports = API
