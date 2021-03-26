@@ -57,7 +57,7 @@ var API = {
     const options = {
       hostname: 'api.twitter.com',
       port: 443,
-      path: format('/2/users/{0}/mentions', twitterId),
+      path: format('/2/users/{0}/mentions?expansions=geo.place_id&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type', twitterId),
       method: 'GET',
       headers: {
         'Authorization': format('Bearer {0}', twitterBearToken)
