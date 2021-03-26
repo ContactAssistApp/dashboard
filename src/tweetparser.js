@@ -10,7 +10,10 @@ class TweetParser {
         // includes holds extensions, in this particular case, we're interested in place data
         const includes = response.content.includes;
         
+        const published = 0;
+        const total = 0;
         data.forEach((tweet) => {
+            total += 1;
             const location = this.getLocation(tweet, includes);
             if (location) {
                 var _this = this;
@@ -21,13 +24,15 @@ class TweetParser {
                     };
                     console.log("found valid message, publishing");
                     API.putAreaReport(JSON.stringify(psa), function(result) {
-                        response.send(result);
+                        console.log(result);
+                        published += 1;
                     });
                 });
             } else {
                 console.log("no location provided, not publishing");
             }
         });
+        return `Parsed ${total} tweets and published ${published}`;
     }
 
     getUserMessage(tweet, location, callback) {

@@ -126,8 +126,8 @@ router.get('/api/usermentionstweets', function (req, res) {
 router.get('/api/publishTweets', function(req, res) {
   const parser = new TweetParser();
   API.getUserMentionsTweets(req.query.twitterId, (e) => {
-    
-    parser.parseTweets(e);
+    const result = parser.parseTweets(e);
+    res.send(result);
   });
 });
 
