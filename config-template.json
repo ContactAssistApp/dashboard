@@ -10,5 +10,7 @@
   "twitter": {
     "bearerToken": ""
   },
-  "bingKey": ""
+  "bingKey": "",
+  "defaultRadius": 0,
+  "defaultDuration": 0
 }

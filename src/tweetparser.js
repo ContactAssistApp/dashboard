@@ -1,7 +1,8 @@
 const API = require("./controller");
+const config = require("../config.json");
 
-const defaultRadius = 100;
-const defaultDuration = 7200000 // 2 hours in ms
+const defaultRadius = config.defaultRadius;
+const defaultDuration = config.defaultDuration;
 
 class TweetParser {
     parseTweets(response) {
