@@ -80,6 +80,60 @@ var API = {
     })
     req.end()
   },
+  setRulesForNewTweets: function (body, cb) {
+    const options = {
+      hostname: 'api.twitter.com',
+      port: 443,
+      path: format('/2/tweets/search/stream/rules'),
+      method: 'POST',
+      headers: {
+        'Authorization': format('Bearer {0}', twitterBearToken),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end(JSON.stringify(body))
+  },
+  getRulesForNewTweets: function (cb) {
+    const options = {
+      hostname: 'api.twitter.com',
+      port: 443,
+      path: format('/2/tweets/search/stream/rules'),
+      method: 'GET',
+      headers: {
+        'Authorization': format('Bearer {0}', twitterBearToken)
+      }
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end()
+  },
   postMessage: function (obj, cb) {
     let input = obj || JSON.stringify({
       "RequestedQueries": [{

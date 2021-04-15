@@ -131,6 +131,18 @@ router.get('/api/publishTweets', function(req, res) {
   });
 });
 
+router.post('/api/setRules', function(req, res) {
+  API.setRulesForNewTweets(req.body, (e) => {
+    res.send(e);
+  });
+});
+
+router.get('/api/getRules', function(req, res) {
+  API.getRulesForNewTweets((e) => {
+    res.send(e);
+  });
+});
+
 router.post('/api/message', function (req, res) { //todo post <> backend
   let messageInput = '';
 
