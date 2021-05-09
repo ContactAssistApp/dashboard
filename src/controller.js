@@ -134,11 +134,11 @@ var API = {
     })
     req.end()
   },
-  getNewTweets: function (cb) {
+  getNewTweets: function (tweetParser) {
     const options = {
       hostname: 'api.twitter.com',
       port: 443,
-      path: format('/2/tweets/search/stream'),
+      path: format('/2/tweets/search/stream?expansions=geo.place_id&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type'),
       method: 'GET',
       headers: {
         'Authorization': format('Bearer {0}', twitterBearToken)
@@ -148,15 +148,23 @@ var API = {
       console.log(`statusCode: ${res.statusCode}`)
       let data = ''
       res.on('data', (chunk) => {
+        try {
+          const json = JSON.parse(chunk);
+          if (json.data){
+            tweetParser.parseTweet(json);
+          }
+        }
+        catch (e) {
+          console.log("no data");
+        }
         data += chunk
       })
       res.on('end', () => {
-        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+        console.log("end of stream");
       });
     })
     req.on('error', (error) => {
       console.error(error)
-      cb({ status: 500, content: error })
     })
     req.end()
   },

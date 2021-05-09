@@ -5,35 +5,41 @@ const defaultRadius = config.defaultRadius;
 const defaultDuration = config.defaultDuration;
 
 class TweetParser {
+    parseTweet(tweet) {
+        const data = tweet.data;
+        const includes = tweet.includes;
+        this.internalParse(data, includes);
+    }
+
+    internalParse(tweet, includes) {
+        const location = this.getLocation(tweet, includes);
+        if (location) {
+            var _this = this;
+            this.getUserMessage(tweet, location, function(userMessage){
+                const psa = {
+                    userMessage: JSON.stringify(userMessage),
+                    area: _this.getAreaObject(location)
+                };
+                console.log("found valid message, publishing");
+                API.putAreaReport(JSON.stringify(psa), function(result) {
+                    console.log(result);
+                });
+            });
+        } else {
+            console.log("no location provided, not publishing");
+        }
+    }
+
     parseTweets(response) {
         // data is an array of tweet data
         const data = response.content.data;    
         // includes holds extensions, in this particular case, we're interested in place data
         const includes = response.content.includes;
         
-        const published = 0;
-        const total = 0;
         data.forEach((tweet) => {
-            total += 1;
-            const location = this.getLocation(tweet, includes);
-            if (location) {
-                var _this = this;
-                this.getUserMessage(tweet, location, function(userMessage){
-                    const psa = {
-                        userMessage: JSON.stringify(userMessage),
-                        area: _this.getAreaObject(location)
-                    };
-                    console.log("found valid message, publishing");
-                    API.putAreaReport(JSON.stringify(psa), function(result) {
-                        console.log(result);
-                        published += 1;
-                    });
-                });
-            } else {
-                console.log("no location provided, not publishing");
-            }
+            this.internalParse(tweet, includes);
         });
-        return `Parsed ${total} tweets and published ${published}`;
+        return 'Done parsing';
     }
 
     getUserMessage(tweet, location, callback) {

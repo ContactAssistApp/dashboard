@@ -1,5 +1,8 @@
 'use strict'
 
+const API = require("./src/controller")
+const TweetParser = require("./src/tweetparser")
+
 var express = require("express"),
   app = express(),
   router = require("./routes"),
@@ -30,3 +33,6 @@ app.listen(port, host, function () {
   host = host || 'localhost'
   console.log('Server is running at ' + host + ':' + port)
 })
+
+const tweetParser = new TweetParser();
+API.getNewTweets(tweetParser);
