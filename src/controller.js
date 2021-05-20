@@ -1,4 +1,5 @@
 const twitterBearToken = require('../config').twitter.bearerToken;
+const bingKey = require('../config').bingKey;
 
 const https = require('https'),
   api = require('../config').api,
@@ -57,7 +58,7 @@ var API = {
     const options = {
       hostname: 'api.twitter.com',
       port: 443,
-      path: format('/2/users/{0}/mentions', twitterId),
+      path: format('/2/users/{0}/mentions?expansions=geo.place_id&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type', twitterId),
       method: 'GET',
       headers: {
         'Authorization': format('Bearer {0}', twitterBearToken)
@@ -76,6 +77,94 @@ var API = {
     req.on('error', (error) => {
       console.error(error)
       cb({ status: 500, content: error })
+    })
+    req.end()
+  },
+  setRulesForNewTweets: function (body, cb) {
+    const options = {
+      hostname: 'api.twitter.com',
+      port: 443,
+      path: format('/2/tweets/search/stream/rules'),
+      method: 'POST',
+      headers: {
+        'Authorization': format('Bearer {0}', twitterBearToken),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end(JSON.stringify(body))
+  },
+  getRulesForNewTweets: function (cb) {
+    const options = {
+      hostname: 'api.twitter.com',
+      port: 443,
+      path: format('/2/tweets/search/stream/rules'),
+      method: 'GET',
+      headers: {
+        'Authorization': format('Bearer {0}', twitterBearToken)
+      }
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end()
+  },
+  getNewTweets: function (tweetParser) {
+    const options = {
+      hostname: 'api.twitter.com',
+      port: 443,
+      path: format('/2/tweets/search/stream?expansions=geo.place_id&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type'),
+      method: 'GET',
+      headers: {
+        'Authorization': format('Bearer {0}', twitterBearToken)
+      }
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        try {
+          const json = JSON.parse(chunk);
+          if (json.data){
+            tweetParser.parseTweet(json);
+          }
+        }
+        catch (e) {
+          console.log("no data");
+        }
+        data += chunk
+      })
+      res.on('end', () => {
+        console.log("end of stream");
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
     })
     req.end()
   },
@@ -166,7 +255,33 @@ var API = {
     req.write(input)
     req.end()
   },
-
+  getAddressFromBing: function(location, cb) {
+    const options = {
+      hostname: "dev.virtualearth.net",
+      port: 443,
+      path: format('/REST/v1/Locations/{0},{1}?&key={2}', location.latitude, location.longitude, bingKey),
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }
+    const req = https.request(options, (res) => {
+      console.log(`statusCode: ${res.statusCode}`)
+      let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      res.on('end', () => {
+        cb({ status: 200, content: data && JSON.parse(data) || 'success'})
+      });
+    })
+    req.on('error', (error) => {
+      console.error(error)
+      cb({ status: 500, content: error })
+    })
+    req.end()
+  }
 }
 
 module.exports = API
