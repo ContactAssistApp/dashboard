@@ -5,6 +5,12 @@ const https = require('https'),
   api = require('../config').api,
   format = (str2Format, ...args) => str2Format.replace(/(\{\d+\})/g, a => args[+(a.substr(1, a.length - 2)) || 0]);
 
+const timeout = 0;
+const reconnect = (tweetParser) => {
+  timeout++;
+  setTimeout(this.getNewTweets(tweetParser), 2 ** timeout * 1000);
+}
+
 var API = {
   getSize: function (lat, lon, precision, lastTimestamp, cb) {
     const options = {
@@ -150,7 +156,11 @@ var API = {
       res.on('data', (chunk) => {
         try {
           const json = JSON.parse(chunk);
-          if (json.data){
+          if (json.connection_issue) {
+            console.log("connection issue. reconnecting");
+            reconnect(tweetParser);
+          }
+          else if (json.data){
             tweetParser.parseTweet(json);
           }
         }
@@ -160,7 +170,8 @@ var API = {
         data += chunk
       })
       res.on('end', () => {
-        console.log("end of stream");
+        console.log("end of stream. reconnecting");
+        reconnect(tweetParser);
       });
     })
     req.on('error', (error) => {
