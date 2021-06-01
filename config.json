@@ -8,6 +8,9 @@
     "password":"123"
   },
   "twitter": {
-    "bearerToken": "token"
-  }
+    "bearerToken": "AAAAAAAAAAAAAAAAAAAAALX%2FNQEAAAAAPcC2lUlx1LQOcvvxT3Y7wXTa4iM%3DVAcRo6QfB0AHQedWcAOTaXjygX1hyEMGb2NK1xRkpfNlYKPwvh"
+  },
+  "bingKey": "AkisLQBneNEbcJ5sGvulxCrTU9LLcBrOLCoHPOZipxL5GRSo3uxDFPYMz6GIvEud",
+  "defaultRadius": 100,
+  "defaultDuration": 7200000
 }

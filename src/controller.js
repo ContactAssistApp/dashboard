@@ -5,7 +5,7 @@ const https = require('https'),
   api = require('../config').api,
   format = (str2Format, ...args) => str2Format.replace(/(\{\d+\})/g, a => args[+(a.substr(1, a.length - 2)) || 0]);
 
-const timeout = 0;
+let timeout = 0;
 const reconnect = (tweetParser) => {
   timeout++;
   setTimeout(this.getNewTweets(tweetParser), 2 ** timeout * 1000);

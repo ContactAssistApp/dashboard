@@ -95,7 +95,11 @@ class TweetParser {
 
     getAddress(location, callback) {
         API.getAddressFromBing(location, (response) => {
-            const address = response.content.resourceSets[0].resources[0].address;
+            console.log(JSON.stringify(response));
+            let address = '';
+            if(response.content.resourceSets){
+                address = response.content.resourceSets[0].resources[0].address;
+            }            
             const placeData = {
                 street: address.addressLine,
                 city: address.locality,
