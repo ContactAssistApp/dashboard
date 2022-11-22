@@ -9,7 +9,7 @@
     "react": "^16.13.1",
     "react-add-to-calendar-hoc": "^1.0.10",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-share": "^4.2.1"
   },
   "scripts": {
